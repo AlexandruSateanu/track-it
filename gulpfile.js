@@ -22,9 +22,6 @@ var gulp = require('gulp'),
     browserSync = require('browser-sync'),
     reload = browserSync.reload;
 
-    //var CacheBuster = require('gulp-cachebust');
-    //var cachebust = new CacheBuster();
-
 /////////////////////////////////////////////////////////////////////////////////////
 //
 // cleans the build output
@@ -206,7 +203,8 @@ gulp.task('nodemon', function (cb) {
     script: './bin/www',
     ignore: [
       'gulpfile.js',
-      'node_modules/'
+      'node_modules/',
+      'dist/'
     ]
   })
   .on('start', function () {
@@ -247,7 +245,7 @@ gulp.task('build', ['build-template-cache', 'build-css', 'jshint', 'build-js']);
 /////////////////////////////////////////////////////////////////////////////////////
 
 gulp.task('watch', function () {
-  gulp.watch(['./app_client/*.html', './app_client/**/*.view.html', './public/scss/**/*.scss', './app_client/*.js', './app_api/*js'], ['build']);
+  gulp.watch(['./app_client/**/*.view.html', './public/scss/**/*.scss', './app_client/*.js', './app_api/*js'], ['build']);
 });
 
 /////////////////////////////////////////////////////////////////////////////////////
