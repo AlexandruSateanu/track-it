@@ -98,7 +98,7 @@ gulp.task('build-css', function() {
 /////////////////////////////////////////////////////////////////////////////////////
 
 gulp.task('build-template-cache', function () {
-  return gulp.src("./app_client/**/*.view.html")
+  return gulp.src(["./app_client/**/*.view.html", "./app_client/**/*.template.html"])
     .pipe(ngHtml2Js({
       moduleName: "trackitPartials"
     }))
