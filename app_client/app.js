@@ -7,14 +7,14 @@ angular.module('track-it', ['ngRoute', 'ngSanitize']);
 
 function config($routeProvider, $locationProvider) {
   $routeProvider
-    .when('/', {
-      templateUrl: 'home/home.view.html',
+  .when('/', {
+      templateUrl: 'pages/home/home.view.html',
       controller: 'homeCtrl',
       controllerAs: 'vm'
     })
     .otherwise({ redirectTo: '/' });
 
-  $locationProvider.html5Mode({
+    $locationProvider.html5Mode({
     enabled: true,
     requireBase: false
   });
@@ -22,7 +22,7 @@ function config($routeProvider, $locationProvider) {
 
 angular
   .module('track-it')
-  .config(['$routeProvider', '$locationProvider', config])
-  .controller('homeCtrl', require('./home/home.controller'));
+  .config(['$routeProvider', '$locationProvider', config]);
 
 require('./common/directives');
+require('./pages');

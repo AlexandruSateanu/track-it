@@ -245,7 +245,7 @@ gulp.task('build', ['build-template-cache', 'build-css', 'jshint', 'build-js']);
 /////////////////////////////////////////////////////////////////////////////////////
 
 gulp.task('watch', function () {
-  gulp.watch(['./app_client/**/*.view.html', './public/scss/**/*.scss', './app_client/**/*.js', './app_api/**/*js'], ['build']);
+  gulp.watch(['./app_client/**/*.view.html', './app_client/**/*.template.html', './public/scss/**/*.scss', './public/scss/*.scss', './app_client/**/*.js', './app_api/**/*js'], ['build']);
 });
 
 /////////////////////////////////////////////////////////////////////////////////////

@@ -1,0 +1,7 @@
+@media (max-width: 991px) {
+  .navbar-nav {
+    .nav-item + .nav-item {
+      margin-left: 0;
+    }
+  }
+}
