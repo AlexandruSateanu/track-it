@@ -1,20 +1,20 @@
 var angular = require('angular');
 require('angular-route');
 require('angular-sanitize');
-require('../dist/templates/templateCachePartials');
+require('../production/templates/templateCachePartials');
 
 angular.module('track-it', ['ngRoute', 'ngSanitize']);
 
 function config($routeProvider, $locationProvider) {
   $routeProvider
     .when('/', {
-      templateUrl: 'components/home/home.view.html',
+      templateUrl: 'componente/home/home.view.html',
       controller: 'homeCtrl',
       controllerAs: 'vm'
     })
     .when('/dashboard', {
-      templateUrl: 'components/dashboard/dashboard.view.html',
-      controller: 'dashboardCtrl',
+      templateUrl: 'componente/panou-start/panou-start.view.html',
+      controller: 'panouStartCtrl',
       controllerAs: 'vm'
     })
     .otherwise({ redirectTo: '/' });
@@ -29,5 +29,5 @@ angular
   .module('track-it')
   .config(['$routeProvider', '$locationProvider', config]);
 
-require('./shared');
-require('./components');
+require('./componente');
+require('./comune');

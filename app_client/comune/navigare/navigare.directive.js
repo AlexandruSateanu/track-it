@@ -1,6 +1,6 @@
 module.exports = function navigation () {
   return {
     restrict: 'EA',
-    templateUrl: '/shared/navigation/navigation.template.html'
+    templateUrl: '/comune/navigare/navigare.template.html'
   };
 }

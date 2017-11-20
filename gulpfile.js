@@ -30,7 +30,7 @@ var gulp = require('gulp'),
 
 gulp.task('clean', function (cb) {
   del([
-    'dist'
+    'production'
   ], cb);
 });
 
@@ -58,7 +58,7 @@ gulp.task('bower', function () {
     .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
     .pipe(sourcemaps.write('./maps'))
-    .pipe(gulp.dest('./dist/css'));
+    .pipe(gulp.dest('./production/css'));
 });*/
 
 gulp.task('build-css', function() {
@@ -84,10 +84,10 @@ gulp.task('build-css', function() {
 		.pipe(sass().on('error', sass.logError))
 		.pipe(autoprefixer())
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('./dist/css'))
+    .pipe(gulp.dest('./production/css'))
     .pipe(cssmin())
     .pipe(rename({suffix: '.min'}))
-		.pipe(gulp.dest('./dist/css'));
+		.pipe(gulp.dest('./production/css'));
 });
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -103,7 +103,7 @@ gulp.task('build-template-cache', function () {
       moduleName: "trackitPartials"
     }))
     .pipe(concat("templateCachePartials.js"))
-    .pipe(gulp.dest("./dist/templates"));
+    .pipe(gulp.dest("./production/templates"));
 });
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -164,7 +164,7 @@ gulp.task('build-js', function () {
     .pipe(uglify())
     .on('error', gutil.log)
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('./dist/js/'));
+    .pipe(gulp.dest('./production/js/'));
 });
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -204,7 +204,7 @@ gulp.task('nodemon', function (cb) {
     ignore: [
       'gulpfile.js',
       'node_modules/',
-      'dist/'
+      'production/'
     ]
   })
   .on('start', function () {
