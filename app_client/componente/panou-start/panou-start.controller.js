@@ -1,32 +1,54 @@
-var proiecte = {
-  proiect1: {
-    nume: "Proiect 1",
-    rol: "Manager Proiect"
+var proiecteleMele = {
+
+}
+
+var activitatiRecente = {
+  activitate1: {
+    cod: "PR1-ACT2",
+    nume: "Activitate 2",
+    proiect: "Proiect 1",
+    data: "23 03 2016, 11:00"
   },
-  proiect2: {
-    nume: "Proiect 2",
-    rol: "Consultant"
+  activitate2: {
+    cod: "PR1-ACT1",
+    nume: "Activitate 1",
+    proiect: "Proiect 1",
+    data: "23 03 2016, 10:00"
+  },
+  activitate3: {
+    cod: "PR2-ACT4",
+    nume: "Activitate 4",
+    proiect: "Proiect 2",
+    data: "22 03 2016, 16:00"
+  },
+  activitate4: {
+    cod: "PR2-ACT3",
+    nume: "Activitate 3",
+    proiect: "Proiect 2",
+    data: "22 03 2016, 13:00"
   }
 }
 
-var activitati = {
+var activitateaMea = {
   activitate1: {
-    name: "Activitatea numarul unu",
-    date: "23-20-2017",
-    log: "2 ore"
+    cod: "PR2-ACT2",
+    nume: "Activitatea Mea 2",
+    proiect: "Proiect 2",
+    data: "21 03 2016, 12:00"
   },
   activitate2: {
-    name: "Activitatea numarul doi",
-    date: "23-20-2017",
-    log: "4 ore"
+    cod: "PR2-ACT1",
+    nume: "Activitatea Mea 1",
+    proiect: "Proiect 2",
+    data: "21 03 2016, 10:00"
   }
 }
 
 module.exports = function dashboardCtrl () {
   var vm = this;
-  vm.mesaj = 'Bine ai venit!';
+  vm.mesaj = 'Panoul tau de start';
 
-  vm.proiecteleMele = proiecte;
+  vm.activitatiRecente = activitatiRecente;
 
-  vm.activitatiRecente = activitati;
+  vm.activitateaMea = activitateaMea;
 }

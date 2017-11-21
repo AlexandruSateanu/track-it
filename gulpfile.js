@@ -62,7 +62,7 @@ gulp.task('bower', function () {
 });*/
 
 gulp.task('build-css', function() {
-	return gulp.src('./public/scss/**/*.scss')
+	return gulp.src(['./public/scss/**/*.scss', '!./public/scss/base/_reset.scss'])
 		.pipe(sassLint({
 			options: {
 				formatter: 'stylish',

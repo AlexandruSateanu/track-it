@@ -12,7 +12,7 @@ function config($routeProvider, $locationProvider) {
       controller: 'homeCtrl',
       controllerAs: 'vm'
     })
-    .when('/dashboard', {
+    .when('/panou-start', {
       templateUrl: 'componente/panou-start/panou-start.view.html',
       controller: 'panouStartCtrl',
       controllerAs: 'vm'

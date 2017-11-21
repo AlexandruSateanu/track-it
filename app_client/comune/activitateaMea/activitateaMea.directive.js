@@ -2,8 +2,8 @@ module.exports = function navigation () {
   return {
     restrict: 'EA',
     scope: {
-      recent: '=recent'
+      recente: '=recente'
     },
-    templateUrl: '/shared/recentProject/recentProject.template.html'
+    templateUrl: '/comune/activitateaMea/activitateaMea.template.html'
   };
 }
