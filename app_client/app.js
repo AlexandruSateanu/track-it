@@ -17,6 +17,11 @@ function config($routeProvider, $locationProvider) {
       controller: 'panouStartCtrl',
       controllerAs: 'vm'
     })
+    .when('/proiect-start', {
+      templateUrl: 'componente/proiect-start/proiect-start.view.html',
+      controller: 'proiectStartCtrl',
+      controllerAs: 'vm'
+    })
     .otherwise({ redirectTo: '/' });
 
   $locationProvider.html5Mode({

@@ -1,6 +1,11 @@
 var proiecteleMele = {
-
-}
+  proiect1: {
+    nume: "Proiectul 1"
+  },
+  proiect2: {
+    nume: "Proiectul 2"
+  }
+};
 
 var activitatiRecente = {
   activitate1: {
@@ -27,7 +32,7 @@ var activitatiRecente = {
     proiect: "Proiect 2",
     data: "22 03 2016, 13:00"
   }
-}
+};
 
 var activitateaMea = {
   activitate1: {
@@ -42,13 +47,15 @@ var activitateaMea = {
     proiect: "Proiect 2",
     data: "21 03 2016, 10:00"
   }
-}
+};
 
-module.exports = function dashboardCtrl () {
+module.exports = function panouStartCtrl () {
   var vm = this;
   vm.mesaj = 'Panoul tau de start';
 
   vm.activitatiRecente = activitatiRecente;
 
   vm.activitateaMea = activitateaMea;
+
+  vm.proiecteleMele = proiecteleMele;
 }
