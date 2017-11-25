@@ -4,10 +4,14 @@
       <h3>{{ vm.mesaj }}</h3>
     </div>
     <div class="col-xs-12 col-sm-6">
-      <h4>Proiectele Mele</h4>
-      <proiectele-mele proiecte="vm.proiecteleMele"></proiectele-mele>
-      <h4>Ultimele activitati pe proiecte</h4>
-      <activitati-recente recente="vm.activitatiRecente"></activitati-recente>
+      <div class="component">
+        <h4>Proiectele Mele</h4>
+        <proiectele-mele proiecte="vm.proiecteleMele"></proiectele-mele>
+      </div>
+      <div class="component">
+        <h4>Ultimele activitati pe proiecte</h4>
+        <activitati-recente recente="vm.activitatiRecente"></activitati-recente>
+      </div>
     </div>
     <div class="col-xs-12 col-sm-6">
       <h4>Activitatea ta recenta</h4>

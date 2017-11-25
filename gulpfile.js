@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    runSequence = require('run-sequence'),
     del = require('del'),
     sass = require('gulp-sass'),
     /*karma = require('gulp-karma'),*/
@@ -147,7 +148,7 @@ gulp.task('test', ['build-js'], function () {
 //
 /////////////////////////////////////////////////////////////////////////////////////
 
-gulp.task('build-js', function () {
+gulp.task('build-js', ['build-template-cache'], function () {
   var b = browserify({
     entries: './app_client/app.js',
     debug: true,
@@ -236,7 +237,17 @@ gulp.task('bs-reload', function() {
 //
 /////////////////////////////////////////////////////////////////////////////////////
 
-gulp.task('build', ['build-template-cache', 'build-css', 'jshint', 'build-js']);
+gulp.task('build', function() {
+  runSequence(
+    'clean',
+    [
+      'build-template-cache', 
+      'build-css', 
+      'jshint', 
+      'build-js'
+    ]
+  );
+});
 
 /////////////////////////////////////////////////////////////////////////////////////
 //
@@ -254,4 +265,12 @@ gulp.task('watch', function () {
 //
 /////////////////////////////////////////////////////////////////////////////////////
 
-gulp.task('default', ['build', 'watch', 'nodemon']);
+gulp.task('default', function() {
+  runSequence(
+    [
+      'build', 
+      'watch', 
+      'nodemon'
+    ]
+  );
+});

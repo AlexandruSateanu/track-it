@@ -22,6 +22,11 @@ function config($routeProvider, $locationProvider) {
       controller: 'proiectStartCtrl',
       controllerAs: 'vm'
     })
+    .when('/register', {
+      templateUrl: 'auth/register/register.view.html',
+      controller: 'registerCtrl',
+      controllerAs: 'vm'
+    })
     .otherwise({ redirectTo: '/' });
 
   $locationProvider.html5Mode({
@@ -34,5 +39,6 @@ angular
   .module('track-it')
   .config(['$routeProvider', '$locationProvider', config]);
 
-require('./componente');
 require('./comune');
+require('./auth');
+require('./componente');
