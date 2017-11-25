@@ -2,7 +2,7 @@ module.exports = function homeCtrl () {
   var vm = this;
 
   vm.antetPagina = {
-    titlu: 'Welcome to TrackIt',
-    subtitlu: 'Lorem ipsum'
+    titlu: 'Bine ati venit la TrackIt.',
+    subtitlu: 'Partenerul vostru in project management'
   }
 }

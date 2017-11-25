@@ -34,6 +34,33 @@ var activitatiRecente = {
   }
 };
 
+var sarciniRecente = {
+  sarcina1: {
+    cod: "PR1-SAR2",
+    nume: "Sarcina 2",
+    proiect: "Proiect 1",
+    data: "23 03 2016, 11:00"
+  },
+  sarcina2: {
+    cod: "PR1-SAR1",
+    nume: "Sarcina 1",
+    proiect: "Proiect 1",
+    data: "23 03 2016, 10:00"
+  },
+  sarcina3: {
+    cod: "PR2-SAR4",
+    nume: "Sarcina 4",
+    proiect: "Proiect 2",
+    data: "22 03 2016, 16:00"
+  },
+  sarcina4: {
+    cod: "PR2-SAR3",
+    nume: "Sarcina 3",
+    proiect: "Proiect 2",
+    data: "22 03 2016, 13:00"
+  }
+};
+
 var activitateaMea = {
   activitate1: {
     cod: "PR2-ACT2",
@@ -51,7 +78,10 @@ var activitateaMea = {
 
 module.exports = function panouStartCtrl () {
   var vm = this;
-  vm.mesaj = 'Panoul tau de start';
+
+  vm.antetPagina = {
+    titlu: 'Panoul tau de start'
+  };
 
   vm.activitatiRecente = activitatiRecente;
 

@@ -1,4 +1,4 @@
-module.exports = function navigation () {
+module.exports = function tabelStatistici() {
   return {
     restrict: 'EA',
     scope: {
@@ -6,4 +6,4 @@ module.exports = function navigation () {
     },
     templateUrl: '/comune/tabelStatistici/tabelStatistici.template.html'
   };
-}
+};

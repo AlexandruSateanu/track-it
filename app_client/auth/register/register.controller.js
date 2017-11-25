@@ -1,5 +1,9 @@
-module.exports = function registerCtrl($location, authentication) {
+module.exports = function registerCtrl() {
   var vm = this;
+
+  vm.antetPagina = {
+    titlu: 'Inregistrare'
+  };
 
   vm.credentials = {
     name : "",

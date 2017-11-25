@@ -1,4 +1,4 @@
-module.export = function antetPagina () {
+module.exports = function antetPagina() {
   return {
     restrict: 'EA',
     scope: {

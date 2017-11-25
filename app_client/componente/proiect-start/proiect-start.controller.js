@@ -61,7 +61,10 @@ var statistici = {
 
 module.exports = function proiectStartCtrl () {
   var vm = this;
-  vm.mesaj = proiect.proiect1.nume;
+
+  vm.antetPagina = {
+    titlu: proiect.proiect1.nume
+  };
 
   vm.activitatiRecente = activitatiRecente;
 

@@ -1,4 +1,4 @@
-module.exports = function navigation () {
+module.exports = function proiecteleMele() {
   return {
     restrict: 'EA',
     scope: {
@@ -6,4 +6,4 @@ module.exports = function navigation () {
     },
     templateUrl: '/comune/proiecteleMele/proiecteleMele.template.html'
   };
-}
+};
