@@ -13,18 +13,28 @@ function config($routeProvider, $locationProvider) {
       controllerAs: 'vm'
     })
     .when('/panou-start', {
-      templateUrl: 'componente/panou-start/panou-start.view.html',
+      templateUrl: 'componente/panouStart/panouStart.view.html',
       controller: 'panouStartCtrl',
       controllerAs: 'vm'
     })
     .when('/proiect-start', {
-      templateUrl: 'componente/proiect-start/proiect-start.view.html',
+      templateUrl: 'componente/proiectStart/proiectStart.view.html',
       controller: 'proiectStartCtrl',
       controllerAs: 'vm'
     })
     .when('/register', {
       templateUrl: 'auth/register/register.view.html',
       controller: 'registerCtrl',
+      controllerAs: 'vm'
+    })
+    .when('/creare-proiect', {
+      templateUrl: 'componente/creareProiect/creareProiect.view.html',
+      controller: 'creareProiectCtrl',
+      controllerAs: 'vm'
+    })
+    .when('/setari-proiect', {
+      templateUrl: 'componente/setariProiect/setariProiect.view.html',
+      controller: 'setariProiectCtrl',
       controllerAs: 'vm'
     })
     .otherwise({ redirectTo: '/' });

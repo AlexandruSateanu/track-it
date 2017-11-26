@@ -1,21 +1,21 @@
 <div class="container page-container">
   <antet-pagina content="vm.antetPagina"></antet-pagina>
   <div class="row">
-    <div class="col-xs-12 col-sm-6">
+    <div class="col-xs-12 col-md-8">
       <h3>Pupi</h3>
       <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quibusdam et tempore dicta eos iusto cum itaque qui architecto alias aperiam autem maxime assumenda, inventore unde est nam optio aut at.</p>
     </div>
-    <div class="col-xs-12 col-sm-6">
+    <div class="col-xs-12 col-md-4">
       <h4>Conectare</h4>
-      <form>
-        <div role="alert" class="alert alert-danger"></div>
+      <form id="login" name="login" ng-submit="vm.onSubmit()">
+        <div role="alert" class="alert alert-danger" ng-show="vm.formError">{{ vm.formError }}</div>
         <div class="form-group">
           <label for="email">Adresa email</label>
-          <input type="email" class="form-control" id="email" placeholder="Introduceti email-ul">
+          <input type="email" class="form-control" id="email" placeholder="Introduceti email-ul" ng-model="vm.credentiale.email">
         </div>
         <div class="form-group">
-          <label for="password">Parola</label>
-          <input type="password" class="form-control" id="password" placeholder="Introduceti parola">
+          <label for="parola">Parola</label>
+          <input type="password" class="form-control" id="parola" placeholder="Introduceti parola" ng-model="vm.credentiale.parola">
         </div>
         <button type="submit" class="btn btn-default">Intrati</button>
       </form>

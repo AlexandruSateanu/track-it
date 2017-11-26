@@ -1,17 +1,17 @@
 <div class="container page-container">
   <antet-pagina content="vm.antetPagina"></antet-pagina>
   <div class="row">
-    <div class="col-xs-12 col-sm-6">
-      <div class="component">
+    <div class="col-xs-12 col-md-6">
+      <div class="page-component">
         <h4>Ultimele activitati</h4>
         <activitati-recente recente="vm.activitatiRecente"></activitati-recente>
       </div>
       <h4>Statistici rapide</h4>
-      <div class="component">
+      <div class="page-component">
         <h5>Sarcini in functie de status</h5>
         <tabel-statistici statistici="vm.statisticiStatus"></tabel-statistici>
       </div>
-      <div class="component">
+      <div class="page-component">
         <h5>Sarcini in functie de prioritate</h5>
         <tabel-statistici statistici="vm.statisticiPrioritate"></tabel-statistici>
         <div class="margin-top">
@@ -19,8 +19,8 @@
         </div>
       </div>
     </div>
-    <div class="col-xs-12 col-sm-6">
-      <div class="component">
+    <div class="col-xs-12 col-md-6">
+      <div class="page-component">
         <h4>Project Manager</h4>
         <ul class="list-group">
           <li class="list-group-item">
@@ -28,21 +28,7 @@
           </li>
         </ul>
       </div>
-      <div class="component">
-        <h4>Optiuni</h4>
-        <ul>
-          <li>
-            <a href="/">Creeaza sarcina noua</a>
-          </li>
-          <li>
-            <a href="/">Editeaza proiect</a>
-          </li>
-          <li>
-              <a href="/">Membrii proiect</a>
-            </li>
-        </ul>
-      </div>
-      <div class="component">
+      <div class="page-component">
         <h4>Tablouri</h4>
         <ul>
           <li>
@@ -51,6 +37,20 @@
           <li>
             <a href="/">Gantt Chart</a>
           </li>
+        </ul>
+      </div>
+      <div class="page-component">
+        <h4>Optiuni</h4>
+        <ul>
+          <li>
+            <a href="/">Creeaza sarcina noua</a>
+          </li>
+          <li>
+            <a href="/#setari-proiect">Setari proiect</a>
+          </li>
+          <li>
+              <a href="/">Membrii proiectului</a>
+            </li>
         </ul>
       </div>
     </div>

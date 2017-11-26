@@ -76,7 +76,7 @@ var activitateaMea = {
   }
 };
 
-module.exports = function panouStartCtrl () {
+module.exports = function panouStartCtrl() {
   var vm = this;
 
   vm.antetPagina = {

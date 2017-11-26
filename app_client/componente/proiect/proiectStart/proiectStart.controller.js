@@ -59,7 +59,7 @@ var statistici = {
   ]
 };
 
-module.exports = function proiectStartCtrl () {
+module.exports = function proiectStartCtrl() {
   var vm = this;
 
   vm.antetPagina = {

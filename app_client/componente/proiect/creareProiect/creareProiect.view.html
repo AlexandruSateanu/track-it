@@ -1,0 +1,26 @@
+<div class="container page-container">
+  <antet-pagina content="vm.antetPagina"></antet-pagina>
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <form id="creareProiect" name="creareProiect" ng-submit="vm.onSubmit()">
+        <div role="alert" class="alert alert-danger" ng-show="vm.formError">{{ vm.formError }}</div>
+        <div class="form-group">
+          <label for="numeProiect">Nume</label>
+          <input type="text" class="form-control" id="numeProiect" placeholder="Numele proiectului" ng-model="vm.dateForm.numeProiect">
+        </div>
+        <div class="form-group">
+          <label for="cheieProiect">Cheie - va fi folosita pentru codul activitatilor din proiect (ex: PRJ) - Maxim 3 caractere</label>
+          <input type="text" class="form-control" id="cheieProiect" placeholder="Introduceti cheia" ng-model="vm.dateForm.cheieProiect">
+        </div>
+        <div class="form-group">
+          <label for="tipProiect">Tip de proiect (cu sau fara etape definite)</label>
+          <select class="form-control" name="tipProiect" id="tipProiect" ng-model="vm.dateForm.tipProiect">
+            <option value="1">Cu etape</option>
+            <option value="2">Fara etape</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-default">Creaza proiect</button>
+      </form>
+    </div>
+  </div>
+</div>
