@@ -1,9 +1,10 @@
 var angular = require('angular');
 require('angular-route');
 require('angular-sanitize');
+require('angular-ui-bootstrap');
 require('../production/templates/templateCachePartials');
 
-angular.module('track-it', ['ngRoute', 'ngSanitize']);
+angular.module('track-it', ['ngRoute', 'ngSanitize', 'ui.bootstrap']);
 
 function config($routeProvider, $locationProvider) {
   $routeProvider
@@ -17,24 +18,24 @@ function config($routeProvider, $locationProvider) {
       controller: 'panouStartCtrl',
       controllerAs: 'vm'
     })
-    .when('/proiect-start', {
-      templateUrl: 'componente/proiectStart/proiectStart.view.html',
-      controller: 'proiectStartCtrl',
-      controllerAs: 'vm'
-    })
     .when('/register', {
       templateUrl: 'auth/register/register.view.html',
       controller: 'registerCtrl',
       controllerAs: 'vm'
     })
+    .when('/proiect-start', {
+      templateUrl: 'componente/proiect/proiectStart/proiectStart.view.html',
+      controller: 'proiectStartCtrl',
+      controllerAs: 'vm'
+    })
     .when('/creare-proiect', {
-      templateUrl: 'componente/creareProiect/creareProiect.view.html',
+      templateUrl: 'componente/proiect/creareProiect/creareProiect.view.html',
       controller: 'creareProiectCtrl',
       controllerAs: 'vm'
     })
-    .when('/setari-proiect', {
-      templateUrl: 'componente/setariProiect/setariProiect.view.html',
-      controller: 'setariProiectCtrl',
+    .when('/setari-initiale', {
+      templateUrl: 'componente/proiect/setariInitiale/setariInitiale.view.html',
+      controller: 'setariInitialeCtrl',
       controllerAs: 'vm'
     })
     .otherwise({ redirectTo: '/' });
@@ -47,7 +48,10 @@ function config($routeProvider, $locationProvider) {
 
 angular
   .module('track-it')
-  .config(['$routeProvider', '$locationProvider', config]);
+  .config(['$routeProvider', '$locationProvider', config])
+  .config(['$locationProvider', function($locationProvider) {
+    $locationProvider.hashPrefix('');
+  }]);
 
 require('./comune');
 require('./auth');
