@@ -6,4 +6,5 @@ app.controller('panouStartCtrl', require('./panouStart/panouStart.controller.js'
 /* Proiect */
 app.controller('proiectStartCtrl', require('./proiect/proiectStart/proiectStart.controller.js'));
 app.controller('creareProiectCtrl', require('./proiect/creareProiect/creareProiect.controller.js'));
-app.controller('setariInitialeCtrl', require('./proiect/setariInitiale/setariInitiale.controller.js'));
+app.controller('alegePerioadaCtrl', require('./proiect/alegePerioada/alegePerioada.controller.js'));
+app.controller('alegeMembriCtrl', require('./proiect/alegeMembri/alegeMembri.controller.js'));
