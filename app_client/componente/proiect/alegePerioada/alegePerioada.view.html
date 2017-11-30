@@ -1,0 +1,14 @@
+<div class="container page-container">
+  <antet-pagina content="vm.antetPagina"></antet-pagina>
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <div class="page-component">
+        <form id="alegePerioada" name="alegePerioada" ng-submit="vm.onSubmit()">
+          <div role="alert" class="alert alert-danger" ng-show="vm.formError">{{ vm.formError }}</div>
+          <date-picker ng-model="vm.dateForm"></date-picker>
+          <button type="submit" class="btn btn-default">Salveaza date</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

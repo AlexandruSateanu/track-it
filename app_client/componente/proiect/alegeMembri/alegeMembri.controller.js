@@ -5,12 +5,6 @@ module.exports = function alegeMembriCtrl() {
     titlu: 'Alege Membri'
   };
 
-  /*vm.dateForm = {
-    numeProiect: '',
-    cheieProiect: '',
-    tipProiect: ''
-  };*/
-
   vm.faraMembri = true;
 
   vm.toggleMembri = function () {
@@ -20,6 +14,7 @@ module.exports = function alegeMembriCtrl() {
   vm.membri = [{}];
   
   vm.adaugaOptiune = function() {
+    vm.formError = "";
     vm.membri.push({});
   };
     

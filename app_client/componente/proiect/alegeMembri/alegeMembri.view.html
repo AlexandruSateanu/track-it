@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-xs-12 col-md-6">
       <div class="page-component" ng-show="vm.faraMembri">
-        <h3>Vreti sa adaugati acum membrii la proiect? (Puteti adauga si mai tarziu)</h3>
+        <h4>Vreti sa adaugati acum membri la proiect? (Puteti adauga si mai tarziu)</h4>
         <div class="row">
           <div class="col-xs-12 col-md-6">
             <button class="btn btn-success" ng-click="vm.toggleMembri()">Da</button>
@@ -18,11 +18,17 @@
         <div class="form-group">
           <fieldset ng-repeat="membru in vm.membri">
             <label for="alegeMembru">Alege membru</label>
-            <select class="form-control" name="alegeMembru" ng-model="vm.dateForm.listaMembrii">
-              <option value="1">Membru 1</option>
-              <option value="2">Membru 2</option>
-            </select>
-            <button class="btn btn-danger" ng-click="vm.stergeOptiune()">Anuleaza</button>
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <select class="form-control" name="alegeMembru" ng-model="vm.dateForm.listaMembrii">
+                  <option value="1">Membru 1</option>
+                  <option value="2">Membru 2</option>
+                </select>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <button class="btn btn-danger" ng-click="vm.stergeOptiune()">Anuleaza</button>
+              </div>
+            </div>
           </fieldset>
           <button class="btn btn-success" ng-click="vm.adaugaOptiune()">Adauga membru</button>
         </div>

@@ -10,40 +10,18 @@ module.exports = function alegePerioadaCtrl() {
     dataSfarsit: ''
   };
 
-  vm.dateOptions = {
-    formatYear: 'yy',
-    maxDate: new Date(2030, 5, 22),
-    minDate: new Date(),
-    startingDay: 1
-  };
-
-  vm.format = 'dd MMMM yyyy';
-
-  vm.popupStart = {
-    opened: false
-  };
-
-  vm.popupSfarsit = {
-    opened: false
-  };
-
-  vm.deschideStart = function() {
-    vm.popupStart.deschis = true;
-  };
-
-  vm.deschideSfarsit = function() {
-    vm.popupSfarsit.deschis = true;
-  };
-
   vm.onSubmit = function () {
     vm.formError = "";
     
     if (!vm.dateForm || !vm.dateForm.dataStart || !vm.dateForm.dataSfarsit) {
       vm.formError = "Alege ambele date!";
       return false;
-    } else {
-      console.log(vm.dateForm.dataStart);
-      console.log(vm.dateForm.dataSfarsit);
+    } else if (vm.dateForm.dataStart.getTime() >= vm.dateForm.dataSfarsit.getTime()) {
+      vm.formError = "Data de sfarsit trebuie sa fie mai mare ca data de start!";
+      return false;
+    }
+    else {
+      console.log(vm.dateForm);
       return false;
     }
   };
