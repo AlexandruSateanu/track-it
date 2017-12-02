@@ -4,7 +4,7 @@ require('angular-sanitize');
 require('angular-ui-bootstrap');
 require('../production/templates/templateCachePartials');
 
-angular.module('track-it', ['ngRoute', 'ngSanitize', 'ui.bootstrap']);
+angular.module('track-it', ['ngRoute', 'ngSanitize', 'trackitPartials', 'ui.bootstrap']);
 
 function config($routeProvider, $locationProvider) {
   $routeProvider

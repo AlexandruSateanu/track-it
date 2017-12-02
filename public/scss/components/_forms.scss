@@ -3,3 +3,17 @@
     z-index: 2000;
   }
 }
+
+.uib-typeahead-match {
+  a {
+    padding: 0 1rem;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.ng-invalid {
+  border-color: #e74c3c;
+}

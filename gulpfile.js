@@ -152,7 +152,7 @@ gulp.task('build-js', ['build-template-cache'], function () {
   var b = browserify({
     entries: './app_client/app.js',
     debug: true,
-    paths: ['./app_client/common', './app_client/home'],
+    paths: ['./app_client/comune', './app_client/componente', './app_client/auth'],
     transform: [ngAnnotate]
   });
 

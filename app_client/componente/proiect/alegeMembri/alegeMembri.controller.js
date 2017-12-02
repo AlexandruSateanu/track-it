@@ -1,3 +1,45 @@
+var membri = [
+  {
+    id: 1,
+    nume: 'Cristina Ungureanu'
+  },
+  {
+    id: 2,
+    nume: 'Alex Sateanu'
+  },
+  {
+    id: 3,
+    nume: 'Andreea Ujica'
+  },
+  {
+    id: 4,
+    nume: 'Bogdan Chircu'
+  },
+  {
+    id: 5,
+    nume: 'Test Test'
+  }
+];
+
+var roluri = [
+  {
+    rolId: 1,
+    rol: "Coordonator echipa"
+  },
+  {
+    rolId: 2,
+    rol: "Membru echipa"
+  },
+  {
+    rolId: 3,
+    rol: "Consultant"
+  },
+  {
+    rolId: 4,
+    rol: "Vizitator"
+  },
+];
+
 module.exports = function alegeMembriCtrl() {
   var vm = this;
 
@@ -5,40 +47,37 @@ module.exports = function alegeMembriCtrl() {
     titlu: 'Alege Membri'
   };
 
+  vm.butonSalvare = "Adauga";
+
+  vm.membri = membri;
+  vm.roluri = roluri;
+
   vm.faraMembri = true;
 
   vm.toggleMembri = function () {
     vm.faraMembri = false;
   };
 
-  vm.membri = [{}];
-  
-  vm.adaugaOptiune = function() {
-    vm.formError = "";
-    vm.membri.push({});
+  vm.dateForm = {
+    membru: '',
+    rol: ''
   };
-    
-  vm.stergeOptiune = function() {
-    var ultimul = vm.membri.length - 1;
-    if (ultimul > 0) {
-      vm.formError = "";
-      vm.membri.splice(ultimul);
-    } else {
-      vm.formError = "Alege cel putin un membru!";
-    }
-  };
-/*
+
   vm.onSubmit = function () {
     vm.formError = "";
-    
-    if (!vm.dateForm || !vm.dateForm.numeProiect || !vm.dateForm.cheieProiect || !vm.dateForm.tipProiect) {
-      vm.formError = "Toate campurile sunt obligatorii!";
+
+    if (!vm.dateForm || !vm.dateForm.membru || !vm.dateForm.rol) {
+      vm.formError = 'Toate campurile sunt obligatorii!';
       return false;
-    } else if (vm.dateForm.cheieProiect.length > 3) {
-      vm.formError = "Cheia trebuie sa aiba maxim 3 caractere!"
+    } else if (vm.alegeMembri.$invalid) {
+      vm.formError = 'Unele campuri contin informatii invalide!'; 
     } else {
       console.log(vm.dateForm);
+      vm.dateForm = {};
+      vm.alegeMembri.$setPristine();
+      vm.alegeMembri.$setUntouched();
+      vm.butonSalvare = "Adauga nou membru";
       return false;
     }
-  };*/
+  };
 };
