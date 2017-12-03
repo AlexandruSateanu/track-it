@@ -12,3 +12,4 @@ app.directive('datePicker', require('./datePicker/datePicker.directive.js'));
 app.directive('tabelRecente', require('./tabelRecente/tabelRecente.directive.js'));
 app.directive('proiecteleMele', require('./proiecteleMele/proiecteleMele.directive.js'));
 app.directive('tabelStatistici', require('./tabelStatistici/tabelStatistici.directive.js'));
+app.directive('tabelMembri', require('./tabelMembri/tabelMembri.directive.js'));

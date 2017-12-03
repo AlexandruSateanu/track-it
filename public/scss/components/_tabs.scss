@@ -1,0 +1,15 @@
+.nav-tabs {
+  & > li {
+    &.active {
+      & > a {
+        border-color: #ecf0f1 #ecf0f1 transparent;
+        background-color: #fff;
+
+        &:focus,
+        &:hover {
+          border-color: #ecf0f1 #ecf0f1 transparent;
+        }
+      }
+    }
+  }
+}

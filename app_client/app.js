@@ -38,9 +38,19 @@ function config($routeProvider, $locationProvider) {
       controller: 'alegePerioadaCtrl',
       controllerAs: 'vm'
     })
+    .when('/alege-etape', {
+      templateUrl: 'componente/proiect/alegeEtape/alegeEtape.view.html',
+      controller: 'alegeEtapeCtrl',
+      controllerAs: 'vm'
+    })
     .when('/alege-membri', {
       templateUrl: 'componente/proiect/alegeMembri/alegeMembri.view.html',
       controller: 'alegeMembriCtrl',
+      controllerAs: 'vm'
+    })
+    .when('/setari-proiect', {
+      templateUrl: 'componente/proiect/setariProiect/setariProiect.view.html',
+      controller: 'setariProiectCtrl',
       controllerAs: 'vm'
     })
     .otherwise({ redirectTo: '/' });

@@ -47,12 +47,11 @@ module.exports = function alegeMembriCtrl() {
     titlu: 'Alege Membri'
   };
 
-  vm.butonSalvare = "Adauga";
-
   vm.membri = membri;
   vm.roluri = roluri;
 
   vm.faraMembri = true;
+  vm.continua = false;
 
   vm.toggleMembri = function () {
     vm.faraMembri = false;
@@ -76,7 +75,7 @@ module.exports = function alegeMembriCtrl() {
       vm.dateForm = {};
       vm.alegeMembri.$setPristine();
       vm.alegeMembri.$setUntouched();
-      vm.butonSalvare = "Adauga nou membru";
+      vm.continua = true;
       return false;
     }
   };

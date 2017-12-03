@@ -84,10 +84,9 @@ gulp.task('build-css', function() {
 		.pipe(sourcemaps.init())
 		.pipe(sass().on('error', sass.logError))
 		.pipe(autoprefixer())
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest('./production/css'))
     .pipe(cssmin())
     .pipe(rename({suffix: '.min'}))
+    .pipe(sourcemaps.write('./'))
 		.pipe(gulp.dest('./production/css'));
 });
 
@@ -256,7 +255,9 @@ gulp.task('build', function() {
 /////////////////////////////////////////////////////////////////////////////////////
 
 gulp.task('watch', function () {
-  gulp.watch(['./app_client/**/*.view.html', './app_client/**/*.template.html', './public/scss/**/*.scss', './public/scss/*.scss', './app_client/**/*.js', './app_api/**/*js'], ['build']);
+  gulp.watch(['./app_client/**/*.js', './app_api/**/*js'], ['jshint', 'build-js']);
+  gulp.watch(['./public/scss/**/*.scss', './public/scss/*.scss'], ['build-css']);
+  gulp.watch(['./app_client/**/*.view.html', './app_client/**/*.template.html'], ['build-template-cache']);
 });
 
 /////////////////////////////////////////////////////////////////////////////////////
