@@ -1,6 +1,7 @@
 module.exports = function datePickerCtrl() {
   var vm = this;
 
+  /** optiuni date picker */
   vm.dateOptions = {
     formatYear: 'yy',
     maxDate: new Date(2030, 5, 22),

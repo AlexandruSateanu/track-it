@@ -53,6 +53,7 @@ module.exports = function alegeMembriCtrl() {
   vm.faraMembri = true;
   vm.continua = false;
 
+  /** amanare introducere membrii */
   vm.toggleMembri = function () {
     vm.faraMembri = false;
   };
@@ -74,6 +75,7 @@ module.exports = function alegeMembriCtrl() {
       vm.formError = '';
       console.log(vm.dateForm);
       vm.dateForm = {};
+      /** resetare campuri */
       vm.alegeMembri.$setPristine();
       vm.alegeMembri.$setUntouched();
       vm.continua = true;

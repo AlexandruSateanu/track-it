@@ -30,6 +30,7 @@ module.exports = function alegeEtapeCtrl() {
     var campGol = 0;
     var perioadaGresita = 0;
 
+    /** validare form: daca exista campuri goale sau perioada gresita */
     for (var i = 0; i < vm.dateForm.length; i++) {
       if (!vm.dateForm[i].numeEtapa|| !vm.dateForm[i].perioada.dataStart || !vm.dateForm[i].perioada.dataSfarsit) {
         campGol++

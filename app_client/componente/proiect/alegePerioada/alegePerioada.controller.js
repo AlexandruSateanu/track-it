@@ -12,7 +12,7 @@ module.exports = function alegePerioadaCtrl() {
 
   vm.onSubmit = function () {
     vm.formError = '';
-    
+    /** validare form */
     if (!vm.dateForm || !vm.dateForm.dataStart || !vm.dateForm.dataSfarsit) {
       vm.formError = "Alege ambele date!";
       return false;

@@ -14,6 +14,7 @@ module.exports = function creareProiectCtrl() {
   vm.onSubmit = function () {
     vm.formError = '';
     
+    /* Validare form */
     if (!vm.dateForm || !vm.dateForm.numeProiect || !vm.dateForm.cheieProiect || !vm.dateForm.tipProiect) {
       vm.formError = "Toate campurile sunt obligatorii!";
       return false;
