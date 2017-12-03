@@ -4,9 +4,38 @@
     <div class="col-xs-12 col-md-12">
       <div class="page-component">
         <uib-tabset active="active">
-          <uib-tab index="0" heading="Perioada">Editeaza perioada</uib-tab>
-          <uib-tab index="1" heading="Etape" ng-show="vm.setariEtape">Editeaza etapele</uib-tab>
-          <uib-tab index="2" heading="Membri">Editeaza membrii</uib-tab>
+          <uib-tab index="0" heading="Perioada">
+            <div ng-controller="editeazaPerioadaCtrl as ep">
+              <h4>Editeaza perioada proiectului</h4>
+              <div class="row">
+                <div class="col-xs-12 col-md-6">
+                  <h5>Perioada curenta</h5>
+                  <div>
+                    <span>Data start: </span>
+                    <span>{{ ep.dataStartCurenta | date: 'dd MMMM yyyy' }}</span>
+                  </div>
+                  <div>
+                    <span>Data sfarsit: </span>
+                    <span>{{ ep.dataSfarsitCurenta | date: 'dd MMMM yyyy' }}</span>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                  <h5>Perioada noua</h5>
+                  <form id="editeazaPerioada" name="editeazaPerioada" ng-submit="ep.perioadaOnSubmit()">
+                    <div role="alert" class="alert alert-danger" ng-show="ep.formError">{{ ep.formError }}</div>
+                    <date-picker ng-model="ep.dateForm"></date-picker>
+                    <button type="submit" class="btn btn-primary">Salveaza date</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </uib-tab>
+          <uib-tab index="1" heading="Etape" ng-show="vm.setariEtape">
+            <h4>Editeaza etapele proiectului</h4>
+          </uib-tab>
+          <uib-tab index="2" heading="Membri">
+            <h4>Editeaza membrii proiectului</h4>
+          </uib-tab>
         </uib-tabset>
       </div>
     </div>

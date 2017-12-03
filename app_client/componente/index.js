@@ -10,3 +10,4 @@ app.controller('alegePerioadaCtrl', require('./proiect/alegePerioada/alegePerioa
 app.controller('alegeEtapeCtrl', require('./proiect/alegeEtape/alegeEtape.controller.js'));
 app.controller('alegeMembriCtrl', require('./proiect/alegeMembri/alegeMembri.controller.js'));
 app.controller('setariProiectCtrl', require('./proiect/setariProiect/setariProiect.controller.js'));
+app.controller('editeazaPerioadaCtrl', require('./proiect/setariProiect/editeazaPerioada.controller.js'));

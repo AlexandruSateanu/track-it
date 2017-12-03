@@ -63,7 +63,7 @@ module.exports = function alegeMembriCtrl() {
   };
 
   vm.onSubmit = function () {
-    vm.formError = "";
+    vm.formError = '';
 
     if (!vm.dateForm || !vm.dateForm.membru || !vm.dateForm.rol) {
       vm.formError = 'Toate campurile sunt obligatorii!';
@@ -71,6 +71,7 @@ module.exports = function alegeMembriCtrl() {
     } else if (vm.alegeMembri.$invalid) {
       vm.formError = 'Unele campuri contin informatii invalide!'; 
     } else {
+      vm.formError = '';
       console.log(vm.dateForm);
       vm.dateForm = {};
       vm.alegeMembri.$setPristine();

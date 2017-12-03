@@ -1,16 +1,21 @@
-module.exports = function alegePerioadaCtrl() {
+module.exports = function editeazaPerioadaCtrl() {
   var vm = this;
 
-  vm.antetPagina = {
-    titlu: 'Alege perioada proiectului'
-  };
+  /* Mostenire controller parinte */
+  setariProiectCtrl.apply(vm, arguments);
+
+  /* Accesare date din scope-ul parinte */
+  vm.proiect = vm.proiect;
+
+  vm.dataStartCurenta = vm.proiect.perioada.dataStart;
+  vm.dataSfarsitCurenta = vm.proiect.perioada.dataSfarsit;
 
   vm.dateForm = {
     dataStart: '',
     dataSfarsit: ''
   };
 
-  vm.onSubmit = function () {
+  vm.perioadaOnSubmit = function () {
     vm.formError = '';
     
     if (!vm.dateForm || !vm.dateForm.dataStart || !vm.dateForm.dataSfarsit) {

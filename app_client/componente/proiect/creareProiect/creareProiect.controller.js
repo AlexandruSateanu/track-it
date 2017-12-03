@@ -12,7 +12,7 @@ module.exports = function creareProiectCtrl() {
   };
 
   vm.onSubmit = function () {
-    vm.formError = "";
+    vm.formError = '';
     
     if (!vm.dateForm || !vm.dateForm.numeProiect || !vm.dateForm.cheieProiect || !vm.dateForm.tipProiect) {
       vm.formError = "Toate campurile sunt obligatorii!";
@@ -20,6 +20,7 @@ module.exports = function creareProiectCtrl() {
     } else if (vm.dateForm.cheieProiect.length > 3) {
       vm.formError = "Cheia trebuie sa aiba maxim 3 caractere!"
     } else {
+      vm.formError = '';
       console.log(vm.dateForm);
       return false;
     }

@@ -1,9 +1,7 @@
 var proiect = {
-  proiect1: {
-    id: 1,
-    numeProiect: "Proiect 1",
-    projectManager: "Alex Sateanu"
-  }
+  id: 1,
+  numeProiect: "Proiect 1",
+  projectManager: "Alex Sateanu"
 };
 
 var activitatiRecente = {
@@ -87,7 +85,7 @@ module.exports = function proiectStartCtrl() {
   var vm = this;
 
   vm.antetPagina = {
-    titlu: proiect.proiect1.nume
+    titlu: proiect.numeProiect
   };
 
   vm.activitatiRecente = activitatiRecente;
@@ -96,7 +94,7 @@ module.exports = function proiectStartCtrl() {
 
   vm.statisticiPrioritate = statistici.prioritate;
 
-  vm.projectManager = proiect.proiect1.projectManager;
+  vm.projectManager = proiect.projectManager;
 
   vm.membri = membri;
 }
