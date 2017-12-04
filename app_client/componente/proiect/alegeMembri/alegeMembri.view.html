@@ -21,7 +21,7 @@
               <div class="row">
                 <div class="col-xs-12 col-md-5">
                   <label for="alegeMembru">Alege membru</label>
-                  <input type="text" ng-model="vm.dateForm.membru" uib-typeahead="membru as membru.nume for membru in vm.membri | filter:$viewValue | limitTo:3" typeahead-show-hint="true" typeahead-no-results="noResults" typeahead-editable="false" class="form-control">                  
+                  <input type="text" nume="alegeMembru" ng-model="vm.dateForm.membru" uib-typeahead="membru as membru.nume for membru in vm.membri | filter:$viewValue | limitTo:3" typeahead-show-hint="true" typeahead-no-results="noResults" typeahead-editable="false" class="form-control">                  
                   <div ng-show="noResults">
                     <i class="glyphicon glyphicon-remove"></i> Nu exista rezultate
                   </div>

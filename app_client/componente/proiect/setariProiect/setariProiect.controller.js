@@ -10,6 +10,7 @@ var proiect = {
   },
   etape: [
     {
+      id: 100,
       numeEtapa: 'Etapa unu',
       perioada: {
         dataStart: new Date('2017-12-14T00:00:00Z'),
@@ -17,6 +18,7 @@ var proiect = {
       }
     },
     {
+      id: 200,
       numeEtapa: 'Etapa doi',
       perioada: {
         dataStart: new Date('2018-01-05T00:00:00Z'),
@@ -24,6 +26,7 @@ var proiect = {
       }
     },
     {
+      id: 300,
       numeEtapa: 'Etapa trei',
       perioada: {
         dataStart: new Date('2018-02-05T00:00:00Z'),
@@ -34,22 +37,27 @@ var proiect = {
   membri: [
     {
       id: 1,
+      nume: 'Cristina Ungureanu',
       rolId: 1
     },
     {
       id: 2,
+      nume: 'Alex Sateanu',
       rolId: 2
     },
     {
       id: 3,
+      nume: 'Andreea Ujica',
       rolId: 2
     },
     {
       id: 4,
+      nume: 'Bogdan Chircu',
       rolId: 2
     },
     {
       id: 5,
+      nume: 'Test Test',
       rolId: 4
     }
   ]

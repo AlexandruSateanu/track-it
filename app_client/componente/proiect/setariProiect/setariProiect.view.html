@@ -4,7 +4,7 @@
     <div class="col-xs-12 col-md-12">
       <div class="page-component">
         <uib-tabset active="active">
-          <uib-tab index="0" heading="Perioada">
+          <uib-tab index="0" heading="Editeaza Perioada">
             <div ng-controller="editeazaPerioadaCtrl as ep">
               <h4>Editeaza perioada proiectului</h4>
               <div class="row">
@@ -30,11 +30,91 @@
               </div>
             </div>
           </uib-tab>
-          <uib-tab index="1" heading="Etape" ng-show="vm.setariEtape">
-            <h4>Editeaza etapele proiectului</h4>
+          <uib-tab index="1" heading="Editeaza Etape" ng-show="vm.setariEtape">
+            <div class="page-component">
+              <h4>Editeaza etapele proiectului</h4>
+              <div ng-controller="editeazaEtapeCtrl as ee">
+                <form ng-repeat="etapa in ee.dateForm" name="ee.editEtape-{{$index}}" ng-submit="ee.etapaOnSubmit($index)">
+                  <div role="alert" class="alert alert-danger" ng-show="ee.formError[$index]">{{ ee.formError[$index] }}</div>
+                  <div class="form-group">
+                    <fieldset class="grup-etapa">
+                      <div class="row">
+                        <div class="col-xs-12 col-md-5">
+                          <label for="alegeEtapa-{{$index}}">Editeaza nume etapa</label>
+                          <input type="text" class="form-control" name="numeEtapa-{{$index}}" placeholder="Nume etapa" ng-model="ee.dateForm[$index].numeEtapa">
+                        </div>
+                        <div class="col-xs-12 col-md-5">
+                          <date-picker ng-model="ee.dateForm[$index].perioada"></date-picker>
+                        </div>
+                        <div class="col-xs-12 col-md-2">
+                          <button type="submit" class="btn btn-primary">Salveaza</button>
+                        </div>
+                      </div>
+                    </fieldset>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="page-component">
+              <h4>Adauga etape noi</h4>
+              <div ng-controller="alegeEtapeCtrl as ae">
+                <form id="adaugaEtape" name="ae.adaugaEtape" ng-submit="ae.onSubmit()">
+                  <div role="alert" class="alert alert-danger" ng-show="ae.formError">{{ ae.formError }}</div>
+                  <div class="form-group">
+                    <fieldset ng-repeat="etapa in ae.dateForm" class="grup-etapa">
+                      <div class="row">
+                        <div class="col-xs-12 col-md-5">
+                          <label for="alegeEtapa">Nume etapa</label>
+                          <input type="text" class="form-control" name="numeEtapa" placeholder="Nume etapa" ng-model="ae.dateForm[$index].numeEtapa">
+                        </div>
+                        <div class="col-xs-12 col-md-5">
+                          <date-picker ng-model="ae.dateForm[$index].perioada"></date-picker>
+                        </div>
+                        <div class="col-xs-12 col-md-2">
+                          <div class="delete-btn-label">Sterge</div>
+                          <button type="button" class="btn btn-danger" ng-click="ae.stergeEtapa($index)">-</button>
+                        </div>
+                      </div>
+                    </fieldset>
+                    <button type="button" class="btn btn-success" ng-click="ae.adaugaEtapa()">Adauga etapa</button>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Salveaza etape</button>
+                </form>
+              </div>
+            </div>
           </uib-tab>
-          <uib-tab index="2" heading="Membri">
+          <uib-tab index="2" heading="Editeaza Membri">
             <h4>Editeaza membrii proiectului</h4>
+            <div ng-controller="editeazaMembriCtrl as em">
+              <form ng-repeat="membru in em.dateForm" name="em.editMembri-[$index]" ng-submit="em.membruOnSubmit($index)">
+                <div role="alert" class="alert alert-danger" ng-show="em.formError[$index]">{{ em.formError[$index] }}</div>
+                <div class="form-group">
+                  <fieldset>
+                    <div class="row">
+                      <div class="col-xs-12 col-md-5">>
+                        <div>
+                          <span>Nume membru: </span>
+                          <span>{{ em.dateForm[$index].nume }}</span>
+                        </div>
+                        <div>
+                          <span>Rol curent: </span>
+                          <span>{{ em.dateForm[$index].rolId }}</span>
+                        </div>
+                      </div>
+                      <div class="col-xs-12 col-md-5">
+                        <label for="alegeRol-[$index]">Alege rol nou</label>
+                        <select class="form-control" name="alegeRol-[$index]" ng-model="em.dateForm[$index].rol">
+                          <option ng-repeat="rol in em.roluri" value="{{ em.roluri[$index].rolId }}">{{ em.roluri[$index].rol }}</option>
+                        </select>
+                      </div>
+                      <div class="col-xs-12 col-md-5">
+                        <button type="submit" class="btn btn-primary">Salveaza</button>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+              </form>
+            </div>
           </uib-tab>
         </uib-tabset>
       </div>

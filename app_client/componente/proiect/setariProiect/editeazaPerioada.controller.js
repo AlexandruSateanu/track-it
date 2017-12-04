@@ -1,11 +1,8 @@
-module.exports = function editeazaPerioadaCtrl() {
+module.exports = function editeazaPerioadaCtrl($scope) {
   var vm = this;
 
-  /* Mostenire controller parinte */
-  setariProiectCtrl.apply(vm, arguments);
-
   /* Accesare date din scope-ul parinte */
-  vm.proiect = vm.proiect;
+  vm.proiect = $scope.vm.proiect;
 
   vm.dataStartCurenta = vm.proiect.perioada.dataStart;
   vm.dataSfarsitCurenta = vm.proiect.perioada.dataSfarsit;
@@ -18,6 +15,7 @@ module.exports = function editeazaPerioadaCtrl() {
   vm.perioadaOnSubmit = function () {
     vm.formError = '';
     
+    /* validare form */
     if (!vm.dateForm || !vm.dateForm.dataStart || !vm.dateForm.dataSfarsit) {
       vm.formError = "Alege ambele date!";
       return false;

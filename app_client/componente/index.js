@@ -10,4 +10,6 @@ app.controller('alegePerioadaCtrl', require('./proiect/alegePerioada/alegePerioa
 app.controller('alegeEtapeCtrl', require('./proiect/alegeEtape/alegeEtape.controller.js'));
 app.controller('alegeMembriCtrl', require('./proiect/alegeMembri/alegeMembri.controller.js'));
 app.controller('setariProiectCtrl', require('./proiect/setariProiect/setariProiect.controller.js'));
-app.controller('editeazaPerioadaCtrl', require('./proiect/setariProiect/editeazaPerioada.controller.js'));
+app.controller('editeazaPerioadaCtrl', ['$scope', require('./proiect/setariProiect/editeazaPerioada.controller.js')]);
+app.controller('editeazaEtapeCtrl', ['$scope', require('./proiect/setariProiect/editeazaEtape.controller.js')]);
+app.controller('editeazaMembriCtrl', ['$scope', require('./proiect/setariProiect/editeazaMembri.controller.js')]);

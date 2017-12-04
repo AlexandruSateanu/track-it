@@ -66,6 +66,7 @@ module.exports = function alegeMembriCtrl() {
   vm.onSubmit = function () {
     vm.formError = '';
 
+    /* validare form */
     if (!vm.dateForm || !vm.dateForm.membru || !vm.dateForm.rol) {
       vm.formError = 'Toate campurile sunt obligatorii!';
       return false;

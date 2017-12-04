@@ -8,8 +8,8 @@
           <fieldset ng-repeat="etapa in vm.dateForm" class="grup-etapa">
             <div class="row">
               <div class="col-xs-12 col-md-5">
-                <label for="alegeEtapa">Alege etapa</label>
-                <input type="text" class="form-control" name="numeEtapa" placeholder="Nume etapa" ng-model="vm.dateForm[$index].numeEtapa">
+                <label for="numeEtapa-[$index]">Nume etapa</label>
+                <input type="text" class="form-control" name="numeEtapa-[$index]" placeholder="Nume etapa" ng-model="vm.dateForm[$index].numeEtapa">
               </div>
               <div class="col-xs-12 col-md-5">
                 <date-picker ng-model="vm.dateForm[$index].perioada"></date-picker>
