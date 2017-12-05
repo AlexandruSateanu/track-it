@@ -37,7 +37,7 @@
                 <form ng-repeat="etapa in ee.dateForm" name="ee.editEtape-{{$index}}" ng-submit="ee.etapaOnSubmit($index)">
                   <div role="alert" class="alert alert-danger" ng-show="ee.formError[$index]">{{ ee.formError[$index] }}</div>
                   <div class="form-group">
-                    <fieldset class="grup-etapa">
+                    <fieldset class="grup-separator">
                       <div class="row">
                         <div class="col-xs-12 col-md-5">
                           <label for="alegeEtapa-{{$index}}">Editeaza nume etapa</label>
@@ -61,7 +61,7 @@
                 <form id="adaugaEtape" name="ae.adaugaEtape" ng-submit="ae.onSubmit()">
                   <div role="alert" class="alert alert-danger" ng-show="ae.formError">{{ ae.formError }}</div>
                   <div class="form-group">
-                    <fieldset ng-repeat="etapa in ae.dateForm" class="grup-etapa">
+                    <fieldset ng-repeat="etapa in ae.dateForm" class="grup-separator">
                       <div class="row">
                         <div class="col-xs-12 col-md-5">
                           <label for="alegeEtapa">Nume etapa</label>
@@ -84,14 +84,14 @@
             </div>
           </uib-tab>
           <uib-tab index="2" heading="Editeaza Membri">
-            <h4>Editeaza membrii proiectului</h4>
-            <div ng-controller="editeazaMembriCtrl as em">
-              <form ng-repeat="membru in em.dateForm" name="em.editMembri-[$index]" ng-submit="em.membruOnSubmit($index)">
-                <div role="alert" class="alert alert-danger" ng-show="em.formError[$index]">{{ em.formError[$index] }}</div>
-                <div class="form-group">
-                  <fieldset>
+            <div class="page-component">
+              <h4>Editeaza membrii proiectului</h4>
+              <div ng-controller="editeazaMembriCtrl as em">
+                <form ng-repeat="membru in em.dateForm" name="em.editMembri-[$index]" ng-submit="em.membruOnSubmit($index)">
+                  <div role="alert" class="alert alert-danger" ng-show="em.formError[$index]">{{ em.formError[$index] }}</div>
+                  <fieldset class="grup-separator">
                     <div class="row">
-                      <div class="col-xs-12 col-md-5">>
+                      <div class="col-xs-12 col-md-5">
                         <div>
                           <span>Nume membru: </span>
                           <span>{{ em.dateForm[$index].nume }}</span>
@@ -102,18 +102,50 @@
                         </div>
                       </div>
                       <div class="col-xs-12 col-md-5">
-                        <label for="alegeRol-[$index]">Alege rol nou</label>
-                        <select class="form-control" name="alegeRol-[$index]" ng-model="em.dateForm[$index].rol">
-                          <option ng-repeat="rol in em.roluri" value="{{ em.roluri[$index].rolId }}">{{ em.roluri[$index].rol }}</option>
-                        </select>
+                        <div class="form-group">
+                          <label for="alegeRol-[$index]">Alege rol nou</label>
+                          <select class="form-control" name="alegeRol-[$index]" ng-model="em.dateForm[$index].rol">
+                            <option ng-repeat="rol in em.roluri" value="{{ em.roluri[$index].rolId }}">{{ em.roluri[$index].rol }}</option>
+                          </select>
+                        </div>
                       </div>
-                      <div class="col-xs-12 col-md-5">
+                      <div class="col-xs-12 col-md-2">
                         <button type="submit" class="btn btn-primary">Salveaza</button>
                       </div>
                     </div>
                   </fieldset>
-                </div>
-              </form>
+                </form>
+              </div>
+            </div>
+            <div class="page-component">
+              <h4>Adauga membri noi</h4>
+              <div ng-controller="alegeMembriCtrl as am">
+                <form id="alegeMembri" name="am.alegeMembri" ng-submit="am.onSubmit()">
+                  <div role="alert" class="alert alert-danger" ng-show="am.formError">{{ am.formError }}</div>
+                  <fieldset>
+                    <div class="row">
+                      <div class="col-xs-12 col-md-5">
+                        <div class="form-group">
+                          <label for="alegeMembru">Alege membru</label>
+                          <input type="text" nume="alegeMembru" ng-model="am.dateForm.membru" uib-typeahead="membru as membru.nume for membru in am.membri | filter:$viewValue | limitTo:3" typeahead-show-hint="true" typeahead-no-results="noResults" typeahead-editable="false" class="form-control">                  
+                          <div ng-show="noResults">
+                            <i class="glyphicon glyphicon-remove"></i> Nu exista rezultate
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xs-12 col-md-5">
+                        <div class="form-group">
+                          <label for="alegeRol">Alege rol</label>
+                          <select class="form-control" name="alegeRol" ng-model="am.dateForm.rol">
+                            <option ng-repeat="rol in am.roluri" value="{{ am.roluri[$index].rolId }}">{{ am.roluri[$index].rol }}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                  <button type="submit" class="btn btn-primary">Adauga membru</button>
+                </form>
+              </div>
             </div>
           </uib-tab>
         </uib-tabset>
