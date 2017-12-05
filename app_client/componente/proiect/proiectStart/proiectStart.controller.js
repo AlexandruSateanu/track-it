@@ -94,7 +94,7 @@ module.exports = function proiectStartCtrl() {
 
   vm.statisticiPrioritate = statistici.prioritate;
 
-  vm.projectManager = proiect.projectManager;
+  vm.proiect = proiect;
 
   vm.membri = membri;
 }

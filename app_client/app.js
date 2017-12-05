@@ -52,6 +52,10 @@ function config($routeProvider, $locationProvider) {
       templateUrl: 'componente/proiect/setariProiect/setariProiect.view.html',
       controller: 'setariProiectCtrl',
       controllerAs: 'vm'
+    }).when('/creare-activitate', {
+      templateUrl: 'componente/activitate/creareActivitate/creareActivitate.view.html',
+      controller: 'creareActivitateCtrl',
+      controllerAs: 'vm'
     })
     .otherwise({ redirectTo: '/' });
 

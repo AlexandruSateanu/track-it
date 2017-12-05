@@ -1,0 +1,38 @@
+<div class="container page-container">
+  <antet-pagina content="vm.antetPagina"></antet-pagina>
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <form id="creareActivitate" name="creareActivitate" ng-submit="vm.onSubmit()">
+        <div role="alert" class="alert alert-danger" ng-show="vm.formError">{{ vm.formError }}</div>
+        <div ng-if="vm.proiectSetat" class="form-group">
+          <span>Proiect: </span><span>{{ vm.proiectSetat }}</span>
+        </div>
+        <div class="form-group">
+          <label for="numeActivitate">Nume activitate</label>
+          <input type="text" class="form-control" name="numeActivitate" placeholder="Numele activitatii" ng-model="vm.dateForm.numeActivitate">
+        </div>
+        <div ng-if="!vm.proiectSetat" class="form-group">
+          <label for="proiect">Proiect</label>
+          <input type="text" class="form-control" name="proiect" placeholder="Proiect" ng-model="vm.dateForm.proiect">  
+        </div>
+        <div class="form-group">
+          <label for="responsabil">Responsabil</label>
+          <input type="text" class="form-control" name="responsabil" placeholder="Introduceti cheia" ng-model="vm.dateForm.responsabil">
+        </div>
+        <div class="form-group">
+          <label for="etapa">Etapa</label>
+          <select class="form-control" name="etapa" ng-model="vm.dateForm.etapa">
+            <option ng-repeat="etapa in vm.proiect.etape" value="{{ etapa.id }}">{{ etapa.numeEtapa }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="prioritate">Prioritat</label>
+          <select class="form-control" name="prioritate" ng-model="vm.dateForm.prioritate">
+            <option ng-repeat="prioritate in vm.prioritate" value="{{ prioritate.id }}">{{prioritate.nume }}</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Creaza activitate</button>
+      </form>
+    </div>
+  </div>
+</div>
