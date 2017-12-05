@@ -1,0 +1,46 @@
+<div class="container page-container">
+  <antet-pagina content="vm.antetPagina"></antet-pagina>
+  <div class="row">
+    <div class="col-xs-12 col-md-12">
+      <div class="page-component" ng-show="vm.faraMembri">
+        <h4>Vreti sa adaugati acum membri la proiect? (Puteti adauga si mai tarziu)</h4>
+        <div class="row">
+          <div class="col-xs-6 col-md-6">
+            <button class="btn btn-success" ng-click="vm.toggleMembri()">Da</button>
+          </div>
+          <div class="col-xs-6 col-md-6">
+            <a href="/#proiect-start" class="btn btn-danger">Nu</a>
+          </div>
+        </div>
+      </div>
+      <div class="page-component" ng-hide="vm.faraMembri">
+        <form id="alegeMembri" name="vm.alegeMembri" ng-submit="vm.onSubmit()">
+          <div role="alert" class="alert alert-danger" ng-show="vm.formError">{{ vm.formError }}</div>
+          <fieldset>
+            <div class="row">
+              <div class="col-xs-12 col-md-5">
+                <div class="form-group">
+                  <label for="alegeMembru">Alege membru</label>
+                  <input type="text" nume="alegeMembru" ng-model="vm.dateForm.membru" uib-typeahead="membru as membru.nume for membru in vm.membri | filter:$viewValue | limitTo:3" typeahead-show-hint="true" typeahead-no-results="noResults" typeahead-editable="false" class="form-control">                  
+                  <div ng-show="noResults">
+                    <i class="glyphicon glyphicon-remove"></i> Nu exista rezultate
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-5">
+                <div class="form-group">
+                  <label for="alegeRol">Alege rol</label>
+                  <select class="form-control" name="alegeRol" ng-model="vm.dateForm.rol">
+                    <option ng-repeat="rol in vm.roluri" value="{{ vm.roluri[$index].rolId }}">{{ vm.roluri[$index].rol }}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <button type="submit" class="btn btn-primary">Adauga membru</button>
+        </form>
+        <a href="/#proiect-start" class="btn btn-secondary" ng-show="vm.continua">Continua spre Proiect</a>
+      </div>
+    </div>
+  </div>
+</div>

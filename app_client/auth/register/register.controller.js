@@ -5,24 +5,26 @@ module.exports = function registerCtrl() {
     titlu: 'Inregistrare'
   };
 
-  vm.credentials = {
-    name : "",
-    email : "",
-    password : ""
+  vm.credentiale = {
+    username: '',
+    email: '',
+    numeIntreg: '',
+    parola: '',
+    parolaConfirmare: ''
   };
-/*
-  vm.returnPage = $location.search().page || '/';
 
   vm.onSubmit = function () {
     vm.formError = "";
 
-    if (!vm.credentials.name || !vm.credentials.email || !vm.credentials.password) {
-      vm.formError = "All fields required, please try again";
+    if (!vm.credentiale || !vm.credentiale.username || !vm.credentiale.numeIntreg || !vm.credentiale.email || !vm.credentiale.parola || !vm.credentiale.parolaConfirmare) {
+      vm.formError = "Toate campurile sunt obligatorii!";
       return false;
     } else {
-      vm.doRegister();
+      console.log(vm.credentiale);
     }
   };
+/*
+  vm.returnPage = $location.search().page || '/';
 
   vm.doRegister = function() {
     vm.formError = "";

@@ -1,30 +1,31 @@
 <div class="container page-container">
   <antet-pagina content="vm.antetPagina"></antet-pagina>
   <div class="row">
-    <div class="col-md-6 col-sm-12">
-      <p class="lead">Sunteti inregistrati deja? Atunci puteti sa va <a href="/">conectati</a>.</p>
-      <form ng-submit="vm.onSubmit()">
-        <div role="alert" class="alert alert-danger"></div>
+    <div class="col-xs-12 col-md-6">
+      <p class="lead">V-ati inregistrat deja? Atunci puteti sa va <a href="/">conectati</a>.</p>
+      <form id="register" name="register" ng-submit="vm.onSubmit()">
+        <div role="alert" class="alert alert-danger" ng-show="vm.formError">{{ vm.formError }}</div>
         <div class="form-group">
-          <label for="name">Username</label>
-          <input type="text" class="form-control" id="username" placeholder="Introduceti username">
-        </div><div class="form-group">
-          <label for="name">Numele intreg</label>
-          <input type="text" class="form-control" id="fullname" placeholder="Introduceti numele si prenumele">
+          <label for="username">Username</label>
+          <input type="text" class="form-control" id="username" placeholder="Introduceti username" ng-model="vm.credentiale.username">
+        </div>
+        <div class="form-group">
+          <label for="numeIntreg">Numele intreg</label>
+          <input type="text" class="form-control" id="numeIntreg" placeholder="Introduceti numele si prenumele" ng-model="vm.credentiale.numeIntreg">
         </div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" class="form-control" id="email" placeholder="Introduceti email">
+          <input type="email" class="form-control" id="email" placeholder="Introduceti email" ng-model="vm.credentiale.email">
         </div>
         <div class="form-group">
-          <label for="password">Parola</label>
-          <input type="password" class="form-control" id="password" placeholder="Introduceti parola">
+          <label for="parola">Parola</label>
+          <input type="password" class="form-control" id="parola" placeholder="Introduceti parola" ng-model="vm.credentiale.parola">
         </div>
         <div class="form-group">
-          <label for="password">Verificare parola</label>
-          <input type="password" class="form-control" id="password-confirm" placeholder="Reintroduceti parola">
+          <label for="parola-confirmare">Verificare parola</label>
+          <input type="password" class="form-control" id="parolaConfirmare" placeholder="Reintroduceti parola" ng-model="vm.credentiale.parolaConfirmare">
         </div>
-        <button type="submit" class="btn btn-default">Inregistrare</button>
+        <button type="submit" class="btn btn-primary">Inregistrare</button>
       </form>
     </div>
   </div>

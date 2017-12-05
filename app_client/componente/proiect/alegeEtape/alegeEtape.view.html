@@ -1,0 +1,31 @@
+<div class="container page-container">
+  <antet-pagina content="vm.antetPagina"></antet-pagina>
+  <div class="row">
+    <div class="col-xs-12 col-md-12">
+      <form id="alegeEtape" name="vm.alegeEtape" ng-submit="vm.onSubmit()">
+        <div role="alert" class="alert alert-danger" ng-show="vm.formError">{{ vm.formError }}</div>
+        <div class="form-group">
+          <fieldset ng-repeat="etapa in vm.dateForm" class="grup-separator">
+            <div class="row">
+              <div class="col-xs-12 col-md-5">
+                <div class="form-group">
+                  <label for="numeEtapa-[$index]">Nume etapa</label>
+                  <input type="text" class="form-control" name="numeEtapa-[$index]" placeholder="Nume etapa" ng-model="vm.dateForm[$index].numeEtapa">
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-5">
+                <date-picker ng-model="vm.dateForm[$index].perioada"></date-picker>
+              </div>
+              <div class="col-xs-12 col-md-2">
+                <div class="delete-btn-label">Sterge</div>
+                <button type="button" class="btn btn-danger" ng-click="vm.stergeEtapa($index)">-</button>
+              </div>
+            </div>
+          </fieldset>
+          <button type="button" class="btn btn-success" ng-click="vm.adaugaEtapa()">Adauga etapa</button>
+        </div>
+        <button type="submit" class="btn btn-primary">Salveaza etape</button>
+      </form>
+    </div>
+  </div>
+</div>

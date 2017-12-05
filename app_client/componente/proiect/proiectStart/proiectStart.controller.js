@@ -1,21 +1,20 @@
 var proiect = {
-  proiect1: {
-    nume: "Proiectul 1",
-    projectManager: "Alex Sateanu"
-  }
+  id: 1,
+  numeProiect: "Proiect 1",
+  projectManager: "Alex Sateanu"
 };
 
 var activitatiRecente = {
   activitate1: {
     cod: "PR1-ACT2",
     nume: "Activitate 2",
-    proiect: "Proiect 1",
+    idProiect: 1,
     data: "23 03 2016, 11:00"
   },
   activitate2: {
     cod: "PR1-ACT1",
     nume: "Activitate 1",
-    proiect: "Proiect 1",
+    idProiect: 1,
     data: "23 03 2016, 10:00"
   }
 };
@@ -59,11 +58,34 @@ var statistici = {
   ]
 };
 
-module.exports = function proiectStartCtrl () {
+var membri = [
+  {
+    id: 1,
+    nume: 'Cristina Ungureanu'
+  },
+  {
+    id: 2,
+    nume: 'Alex Sateanu'
+  },
+  {
+    id: 3,
+    nume: 'Andreea Ujica'
+  },
+  {
+    id: 4,
+    nume: 'Bogdan Chircu'
+  },
+  {
+    id: 5,
+    nume: 'Test Test'
+  }
+];
+
+module.exports = function proiectStartCtrl() {
   var vm = this;
 
   vm.antetPagina = {
-    titlu: proiect.proiect1.nume
+    titlu: proiect.numeProiect
   };
 
   vm.activitatiRecente = activitatiRecente;
@@ -72,5 +94,7 @@ module.exports = function proiectStartCtrl () {
 
   vm.statisticiPrioritate = statistici.prioritate;
 
-  vm.projectManager = proiect.proiect1.projectManager;
+  vm.projectManager = proiect.projectManager;
+
+  vm.membri = membri;
 }
