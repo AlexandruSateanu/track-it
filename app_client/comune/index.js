@@ -13,3 +13,4 @@ app.directive('tabelRecente', require('./tabelRecente/tabelRecente.directive.js'
 app.directive('proiecteleMele', require('./proiecteleMele/proiecteleMele.directive.js'));
 app.directive('tabelStatistici', require('./tabelStatistici/tabelStatistici.directive.js'));
 app.directive('tabelMembri', require('./tabelMembri/tabelMembri.directive.js'));
+app.directive('antetActivitate', require('./antetActivitate/antetActivitate.directive.js'));

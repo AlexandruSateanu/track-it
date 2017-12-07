@@ -52,9 +52,20 @@ function config($routeProvider, $locationProvider) {
       templateUrl: 'componente/proiect/setariProiect/setariProiect.view.html',
       controller: 'setariProiectCtrl',
       controllerAs: 'vm'
-    }).when('/creare-activitate', {
+    })
+    .when('/proiect/:proiectId/creare-activitate', {
       templateUrl: 'componente/activitate/creareActivitate/creareActivitate.view.html',
       controller: 'creareActivitateCtrl',
+      controllerAs: 'vm'
+    })
+    .when('/proiect/:proiectId/activitate/:activitateId', {
+      templateUrl: 'componente/activitate/paginaActivitate/paginaActivitate.view.html',
+      controller: 'paginaActivitateCtrl',
+      controllerAs: 'vm'
+    })
+    .when('/proiect/:proiectId/activitate/:activitateId/creare-sarcina', {
+      templateUrl: 'componente/sarcina/creareSarcina/creareSarcina.view.html',
+      controller: 'creareSarcinaCtrl',
       controllerAs: 'vm'
     })
     .otherwise({ redirectTo: '/' });

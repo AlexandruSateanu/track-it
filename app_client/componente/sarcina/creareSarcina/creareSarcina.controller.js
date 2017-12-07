@@ -82,20 +82,19 @@ var prioritate = [
   },
 ];
 
-module.exports = function creareActivitateCtrl($location) {
+module.exports = function creareSarcinaCtrl($location) {
   var vm = this;
 
   vm.antetPagina = {
-    titlu: 'Creaza activitate noua'
+    titlu: 'Creaza sarcina noua'
   };
 
   vm.proiect = proiect;
   vm.prioritate = prioritate;
 
   vm.dateForm = {
-    numeActivitate: '',
+    numeSarcina: '',
     responsabil: '',
-    etapa: '',
     prioritate: '',
     estimare: '',
     descriere: ''
@@ -104,7 +103,7 @@ module.exports = function creareActivitateCtrl($location) {
   vm.onSubmit = function () {
     vm.formError = '';
     /** validare form */
-    if (!vm.dateForm || !vm.dateForm.numeActivitate || !vm.dateForm.responsabil || !vm.dateForm.etapa || !vm.dateForm.prioritate || !vm.dateForm.estimare) {
+    if (!vm.dateForm || !vm.dateForm.numeSarcina || !vm.dateForm.responsabil || !vm.dateForm.prioritate || !vm.dateForm.estimare) {
       vm.formError = 'Unele campuri obligatorii nu sunt completate!';
       return false;
     } else if (isNaN(vm.dateForm.estimare)) {

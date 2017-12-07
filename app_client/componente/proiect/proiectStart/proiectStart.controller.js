@@ -7,13 +7,13 @@ var proiect = {
 var activitatiRecente = {
   activitate1: {
     cod: "PR1-ACT2",
-    nume: "Activitate 2",
+    numeActivitate: "Activitate 2",
     idProiect: 1,
     data: "23 03 2016, 11:00"
   },
   activitate2: {
     cod: "PR1-ACT1",
-    nume: "Activitate 1",
+    numeActivitate: "Activitate 1",
     idProiect: 1,
     data: "23 03 2016, 10:00"
   }

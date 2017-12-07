@@ -16,3 +16,7 @@ app.controller('editeazaMembriCtrl', ['$scope', require('./proiect/setariProiect
 
 /* Activitate */
 app.controller('creareActivitateCtrl', ['$location', require('./activitate/creareActivitate/creareActivitate.controller.js')]);
+app.controller('paginaActivitateCtrl', require('./activitate/paginaActivitate/paginaActivitate.controller.js'));
+
+/* Sarcina */
+app.controller('creareSarcinaCtrl', ['$location', require('./sarcina/creareSarcina/creareSarcina.controller.js')]);
