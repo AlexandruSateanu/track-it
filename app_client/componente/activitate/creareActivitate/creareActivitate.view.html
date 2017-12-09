@@ -27,9 +27,8 @@
             <option ng-repeat="prioritate in vm.prioritate" value="{{ prioritate.id }}">{{prioritate.nume }}</option>
           </select>
         </div>
-        <div class="form-group">
-          <label for="estimare">Estimare (in zile)</label>
-          <input type="text" class="form-control" name="estimare" placeholder="Estimare" ng-model="vm.dateForm.estimare">
+        <div>
+          <date-picker ng-model="vm.dateForm.perioadaEstimata"></date-picker>
         </div>
         <div class="form-group">
           <label for="descriere">Descriere</label>

@@ -3,14 +3,49 @@
   <div class="row">
     <div class="col-xs-12 col-md-6">
       <div class="page-component">
-        <div>
-          <span>Etapa: </span>
-          <span>{{ vm.activitate.etapa }}</span>
-        </div>
+        <span>Proiect: </span>
+        <span>{{ vm.proiect.numeProiect }}</span>
       </div>
+      <div class="page-component">
+        <span>Etapa: </span>
+        <span>{{ vm.activitate.etapa }}</span>
+      </div>
+      <div class="page-component">
+        <span>Responsabil: </span>
+        <span>{{ vm.activitate.responsabil }}</span>
+      </div>
+      <div class="page-component">
+        <span>Prioritate: </span>
+        <span>{{ vm.activitate.prioritate }}</span>
+      </div>
+      <div class="page-component">
+          <span>Descriere: </span>
+          <div>{{ vm.activitate.descriere }}</div>
+        </div>
     </div>
     <div class="col-xs-12 col-md-6">
-
+      <div class="page-component">
+        <a href="/#editeaza-activitate/{{ vm.activitate.id }}">Editeaza actvitatea</a>
+      </div>
+      <div class="page-component">
+        <h4>Perioada estimata</h4>
+        <div>
+          <span>Data start: </span>
+          <span>{{ vm.activitate.perioada.dataStart | date: 'dd MMMM yyyy' }}</span>
+        </div>
+        <div>
+          <span>Data sfarsit: </span>
+          <span>{{ vm.activitate.perioada.dataSfarsit | date: 'dd MMMM yyyy' }}</span>
+        </div>
+      </div>
+      <div class="page-component">
+        <h4>Perioada realizata</h4>
+        <form id="perioadaRealizata" name="perioadaRealizata" ng-submit="vm.onSubmit()">
+          <div role="alert" class="alert alert-danger" ng-show="vm.formError">{{ vm.formError }}</div>
+          <date-picker ng-model="vm.perioadaRealizata"></date-picker>
+          <button type="submit" class="btn btn-primary">Salveaza perioada</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>

@@ -4,20 +4,20 @@ var proiect = {
   projectManager: "Alex Sateanu"
 };
 
-var activitatiRecente = {
-  activitate1: {
+var activitatiRecente = [
+  {
     cod: "PR1-ACT2",
     numeActivitate: "Activitate 2",
     idProiect: 1,
     data: "23 03 2016, 11:00"
   },
-  activitate2: {
+  {
     cod: "PR1-ACT1",
     numeActivitate: "Activitate 1",
     idProiect: 1,
     data: "23 03 2016, 10:00"
   }
-};
+];
 
 var statistici = {
   status: [
@@ -97,4 +97,4 @@ module.exports = function proiectStartCtrl() {
   vm.proiect = proiect;
 
   vm.membri = membri;
-}
+};

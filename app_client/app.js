@@ -23,11 +23,6 @@ function config($routeProvider, $locationProvider) {
       controller: 'registerCtrl',
       controllerAs: 'vm'
     })
-    .when('/proiect-start', {
-      templateUrl: 'componente/proiect/proiectStart/proiectStart.view.html',
-      controller: 'proiectStartCtrl',
-      controllerAs: 'vm'
-    })
     .when('/creare-proiect', {
       templateUrl: 'componente/proiect/creareProiect/creareProiect.view.html',
       controller: 'creareProiectCtrl',
@@ -46,6 +41,11 @@ function config($routeProvider, $locationProvider) {
     .when('/alege-membri', {
       templateUrl: 'componente/proiect/alegeMembri/alegeMembri.view.html',
       controller: 'alegeMembriCtrl',
+      controllerAs: 'vm'
+    })
+    .when('/proiect/:proiectId', {
+      templateUrl: 'componente/proiect/proiectStart/proiectStart.view.html',
+      controller: 'proiectStartCtrl',
       controllerAs: 'vm'
     })
     .when('/setari-proiect', {

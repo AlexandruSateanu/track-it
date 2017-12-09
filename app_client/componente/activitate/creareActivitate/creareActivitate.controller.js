@@ -97,18 +97,19 @@ module.exports = function creareActivitateCtrl($location) {
     responsabil: '',
     etapa: '',
     prioritate: '',
-    estimare: '',
+    perioadaEstimata: {},
     descriere: ''
   };
 
   vm.onSubmit = function () {
     vm.formError = '';
     /** validare form */
-    if (!vm.dateForm || !vm.dateForm.numeActivitate || !vm.dateForm.responsabil || !vm.dateForm.etapa || !vm.dateForm.prioritate || !vm.dateForm.estimare) {
+    if (!vm.dateForm || !vm.dateForm.numeActivitate || !vm.dateForm.responsabil || !vm.dateForm.etapa || !vm.dateForm.prioritate || !vm.dateForm.perioadaEstimata) {
       vm.formError = 'Unele campuri obligatorii nu sunt completate!';
       return false;
-    } else if (isNaN(vm.dateForm.estimare)) {
-      vm.formError = 'Estimarea in zile trebuie sa fie un numar intreg!'
+    } else if (vm.dateForm.perioadaEstimata.dataStart.getTime() >= vm.dateForm.perioadaEstimata.dataSfarsit.getTime()) {
+      vm.formError = "Data de sfarsit trebuie sa fie mai mare ca data de start!";
+      return false;
     } else {
       vm.formError = '';
       console.log(vm.dateForm);
