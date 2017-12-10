@@ -1,0 +1,36 @@
+<div class="container page-container">
+  <antet-pagina content="vm.antetPagina"></antet-pagina>
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <form id="creareActivitate" name="creareActivitate" ng-submit="vm.onSubmit()">
+        <div role="alert" class="alert alert-danger" ng-show="vm.formError">{{ vm.formError }}</div>
+        <div class="form-group">
+          <label for="numeSarcina">Nume sarcina</label>
+          <input type="text" class="form-control" name="numeSarcina" placeholder="Numele sarcinii" ng-model="vm.dateForm.numeSarcina">
+        </div>
+        <div class="form-group">
+          <label for="responsabil">Responsabil</label>
+          <input type="text" name="responsabil" placeholder="Responsabil" ng-model="vm.dateForm.responsabil" uib-typeahead="membru as membru.nume for membru in vm.proiect.membri | filter:$viewValue | limitTo:5" typeahead-show-hint="true" typeahead-no-results="noResults" typeahead-editable="false" class="form-control">                  
+          <div ng-show="noResults">
+            <i class="glyphicon glyphicon-remove"></i> Nu exista rezultate
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="prioritate">Prioritate</label>
+          <select class="form-control" name="prioritate" ng-model="vm.dateForm.prioritate">
+            <option ng-repeat="prioritate in vm.prioritate" value="{{ prioritate.id }}">{{prioritate.nume }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="estimare">Estimare (in zile)</label>
+          <input type="text" class="form-control" name="estimare" placeholder="Estimare" ng-model="vm.dateForm.estimare">
+        </div>
+        <div class="form-group">
+          <label for="descriere">Descriere</label>
+          <textarea class="form-control" name="descriere" placeholder="Descriere" rows="7" ng-model="vm.dateForm.descriere"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Creaza Sarcina</button>
+      </form>
+    </div>
+  </div>
+</div>

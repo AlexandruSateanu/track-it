@@ -13,3 +13,10 @@ app.controller('setariProiectCtrl', require('./proiect/setariProiect/setariProie
 app.controller('editeazaPerioadaCtrl', ['$scope', require('./proiect/setariProiect/editeazaPerioada.controller.js')]);
 app.controller('editeazaEtapeCtrl', ['$scope', require('./proiect/setariProiect/editeazaEtape.controller.js')]);
 app.controller('editeazaMembriCtrl', ['$scope', require('./proiect/setariProiect/editeazaMembri.controller.js')]);
+
+/* Activitate */
+app.controller('creareActivitateCtrl', ['$location', require('./activitate/creareActivitate/creareActivitate.controller.js')]);
+app.controller('paginaActivitateCtrl', require('./activitate/paginaActivitate/paginaActivitate.controller.js'));
+
+/* Sarcina */
+app.controller('creareSarcinaCtrl', ['$location', require('./sarcina/creareSarcina/creareSarcina.controller.js')]);

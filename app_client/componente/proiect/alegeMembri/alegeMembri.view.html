@@ -21,7 +21,7 @@
               <div class="col-xs-12 col-md-5">
                 <div class="form-group">
                   <label for="alegeMembru">Alege membru</label>
-                  <input type="text" nume="alegeMembru" ng-model="vm.dateForm.membru" uib-typeahead="membru as membru.nume for membru in vm.membri | filter:$viewValue | limitTo:3" typeahead-show-hint="true" typeahead-no-results="noResults" typeahead-editable="false" class="form-control">                  
+                  <input type="text" nume="alegeMembru" ng-model="vm.dateForm.membru" uib-typeahead="membru as membru.nume for membru in vm.membri | filter:$viewValue | limitTo:5" typeahead-show-hint="true" typeahead-no-results="noResults" typeahead-editable="false" class="form-control">                  
                   <div ng-show="noResults">
                     <i class="glyphicon glyphicon-remove"></i> Nu exista rezultate
                   </div>
@@ -31,7 +31,7 @@
                 <div class="form-group">
                   <label for="alegeRol">Alege rol</label>
                   <select class="form-control" name="alegeRol" ng-model="vm.dateForm.rol">
-                    <option ng-repeat="rol in vm.roluri" value="{{ vm.roluri[$index].rolId }}">{{ vm.roluri[$index].rol }}</option>
+                    <option ng-repeat="rol in vm.roluri" value="{{ rol.rolId }}">{{ rol.rol }}</option>
                   </select>
                 </div>
               </div>

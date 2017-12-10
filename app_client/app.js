@@ -23,11 +23,6 @@ function config($routeProvider, $locationProvider) {
       controller: 'registerCtrl',
       controllerAs: 'vm'
     })
-    .when('/proiect-start', {
-      templateUrl: 'componente/proiect/proiectStart/proiectStart.view.html',
-      controller: 'proiectStartCtrl',
-      controllerAs: 'vm'
-    })
     .when('/creare-proiect', {
       templateUrl: 'componente/proiect/creareProiect/creareProiect.view.html',
       controller: 'creareProiectCtrl',
@@ -48,9 +43,29 @@ function config($routeProvider, $locationProvider) {
       controller: 'alegeMembriCtrl',
       controllerAs: 'vm'
     })
+    .when('/proiect/:proiectId', {
+      templateUrl: 'componente/proiect/proiectStart/proiectStart.view.html',
+      controller: 'proiectStartCtrl',
+      controllerAs: 'vm'
+    })
     .when('/setari-proiect', {
       templateUrl: 'componente/proiect/setariProiect/setariProiect.view.html',
       controller: 'setariProiectCtrl',
+      controllerAs: 'vm'
+    })
+    .when('/proiect/:proiectId/creare-activitate', {
+      templateUrl: 'componente/activitate/creareActivitate/creareActivitate.view.html',
+      controller: 'creareActivitateCtrl',
+      controllerAs: 'vm'
+    })
+    .when('/proiect/:proiectId/activitate/:activitateId', {
+      templateUrl: 'componente/activitate/paginaActivitate/paginaActivitate.view.html',
+      controller: 'paginaActivitateCtrl',
+      controllerAs: 'vm'
+    })
+    .when('/proiect/:proiectId/activitate/:activitateId/creare-sarcina', {
+      templateUrl: 'componente/sarcina/creareSarcina/creareSarcina.view.html',
+      controller: 'creareSarcinaCtrl',
       controllerAs: 'vm'
     })
     .otherwise({ redirectTo: '/' });
