@@ -6,7 +6,7 @@ var activitate = {
   responsabil: 'Cristina Ungureanu',
   etapa: 'Etapa unu',
   prioritate: 'Majora',
-  perioada: {
+  perioadaEstimata: {
     dataStart: new Date('2017-12-14T00:00:00Z'),
     dataSfarsit: new Date('2017-12-25T00:00:00Z')
   },
@@ -33,6 +33,13 @@ module.exports = function paginaActivitateCtrl() {
   vm.perioadaRealizata = {
     dataStart: '',
     dataSfarsit: ''
+  };
+
+  vm.dateOptions = {
+    formatYear: 'yy',
+    maxDate: new Date(2030, 5, 22),
+    minDate: vm.activitate.perioadaEstimata.dataStart,
+    startingDay: 1
   };
 
   vm.onSubmit = function () {

@@ -31,18 +31,18 @@
         <h4>Perioada estimata</h4>
         <div>
           <span>Data start: </span>
-          <span>{{ vm.activitate.perioada.dataStart | date: 'dd MMMM yyyy' }}</span>
+          <span>{{ vm.activitate.perioadaEstimata.dataStart | date: 'dd MMMM yyyy' }}</span>
         </div>
         <div>
           <span>Data sfarsit: </span>
-          <span>{{ vm.activitate.perioada.dataSfarsit | date: 'dd MMMM yyyy' }}</span>
+          <span>{{ vm.activitate.perioadaEstimata.dataSfarsit | date: 'dd MMMM yyyy' }}</span>
         </div>
       </div>
       <div class="page-component">
         <h4>Perioada realizata</h4>
         <form id="perioadaRealizata" name="perioadaRealizata" ng-submit="vm.onSubmit()">
           <div role="alert" class="alert alert-danger" ng-show="vm.formError">{{ vm.formError }}</div>
-          <date-picker ng-model="vm.perioadaRealizata"></date-picker>
+          <date-picker-custom ng-model="vm.perioadaRealizata" datepicker-options="vm.dateOptions"></date-picker-custom>
           <button type="submit" class="btn btn-primary">Salveaza perioada</button>
         </form>
       </div>

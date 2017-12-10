@@ -8,6 +8,8 @@ app.directive('antetPagina', require('./layout/antetPagina/antetPagina.directive
 /* Date Picker */
 app.controller('datePickerCtrl', require('./datePicker/datePicker.controller.js'));
 app.directive('datePicker', require('./datePicker/datePicker.directive.js'));
+app.controller('datePickerCustomCtrl', require('./datePickerCustom/datePickerCustom.controller.js'));
+app.directive('datePickerCustom', require('./datePickerCustom/datePickerCustom.directive.js'));
 
 app.directive('tabelRecente', require('./tabelRecente/tabelRecente.directive.js'));
 app.directive('proiecteleMele', require('./proiecteleMele/proiecteleMele.directive.js'));
