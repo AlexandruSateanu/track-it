@@ -83,6 +83,6 @@ angular
     $locationProvider.hashPrefix('');
   }]);
 
+require('./servicii');
 require('./comune');
-require('./auth');
 require('./componente');

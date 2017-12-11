@@ -1,6 +1,12 @@
 var app = require('angular').module('track-it');
 
-app.controller('homeCtrl', require('./home/home.controller.js'));
+/* Home */
+app.controller('homeCtrl', ['$location', 'autentificare', require('./home/home.controller.js')]);
+
+/* Register */
+app.controller('registerCtrl', ['$location', 'autentificare', require('./register/register.controller.js')]);
+
+/* Start */
 app.controller('panouStartCtrl', require('./panouStart/panouStart.controller.js'));
 
 /* Proiect */

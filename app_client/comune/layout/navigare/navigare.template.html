@@ -7,10 +7,18 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="nav navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" href="/">Conectare</a>
+          <a class="nav-link" href="/#register?pagina={{ navvm.caleCurrenta }}">Inregistrare</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/#register">Inregistrare</a>
+        <li class="nav-item" ng-hide="navvm.userLogat">
+          <a href="/" class="nav-link">Conectare</a>
+        </li>
+        <li class="nav-item" ng-show="navvm.userLogat" class="dropdown">
+          <a href="" class="dropdown-toggle" data-toggle="dropdown">{{ navvm.userCurrent.name }} <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li>
+              <a href="" ng-click="navvm.deconectare()">Deconectare</a>
+            </li>
+          </ul>
         </li>
       </ul>
     </div>

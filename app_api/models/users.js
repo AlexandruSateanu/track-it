@@ -9,7 +9,7 @@ var userSchema = new mongoose.Schema({
     unique: true,
     required: true
   },
-  name: {
+  numeIntreg: {
     type: String,
     required: true
   },
@@ -17,7 +17,7 @@ var userSchema = new mongoose.Schema({
   salt: String
 });
 
-userSchema.methods.setPassword = function(password){
+userSchema.methods.setPassword = function(password) {
   this.salt = crypto.randomBytes(16).toString('hex');
   this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
 };
@@ -34,7 +34,7 @@ userSchema.methods.generateJwt = function() {
   return jwt.sign({
     _id: this._id,
     email: this.email,
-    name: this.name,
+    numeIntreg: this.numeIntreg,
     exp: parseInt(expiry.getTime() / 1000),
   }, process.env.JWT_SECRET );
 };

@@ -1,4 +1,4 @@
-module.exports = function homeCtrl() {
+module.exports = function homeCtrl($location, autentificare) {
   var vm = this;
 
   vm.antetPagina = {
@@ -18,8 +18,20 @@ module.exports = function homeCtrl() {
       vm.formError = "Toate campurile sunt obligatorii!";
       return false;
     } else {
-      console.log(vm.credentiale);
-      return false;
+      vm.executaConectare();
     }
+  };
+
+  vm.executaConectare = function() {
+    vm.formError = "";
+
+    autentificare
+      .conectare(vm.credentiale)
+      .error(function(err) {
+        vm.formError = err;
+      })
+      .then(function() {
+        $location.path('/panou-start');
+      });
   };
 }
