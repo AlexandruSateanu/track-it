@@ -5,17 +5,17 @@ module.exports = function autentificare($window, $http) {
 
   var getToken = function () {
     return $window.localStorage['track-it-token'];
-  };
+  }; 
 
   var register = function(user) {
-    return $http.post('/api/register', user).success(function(data){
-      saveToken(data.token);
+    return $http.post('/api/register', user).then(function(response) {
+      saveToken(response.data.token);
     });
   };
-
+  
   var conectare = function(user) {
-    return $http.post('/api/login', user).success(function(data) {
-      saveToken(data.token);
+    return $http.post('/api/login', user).then(function(response) {
+      saveToken(response.data.token);
     });
   };
 
@@ -28,7 +28,7 @@ module.exports = function autentificare($window, $http) {
     
     if(token) {
       var payload = JSON.parse($window.atob(token.split('.')[1]));
-    
+
       return payload.exp > Date.now() / 1000;
     } else {
       return false;
@@ -42,7 +42,7 @@ module.exports = function autentificare($window, $http) {
       
       return {
         email : payload.email,
-        name : payload.name
+        numeIntreg : payload.numeIntreg
       };
     }
   };

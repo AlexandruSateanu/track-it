@@ -3,6 +3,7 @@ var app = require('angular').module('track-it');
 /* Layout */
 app.directive('subsol', require('./layout/subsol/subsol.directive.js'));
 app.directive('navigare', require('./layout/navigare/navigare.directive.js'));
+app.controller('navigareCtrl', ['$location', 'autentificare', require('./layout/navigare/navigare.controller.js')]);
 app.directive('antetPagina', require('./layout/antetPagina/antetPagina.directive.js'));
 
 /* Date Picker */

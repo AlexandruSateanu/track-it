@@ -27,11 +27,10 @@ module.exports = function homeCtrl($location, autentificare) {
 
     autentificare
       .conectare(vm.credentiale)
-      .error(function(err) {
-        vm.formError = err;
-      })
-      .then(function() {
+      .then(function(response) {
         $location.path('/panou-start');
+      }, function(response) {
+        vm.formError = response.data;
       });
   };
 }
