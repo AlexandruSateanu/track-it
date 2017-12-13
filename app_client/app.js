@@ -19,8 +19,13 @@ function config($routeProvider, $locationProvider) {
       controllerAs: 'vm'
     })
     .when('/register', {
-      templateUrl: 'auth/register/register.view.html',
+      templateUrl: 'componente/register/register.view.html',
       controller: 'registerCtrl',
+      controllerAs: 'vm'
+    })
+    .when('/confirmation', {
+      templateUrl: 'componente/confirmation/confirmation.view.html',
+      controller: 'confirmationCtrl',
       controllerAs: 'vm'
     })
     .when('/creare-proiect', {

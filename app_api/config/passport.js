@@ -15,6 +15,12 @@ passport.use(new LocalStrategy({ usernameField: 'email', passwordField: 'parola'
       });
     }
 
+    if (!user.isVerified) {
+      return done(null, false, {
+        message: 'Account has not been verified.'
+      });
+    } 
+
     if (!user.validPassword(password)) {
       return done(null, false, {
         message: 'Incorrect password.'

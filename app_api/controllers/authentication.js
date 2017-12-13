@@ -1,6 +1,7 @@
 var passport = require('passport');
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
+var Verify = mongoose.model('Verify');
 
 var sendJSONResponse = function(res, status, content) {
   res.status(status);

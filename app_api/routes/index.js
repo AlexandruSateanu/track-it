@@ -1,4 +1,3 @@
-
 var express = require('express');
 var router = express.Router();
 var jwt = require('express-jwt');
@@ -7,10 +6,9 @@ var auth = jwt({
   userProperty: 'payload'
 });
 
-var ctrlAuth = require('../controllers/authentication');
-
-// users
-router.post('/register', ctrlAuth.register);
-router.post('/login', ctrlAuth.login);
+/* Users */
+router.post('/register', require('../controllers/register'));
+router.post('/login', require('../controllers/login'));
+router.post('/confirmation', require('../controllers/confirmation'));
 
 module.exports = router;

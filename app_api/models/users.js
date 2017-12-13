@@ -14,7 +14,10 @@ var userSchema = new mongoose.Schema({
     required: true
   },
   hash: String,
-  salt: String
+  salt: String,
+  isVerified: { type: Boolean, default: false },
+  passwordResetToken: String,
+  passwordResetExpires: Date
 });
 
 userSchema.methods.setPassword = function(password) {
@@ -39,4 +42,11 @@ userSchema.methods.generateJwt = function() {
   }, process.env.JWT_SECRET );
 };
 
+var verifySchema = new mongoose.Schema({
+  _userId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
+  token: { type: String, required: true },
+  createdAt: { type: Date, required: true, default: Date.now, expires: 43200 }
+});
+
 mongoose.model('User', userSchema);
+mongoose.model('Verify', verifySchema);

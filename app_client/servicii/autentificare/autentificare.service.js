@@ -9,7 +9,13 @@ module.exports = function autentificare($window, $http) {
 
   var register = function(user) {
     return $http.post('/api/register', user).then(function(response) {
-      saveToken(response.data.token);
+      console.log(response.data);
+    });
+  };
+
+  var confirmare = function(token) {
+    return $http.post('/api/confirmation', token).then(function(response) {
+      console.log(response.data);
     });
   };
   
@@ -51,6 +57,7 @@ module.exports = function autentificare($window, $http) {
     saveToken : saveToken,
     getToken : getToken,
     register : register,
+    confirmare : confirmare,
     conectare : conectare,
     deconectare : deconectare,
     userLogat : userLogat,
