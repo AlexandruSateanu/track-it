@@ -45,10 +45,12 @@ module.exports = function(req, res) {
     user.setPassword(req.body.parola);
 
     user.save(function (err) {
-      if (err) { 
+      if (err) {
         sendJSONResponse(res, 500, {
           "message": err.message
-        }); 
+        });
+
+        return;
       }
 
       /* Creem token nou de verificare. */
@@ -62,6 +64,8 @@ module.exports = function(req, res) {
           sendJSONResponse(res, 500, {
             "message": err.message
           });
+
+          return;
         }
 
         /* Trimitem email cu tokenul de verificare. */
@@ -82,10 +86,12 @@ module.exports = function(req, res) {
         };
         
         transporter.sendMail(mailOptions, function (err) {
-          if (err) { 
+          if (err) {
             sendJSONResponse(res, 500, {
               "message": err.message
             });
+
+            return;
           }
 
           sendJSONResponse(res, 200, {

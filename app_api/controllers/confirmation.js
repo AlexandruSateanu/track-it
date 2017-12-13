@@ -14,6 +14,8 @@ module.exports = function(req, res) {
       sendJSONResponse(res, 400, {
         'message': 'Nu s-a gasit un token valid. Posibil sa fi expirat.'
       });
+
+      return;
     }
 
     /* Daca avem token, cautam userul. */
@@ -22,12 +24,16 @@ module.exports = function(req, res) {
         sendJSONResponse(res, 400, {
           'message': 'Nu s-a gasit user cu acest token.'
         });
+
+        return;
       }
 
       if (user.isVerified) {
         sendJSONResponse(res, 400, {
           'message': 'Acest user a fost deja verificat'
         });
+
+        return;
       }
 
       /* Marcheaza userul ca verificat si salveaza. */
@@ -38,6 +44,8 @@ module.exports = function(req, res) {
           sendJSONResponse(res, 500, {
             'message': err.message
           });
+
+          return;
         }
 
         sendJSONResponse(res, 200, {

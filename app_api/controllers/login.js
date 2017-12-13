@@ -31,6 +31,7 @@ module.exports = function(req, res) {
       });
     } else {
       sendJSONResponse(res, 401, info);
+      return;
     }
   })(req, res);
 };
