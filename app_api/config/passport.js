@@ -11,19 +11,19 @@ passport.use(new LocalStrategy({ usernameField: 'email', passwordField: 'parola'
 
     if (!user) {
       return done(null, false, {
-        message: 'Incorrect username.'
+        message: 'Email-ul nu exista in baza de date.'
       });
     }
 
     if (!user.isVerified) {
       return done(null, false, {
-        message: 'Account has not been verified.'
+        message: 'Contul nu a fost verificat.'
       });
     } 
 
     if (!user.validPassword(password)) {
       return done(null, false, {
-        message: 'Incorrect password.'
+        message: 'Parola este incorecta.'
       });
     }
   

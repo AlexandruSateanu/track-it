@@ -30,7 +30,7 @@ module.exports = function homeCtrl($location, autentificare) {
       .then(function(response) {
         $location.path('/panou-start');
       }, function(response) {
-        vm.formError = response.data;
+        vm.formError = response.data.message;
       });
   };
 }

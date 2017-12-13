@@ -34,9 +34,9 @@ module.exports = function registerCtrl($location, autentificare) {
     autentificare
       .register(vm.credentiale)
       .then(function(response) {
-        vm.confirmare = response.data;
+        vm.confirmare = response.data.message;
       }, function(response) {
-        vm.formError = response.data;
+        vm.formError = response.data.message;
       });
   };
 };

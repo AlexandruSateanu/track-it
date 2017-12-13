@@ -9,7 +9,7 @@ var sendJSONResponse = function(res, status, content) {
 
 module.exports = function(req, res) {
   /* Verificam daca exista token. */
-  Token.findOne({ token: req.body.token }, function (err, token) {
+  Verify.findOne({ token: req.body.token }, function (err, token) {
     if (!token) {
       sendJSONResponse(res, 400, {
         'message': 'Nu s-a gasit un token valid. Posibil sa fi expirat.'

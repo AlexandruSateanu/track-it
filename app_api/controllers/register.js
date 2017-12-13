@@ -78,7 +78,7 @@ module.exports = function(req, res) {
           from: 'no-reply@track-it.com', 
           to: user.email, 
           subject: 'Verificare cont nou', 
-          text: 'Buna,\n\n' + 'Te rugam sa verifici contul nou, navigand la acest link: \nhttp:\/\/' + req.headers.host + '\/confirmation?token=' + verifyToken.token + '.\n' 
+          text: 'Buna,\n\n' + 'Te rugam sa verifici contul nou, navigand la acest link: \nhttp:\/\/' + req.headers.host + '\/confirmare?token=' + verifyToken.token + '.\n' 
         };
         
         transporter.sendMail(mailOptions, function (err) {
@@ -89,7 +89,7 @@ module.exports = function(req, res) {
           }
 
           sendJSONResponse(res, 200, {
-            "message": "Un email de verificare a fost trimis catre " + user.email + "."
+            "message": "Un email de verificare a fost trimis catre " + user.email
           });
         });
       });

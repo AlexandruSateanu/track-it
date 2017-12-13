@@ -1,4 +1,4 @@
-module.exports = function confirmationCtrl($location, autentificare) {
+module.exports = function confirmareCtrl($location, autentificare) {
   var vm = this;
 
   vm.antetPagina = {
@@ -8,9 +8,13 @@ module.exports = function confirmationCtrl($location, autentificare) {
   vm.statusConfirmare = '';
   vm.token = $location.search().token;
 
-  var confirmaCont = function () {
+  var confirmaCont = function (token) {
+    var tokenBody = {
+      token: token
+    };
+
     autentificare
-      .confirmare(vm.token)
+      .confirmare(tokenBody)
       .then(function(response) {
         vm.statusConfirmare = response.data.message;
       }, function(response) {
@@ -18,5 +22,5 @@ module.exports = function confirmationCtrl($location, autentificare) {
       });
   };
 
-  confirmaCont();
+  confirmaCont(vm.token);
 }

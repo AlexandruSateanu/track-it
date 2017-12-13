@@ -8,15 +8,11 @@ module.exports = function autentificare($window, $http) {
   }; 
 
   var register = function(user) {
-    return $http.post('/api/register', user).then(function(response) {
-      console.log(response.data);
-    });
+    return $http.post('/api/register', user);
   };
 
   var confirmare = function(token) {
-    return $http.post('/api/confirmation', token).then(function(response) {
-      console.log(response.data);
-    });
+    return $http.post('/api/confirmation', token);
   };
   
   var conectare = function(user) {

@@ -7,6 +7,9 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="nav navbar-nav ml-auto">
         <li class="nav-item" ng-hide="navvm.userLogat">
+          <a href="/#register?pagina={{ navvm.caleCurrenta }}" class="nav-link">Inregistrare</a>
+        </li>
+        <li class="nav-item" ng-hide="navvm.userLogat">
           <a href="/?pagina={{ navvm.caleCurrenta }}" class="nav-link">Conectare</a>
         </li>
         <li class="nav-item" ng-show="navvm.userLogat" class="dropdown">
