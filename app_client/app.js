@@ -19,8 +19,18 @@ function config($routeProvider, $locationProvider) {
       controllerAs: 'vm'
     })
     .when('/register', {
-      templateUrl: 'auth/register/register.view.html',
+      templateUrl: 'componente/autentificare/register/register.view.html',
       controller: 'registerCtrl',
+      controllerAs: 'vm'
+    })
+    .when('/confirmare', {
+      templateUrl: 'componente/autentificare/confirmare/confirmare.view.html',
+      controller: 'confirmareCtrl',
+      controllerAs: 'vm'
+    })
+    .when('/admin/creare-user', {
+      templateUrl: 'componente/admin/creareUser/creareUser.view.html',
+      controller: 'creareUserCtrl',
       controllerAs: 'vm'
     })
     .when('/creare-proiect', {
@@ -83,6 +93,6 @@ angular
     $locationProvider.hashPrefix('');
   }]);
 
+require('./servicii');
 require('./comune');
-require('./auth');
 require('./componente');

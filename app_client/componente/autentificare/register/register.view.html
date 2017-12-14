@@ -1,3 +1,4 @@
+<navigare></navigare>
 <div class="container page-container">
   <antet-pagina content="vm.antetPagina"></antet-pagina>
   <div class="row">
@@ -5,10 +6,6 @@
       <p class="lead">V-ati inregistrat deja? Atunci puteti sa va <a href="/">conectati</a>.</p>
       <form id="register" name="register" ng-submit="vm.onSubmit()">
         <div role="alert" class="alert alert-danger" ng-show="vm.formError">{{ vm.formError }}</div>
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input type="text" class="form-control" id="username" placeholder="Introduceti username" ng-model="vm.credentiale.username">
-        </div>
         <div class="form-group">
           <label for="numeIntreg">Numele intreg</label>
           <input type="text" class="form-control" id="numeIntreg" placeholder="Introduceti numele si prenumele" ng-model="vm.credentiale.numeIntreg">
@@ -27,6 +24,9 @@
         </div>
         <button type="submit" class="btn btn-primary">Inregistrare</button>
       </form>
+      <div class="page-component">
+        <div ng-show="vm.confirmare">{{ vm.confirmare }}</div>
+      </div>
     </div>
   </div>
 </div>

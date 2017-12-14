@@ -1,5 +1,6 @@
 require('dotenv').load();
-var mongoose = require( 'mongoose' );
+var mongoose = require('mongoose');
+var autoIncrement = require('mongoose-auto-increment');
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
 
@@ -9,15 +10,18 @@ var userSchema = new mongoose.Schema({
     unique: true,
     required: true
   },
-  name: {
+  numeIntreg: {
     type: String,
     required: true
   },
   hash: String,
-  salt: String
+  salt: String,
+  isVerified: { type: Boolean, default: false },
+  passwordResetToken: String,
+  passwordResetExpires: Date
 });
 
-userSchema.methods.setPassword = function(password){
+userSchema.methods.setPassword = function(password) {
   this.salt = crypto.randomBytes(16).toString('hex');
   this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
 };
@@ -34,9 +38,18 @@ userSchema.methods.generateJwt = function() {
   return jwt.sign({
     _id: this._id,
     email: this.email,
-    name: this.name,
+    numeIntreg: this.numeIntreg,
     exp: parseInt(expiry.getTime() / 1000),
   }, process.env.JWT_SECRET );
 };
 
+var verifySchema = new mongoose.Schema({
+  _userId: { type: Number, required: true, ref: 'User' },
+  token: { type: String, required: true },
+  createdAt: { type: Date, required: true, default: Date.now, expires: 43200 }
+});
+
+userSchema.plugin(autoIncrement.plugin, 'User');
+
 mongoose.model('User', userSchema);
+mongoose.model('Verify', verifySchema);
