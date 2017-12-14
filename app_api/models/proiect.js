@@ -11,8 +11,8 @@ var etapaSchema = new mongoose.Schema({
 });
 
 var membruSchema = new mongoose.Schema({
-  membru: {type: [Number], ref: 'User'},
-  rol: {type: [Number], ref: 'Rol'}
+  membru: {type: Number, ref: 'User', required: true},
+  rol: {type: Number, ref: 'Rol', required: true}
 });
 
 var proiectSchema = new mongoose.Schema({

@@ -4,6 +4,11 @@ var autoIncrement = require('mongoose-auto-increment');
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
 
+var proiectSchema = new mongoose.Schema({
+  proiect: {type: Number, ref: 'Proiect', required: true},
+  rol: {type: Number, ref: 'Rol', required: true}
+});
+
 var userSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -14,6 +19,7 @@ var userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  proiecte: [proiectSchema],
   hash: String,
   salt: String,
   isVerified: { type: Boolean, default: false },

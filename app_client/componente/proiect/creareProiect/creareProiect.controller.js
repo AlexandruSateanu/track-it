@@ -1,4 +1,4 @@
-module.exports = function creareProiectCtrl() {
+module.exports = function creareProiectCtrl(proiect) {
   var vm = this;
 
   vm.antetPagina = {
@@ -21,9 +21,21 @@ module.exports = function creareProiectCtrl() {
     } else if (vm.dateForm.cheieProiect.length > 3) {
       vm.formError = "Cheia trebuie sa aiba maxim 3 caractere!"
     } else {
+      vm.executaCreare();
+    }
+
+    vm.confirmare = '';
+    
+    vm.executaCreare = function() {
       vm.formError = '';
-      console.log(vm.dateForm);
-      return false;
+
+      proiect
+        .creare(vm.dateForm)
+        .then(function(response) {
+          vm.confirmare = response.data.message;
+        }, function(response) {
+          vm.formError = response.data.message;
+        });
     }
   };
 };

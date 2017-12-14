@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var autoIncrement = require('mongoose-auto-increment');
 
 var roluri = [
+  'Manager Proiect',
   'Coordonator echipa',
   'Membru echipa',
   'Consultant',

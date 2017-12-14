@@ -1,11 +1,7 @@
 var mongoose = require('mongoose');
-
 var User = mongoose.model('User');
 
-var sendJSONResponse = function(res, status, content) {
-  res.status(status);
-  res.json(content);
-};
+var sendJSONResponse = require('../helpers/sendJSONResponse');
 
 module.exports = function(req, res) {
   /* Validam datele din cerere. */

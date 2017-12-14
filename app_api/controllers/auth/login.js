@@ -1,9 +1,5 @@
 var passport = require('passport');
-
-var sendJSONResponse = function(res, status, content) {
-  res.status(status);
-  res.json(content);
-};
+var sendJSONResponse = require('../helpers/sendJSONResponse');
 
 module.exports = function(req, res) {
   if(!req.body.email || !req.body.parola) {
