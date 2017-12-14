@@ -1,4 +1,3 @@
-var passport = require('passport');
 var mongoose = require('mongoose');
 var crypto = require('crypto');
 var nodemailer = require('nodemailer');
@@ -37,7 +36,7 @@ module.exports = function(req, res) {
       return;
     }
 
-    /* Daca nu exista, cream unul noua in baza de date. */
+    /* Daca nu exista, creem unul noua in baza de date. */
     user = new User();
 
     user.numeIntreg = req.body.numeIntreg;

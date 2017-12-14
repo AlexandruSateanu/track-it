@@ -1,8 +1,8 @@
-module.exports = function registerCtrl($location, autentificare) {
+module.exports = function creareUserCtrl(autentificare) {
   var vm = this;
 
   vm.antetPagina = {
-    titlu: 'Inregistrare'
+    titlu: 'Admin'
   };
 
   vm.credentiale = {
@@ -21,17 +21,17 @@ module.exports = function registerCtrl($location, autentificare) {
     } else if (vm.credentiale.parola !== vm.credentiale.parolaConfirmare) {
       vm.formError = 'Parolele nu sunt identice!';
     } else {
-      vm.executaRegister();
+      vm.executaCreareUser();
     }
   };
 
   vm.confirmare = '';
 
-  vm.executaRegister = function() {
+  vm.executaCreareUser = function() {
     vm.formError = '';
 
     autentificare
-      .register(vm.credentiale)
+      .adminCreareUser(vm.credentiale)
       .then(function(response) {
         vm.confirmare = response.data.message;
       }, function(response) {

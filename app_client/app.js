@@ -28,6 +28,11 @@ function config($routeProvider, $locationProvider) {
       controller: 'confirmareCtrl',
       controllerAs: 'vm'
     })
+    .when('/admin/creare-user', {
+      templateUrl: 'componente/admin/creareUser/creareUser.view.html',
+      controller: 'creareUserCtrl',
+      controllerAs: 'vm'
+    })
     .when('/creare-proiect', {
       templateUrl: 'componente/proiect/creareProiect/creareProiect.view.html',
       controller: 'creareProiectCtrl',

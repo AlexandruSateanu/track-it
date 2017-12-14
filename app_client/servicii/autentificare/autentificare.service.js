@@ -20,9 +20,13 @@ module.exports = function autentificare($window, $http) {
       saveToken(response.data.token);
     });
   };
-
+  
   var deconectare = function () {
     $window.localStorage.removeItem('track-it-token');
+  };
+  
+  var adminCreareUser = function(user) {
+    return $http.post('/api/admin/creare-user', user);
   };
 
   var userLogat = function() {
@@ -56,6 +60,7 @@ module.exports = function autentificare($window, $http) {
     confirmare : confirmare,
     conectare : conectare,
     deconectare : deconectare,
+    adminCreareUser : adminCreareUser,
     userLogat : userLogat,
     userCurrent : userCurrent
   };

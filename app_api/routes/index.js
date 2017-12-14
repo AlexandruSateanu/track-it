@@ -11,6 +11,9 @@ router.post('/register', require('../controllers/auth/register'));
 router.post('/login', require('../controllers/auth/login'));
 router.post('/confirmation', require('../controllers/auth/confirmation'));
 
+/* Admin */
+router.post('/admin/creare-user', require('../controllers/admin/creareUser'));
+
 /* Proiect */
 router.post('/creare-proiect', require('../controllers/proiect/creare'));
 

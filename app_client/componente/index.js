@@ -3,6 +3,9 @@ var app = require('angular').module('track-it');
 /* Home */
 app.controller('homeCtrl', ['$location', 'autentificare', require('./home/home.controller.js')]);
 
+/* Admin*/
+app.controller('creareUserCtrl', ['autentificare', require('./admin/creareUser/creareUser.controller.js')]);
+
 /* Autentificare */
 app.controller('registerCtrl', ['$location', 'autentificare', require('./autentificare/register/register.controller.js')]);
 app.controller('confirmareCtrl', ['$location', 'autentificare', require('./autentificare/confirmare/confirmare.controller.js')]);

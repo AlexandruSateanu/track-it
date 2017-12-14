@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var autoIncrement = require('mongoose-auto-increment');
 
-var dbURI = 'mongodb://localhost/TrackIt-test2';
+var dbURI = 'mongodb://localhost/Track-It-test';
 if (process.env.NODE_ENV === 'production') {
   dbURI = process.env.MONGOLAB_URI;
 }

@@ -1,0 +1,32 @@
+<navigare></navigare>
+<div class="container page-container">
+  <antet-pagina content="vm.antetPagina"></antet-pagina>
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <h4>Creare User</h4>
+      <form id="creare-user" name="creare-user" ng-submit="vm.onSubmit()">
+        <div role="alert" class="alert alert-danger" ng-show="vm.formError">{{ vm.formError }}</div>
+        <div class="form-group">
+          <label for="numeIntreg">Numele intreg</label>
+          <input type="text" class="form-control" id="numeIntreg" placeholder="Introduceti numele si prenumele" ng-model="vm.credentiale.numeIntreg">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" placeholder="Introduceti email" ng-model="vm.credentiale.email">
+        </div>
+        <div class="form-group">
+          <label for="parola">Parola</label>
+          <input type="password" class="form-control" id="parola" placeholder="Introduceti parola" ng-model="vm.credentiale.parola">
+        </div>
+        <div class="form-group">
+          <label for="parola-confirmare">Verificare parola</label>
+          <input type="password" class="form-control" id="parolaConfirmare" placeholder="Reintroduceti parola" ng-model="vm.credentiale.parolaConfirmare">
+        </div>
+        <button type="submit" class="btn btn-primary">Inregistrare</button>
+      </form>
+      <div class="page-component">
+        <div ng-show="vm.confirmare">{{ vm.confirmare }}</div>
+      </div>
+    </div>
+  </div>
+</div>
