@@ -1,10 +1,14 @@
 var mongoose = require('mongoose');
+var autoIncrement = require('mongoose-auto-increment');
 
 var dbURI = 'mongodb://localhost/TrackIt-test2';
 if (process.env.NODE_ENV === 'production') {
   dbURI = process.env.MONGOLAB_URI;
 }
-mongoose.connect(dbURI);
+
+var connection = mongoose.connect(dbURI);
+
+autoIncrement.initialize(connection);
 
 var readLine = require ("readline");
 if (process.platform === "win32") {
@@ -54,3 +58,5 @@ process.on('SIGTERM', function() {
 });
 
 require('./users');
+require('./rol');
+require('./proiect');

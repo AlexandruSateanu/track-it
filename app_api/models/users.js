@@ -1,5 +1,6 @@
 require('dotenv').load();
-var mongoose = require( 'mongoose' );
+var mongoose = require('mongoose');
+var autoIncrement = require('mongoose-auto-increment');
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
 
@@ -47,6 +48,8 @@ var verifySchema = new mongoose.Schema({
   token: { type: String, required: true },
   createdAt: { type: Date, required: true, default: Date.now, expires: 43200 }
 });
+
+userSchema.plugin(autoIncrement.plugin, 'User');
 
 mongoose.model('User', userSchema);
 mongoose.model('Verify', verifySchema);

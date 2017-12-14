@@ -7,8 +7,11 @@ var auth = jwt({
 });
 
 /* Users */
-router.post('/register', require('../controllers/register'));
-router.post('/login', require('../controllers/login'));
-router.post('/confirmation', require('../controllers/confirmation'));
+router.post('/register', require('../controllers/auth/register'));
+router.post('/login', require('../controllers/auth/login'));
+router.post('/confirmation', require('../controllers/auth/confirmation'));
+
+/* Proiect */
+router.post('/creare-proiect', require('../controllers/proiect/creare'));
 
 module.exports = router;
