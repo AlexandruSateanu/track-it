@@ -23,19 +23,19 @@ module.exports = function creareProiectCtrl(proiect) {
     } else {
       vm.executaCreare();
     }
+  };
 
-    vm.confirmare = '';
-    
-    vm.executaCreare = function() {
-      vm.formError = '';
+  vm.confirmare = '';
+  
+  vm.executaCreare = function() {
+    vm.formError = '';
 
-      proiect
-        .creare(vm.dateForm)
-        .then(function(response) {
-          vm.confirmare = response.data.message;
-        }, function(response) {
-          vm.formError = response.data.message;
-        });
-    }
+    proiect
+      .creare(vm.dateForm)
+      .then(function(response) {
+        vm.confirmare = response.data.message;
+      }, function(response) {
+        vm.formError = response.data.message;
+      });
   };
 };

@@ -4,9 +4,11 @@ var autoIncrement = require('mongoose-auto-increment');
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
 
+var roluri = require('../config/roluri');
+
 var proiectSchema = new mongoose.Schema({
   proiect: {type: Number, ref: 'Proiect', required: true},
-  rol: {type: Number, ref: 'Rol', required: true}
+  rol: {type: Number, min: 0, max: roluri.length, required: true}
 });
 
 var userSchema = new mongoose.Schema({
@@ -45,6 +47,7 @@ userSchema.methods.generateJwt = function() {
     _id: this._id,
     email: this.email,
     numeIntreg: this.numeIntreg,
+    proiecte: this.proiecte,
     exp: parseInt(expiry.getTime() / 1000),
   }, process.env.JWT_SECRET );
 };
