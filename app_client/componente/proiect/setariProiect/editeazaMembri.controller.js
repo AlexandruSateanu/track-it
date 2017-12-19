@@ -58,7 +58,9 @@ module.exports = function editeazaMembriCtrl($scope) {
     if (!date || !date.rol) {
       vm.formError[index] = "Toate campurile trebuie completate!";
       return false;
-    } else {
+    } 
+    
+    else {
       vm.formError[index] = '';
       console.log(date);
       return false;

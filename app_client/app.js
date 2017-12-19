@@ -38,17 +38,17 @@ function config($routeProvider, $locationProvider) {
       controller: 'creareProiectCtrl',
       controllerAs: 'vm'
     })
-    .when('/alege-perioada', {
+    .when('/proiect/:proiectId/alege-perioada', {
       templateUrl: 'componente/proiect/alegePerioada/alegePerioada.view.html',
       controller: 'alegePerioadaCtrl',
       controllerAs: 'vm'
     })
-    .when('/alege-etape', {
+    .when('/proiect/:proiectId/alege-etape', {
       templateUrl: 'componente/proiect/alegeEtape/alegeEtape.view.html',
       controller: 'alegeEtapeCtrl',
       controllerAs: 'vm'
     })
-    .when('/alege-membri', {
+    .when('/proiect/:proiectId/alege-membri', {
       templateUrl: 'componente/proiect/alegeMembri/alegeMembri.view.html',
       controller: 'alegeMembriCtrl',
       controllerAs: 'vm'

@@ -8,7 +8,9 @@ var existaUser = require('../helpers/existaUser');
 var roluri = require('../../config/roluri');
 
 module.exports = function(req, res) {
+  /* executa callback daca exista user logat */
   existaUser(req, res, function (req, res, user) {
+    
     /* Salveaza proiect nou */
     Proiect.create({
       numeProiect: req.body.numeProiect,
@@ -16,20 +18,28 @@ module.exports = function(req, res) {
       tipProiect: req.body.tipProiect,
       managerProiect: user._id
     }, function(err, proiect) {
+
       if (err) {
         sendJSONResponse(res, 400, err);
-      } else {
+      } 
+      
+      else {
         /* Salveaza referinta catre proiect si in userul care l-a creat si atribuie rol de Project Manager */
         User.findByIdAndUpdate(
           user._id,
           { $push: { 'proiecte' : { proiect: proiect._id, rol: roluri[0].rolId } } },
           {safe: true, new : true},
           function(err) {
+            
             if (err) {
               sendJSONResponse(res, 400, err);
-            } else {
+            } 
+            
+            else {
+              /* Daca proiectul a fost creat cu succes, il trimitem ca raspuns */
               sendJSONResponse(res, 201, {
-                'message': 'Proiectul a fost creat.'
+                "message": "Proiectul a fost creat.",
+                "proiect": proiect
               });
             }
           }

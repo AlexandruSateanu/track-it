@@ -27,5 +27,5 @@ var proiectSchema = new mongoose.Schema({
   membri: [membruSchema]
 });
 
-proiectSchema.plugin(autoIncrement.plugin, 'Proiect');
+proiectSchema.plugin(autoIncrement.plugin, {model: 'Proiect', startAt: 1});
 mongoose.model('Proiect', proiectSchema);

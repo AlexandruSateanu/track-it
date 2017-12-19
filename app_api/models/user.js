@@ -58,7 +58,7 @@ var verifySchema = new mongoose.Schema({
   createdAt: { type: Date, required: true, default: Date.now, expires: 43200 }
 });
 
-userSchema.plugin(autoIncrement.plugin, 'User');
+userSchema.plugin(autoIncrement.plugin, {model: 'User', startAt: 1});
 
 mongoose.model('User', userSchema);
 mongoose.model('Verify', verifySchema);

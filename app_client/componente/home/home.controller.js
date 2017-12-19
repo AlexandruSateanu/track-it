@@ -17,7 +17,9 @@ module.exports = function homeCtrl($location, autentificare) {
     if (!vm.credentiale || !vm.credentiale.email || !vm.credentiale.parola) {
       vm.formError = "Toate campurile sunt obligatorii!";
       return false;
-    } else {
+    } 
+    
+    else {
       vm.executaConectare();
     }
   };

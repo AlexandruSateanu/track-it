@@ -11,7 +11,9 @@ module.exports = function(req, res) {
     });
   
     return;
-  } else if (req.body.parola !== req.body.parolaConfirmare) {
+  } 
+  
+  else if (req.body.parola !== req.body.parolaConfirmare) {
     sendJSONResponse(res, 400, {
       "message": "Parolele nu sunt identice."
     });
@@ -42,14 +44,14 @@ module.exports = function(req, res) {
     user.save(function (err) {
       if (err) {
         sendJSONResponse(res, 500, {
-          'message': err.message
+          "message": err.message
         });
 
         return;
       }
 
       sendJSONResponse(res, 200, {
-        'message': 'Contul a fost creat.'
+        "message": 'Contul a fost creat.'
       });
     });
   });

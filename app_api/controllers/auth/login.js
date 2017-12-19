@@ -16,17 +16,21 @@ module.exports = function(req, res) {
   
     if (err) {
       sendJSONResponse(res, 404, err);
+
       return;
     }
 
-    if(user) {
+    if (user) {
       /* Generam un JSON Web Token nou si il trimitem ca raspuns. */
       token = user.generateJwt();
       sendJSONResponse(res, 200, {
         "token" : token
       });
-    } else {
+    } 
+    
+    else {
       sendJSONResponse(res, 401, info);
+      
       return;
     }
   })(req, res);

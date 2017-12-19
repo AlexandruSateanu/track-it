@@ -18,9 +18,13 @@ module.exports = function registerCtrl($location, autentificare) {
     if (!vm.credentiale || !vm.credentiale.numeIntreg || !vm.credentiale.email || !vm.credentiale.parola || !vm.credentiale.parolaConfirmare) {
       vm.formError = 'Toate campurile sunt obligatorii!';
       return false;
-    } else if (vm.credentiale.parola !== vm.credentiale.parolaConfirmare) {
+    } 
+    
+    else if (vm.credentiale.parola !== vm.credentiale.parolaConfirmare) {
       vm.formError = 'Parolele nu sunt identice!';
-    } else {
+    } 
+    
+    else {
       vm.executaRegister();
     }
   };

@@ -17,5 +17,6 @@ router.post('/admin/creare-user', require('../controllers/admin/creareUser'));
 
 /* Proiect */
 router.post('/proiect/creare-proiect', auth, require('../controllers/proiect/creareProiect'));
+router.post('/proiect/:proiectId/alege-perioada', auth, require('../controllers/proiect/alegePerioada'));
 
 module.exports = router;

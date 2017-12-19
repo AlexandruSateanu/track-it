@@ -13,9 +13,11 @@ module.exports = function(req, res) {
     sendJSONResponse(res, 400, {
       "message": "Toate campurile sunt obligatorii."
     });
-  
+
     return;
-  } else if (req.body.parola !== req.body.parolaConfirmare) {
+  } 
+  
+  else if (req.body.parola !== req.body.parolaConfirmare) {
     sendJSONResponse(res, 400, {
       "message": "Parolele nu sunt identice."
     });
@@ -29,7 +31,7 @@ module.exports = function(req, res) {
       sendJSONResponse(res, 400, {
         "message": "Adresa de email exista deja pentru un alt utilizator."
       });
-  
+
       return;
     }
 
@@ -86,7 +88,7 @@ module.exports = function(req, res) {
             sendJSONResponse(res, 500, {
               "message": err.message
             });
-
+            
             return;
           }
 
