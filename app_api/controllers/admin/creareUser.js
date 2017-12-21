@@ -1,11 +1,7 @@
 var mongoose = require('mongoose');
-
 var User = mongoose.model('User');
 
-var sendJSONResponse = function(res, status, content) {
-  res.status(status);
-  res.json(content);
-};
+var sendJSONResponse = require('../helpers/sendJSONResponse');
 
 module.exports = function(req, res) {
   /* Validam datele din cerere. */
@@ -15,7 +11,9 @@ module.exports = function(req, res) {
     });
   
     return;
-  } else if (req.body.parola !== req.body.parolaConfirmare) {
+  } 
+  
+  else if (req.body.parola !== req.body.parolaConfirmare) {
     sendJSONResponse(res, 400, {
       "message": "Parolele nu sunt identice."
     });
@@ -46,14 +44,14 @@ module.exports = function(req, res) {
     user.save(function (err) {
       if (err) {
         sendJSONResponse(res, 500, {
-          'message': err.message
+          "message": err.message
         });
 
         return;
       }
 
       sendJSONResponse(res, 200, {
-        'message': 'Contul a fost creat.'
+        "message": 'Contul a fost creat.'
       });
     });
   });

@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var autoIncrement = require('mongoose-auto-increment');
 
-var dbURI = 'mongodb://localhost/Track-It-test';
+var dbURI = 'mongodb://localhost/Track-It-test-rol';
 if (process.env.NODE_ENV === 'production') {
   dbURI = process.env.MONGOLAB_URI;
 }
@@ -57,6 +57,5 @@ process.on('SIGTERM', function() {
   });
 });
 
-require('./users');
-require('./rol');
+require('./user');
 require('./proiect');

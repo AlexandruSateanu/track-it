@@ -5,10 +5,7 @@ var nodemailer = require('nodemailer');
 var User = mongoose.model('User');
 var Verify = mongoose.model('Verify');
 
-var sendJSONResponse = function(res, status, content) {
-  res.status(status);
-  res.json(content);
-};
+var sendJSONResponse = require('../helpers/sendJSONResponse');
 
 module.exports = function(req, res) {
   /* Validam datele din cerere. */
@@ -16,9 +13,11 @@ module.exports = function(req, res) {
     sendJSONResponse(res, 400, {
       "message": "Toate campurile sunt obligatorii."
     });
-  
+
     return;
-  } else if (req.body.parola !== req.body.parolaConfirmare) {
+  } 
+  
+  else if (req.body.parola !== req.body.parolaConfirmare) {
     sendJSONResponse(res, 400, {
       "message": "Parolele nu sunt identice."
     });
@@ -32,7 +31,7 @@ module.exports = function(req, res) {
       sendJSONResponse(res, 400, {
         "message": "Adresa de email exista deja pentru un alt utilizator."
       });
-  
+
       return;
     }
 
@@ -89,7 +88,7 @@ module.exports = function(req, res) {
             sendJSONResponse(res, 500, {
               "message": err.message
             });
-
+            
             return;
           }
 

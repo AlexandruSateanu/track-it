@@ -1,18 +1,16 @@
 var mongoose = require('mongoose');
+
 var User = mongoose.model('User');
 var Verify = mongoose.model('Verify');
 
-var sendJSONResponse = function(res, status, content) {
-  res.status(status);
-  res.json(content);
-};
+var sendJSONResponse = require('../helpers/sendJSONResponse');
 
 module.exports = function(req, res) {
   /* Verificam daca exista token. */
   Verify.findOne({ token: req.body.token }, function (err, token) {
     if (!token) {
       sendJSONResponse(res, 400, {
-        'message': 'Nu s-a gasit un token valid. Posibil sa fi expirat.'
+        "message": 'Nu s-a gasit un token valid. Posibil sa fi expirat.'
       });
 
       return;
@@ -22,7 +20,7 @@ module.exports = function(req, res) {
     User.findOne({ _id: token._userId }, function (err, user) {
       if (!user) {
         sendJSONResponse(res, 400, {
-          'message': 'Nu s-a gasit user cu acest token.'
+          "message": 'Nu s-a gasit user cu acest token.'
         });
 
         return;
@@ -30,7 +28,7 @@ module.exports = function(req, res) {
 
       if (user.isVerified) {
         sendJSONResponse(res, 400, {
-          'message': 'Acest user a fost deja verificat'
+          "message": 'Acest user a fost deja verificat'
         });
 
         return;
@@ -42,14 +40,14 @@ module.exports = function(req, res) {
       user.save(function (err) {
         if (err) {
           sendJSONResponse(res, 500, {
-            'message': err.message
+            "message": err.message
           });
 
           return;
         }
 
         sendJSONResponse(res, 200, {
-          'message': 'Contul a fost verificat. Va puteti conecta.'
+          "message": 'Contul a fost verificat. Va puteti conecta.'
         });
       });
     });

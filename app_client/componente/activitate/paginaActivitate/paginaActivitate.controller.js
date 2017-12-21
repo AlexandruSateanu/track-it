@@ -49,10 +49,13 @@ module.exports = function paginaActivitateCtrl() {
     if (!vm.perioadaRealizata || !vm.perioadaRealizata.dataStart || !vm.perioadaRealizata.dataSfarsit) {
       vm.formError = "Alege ambele date!";
       return false;
-    } else if (vm.perioadaRealizata.dataStart.getTime() >= vm.perioadaRealizata.dataSfarsit.getTime()) {
+    } 
+    
+    else if (vm.perioadaRealizata.dataStart.getTime() >= vm.perioadaRealizata.dataSfarsit.getTime()) {
       vm.formError = "Data de sfarsit trebuie sa fie mai mare ca data de start!";
       return false;
     }
+    
     else {
       vm.formError = '';
       console.log(vm.perioadaRealizata);

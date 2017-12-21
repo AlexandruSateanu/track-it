@@ -107,10 +107,14 @@ module.exports = function creareActivitateCtrl($location) {
     if (!vm.dateForm || !vm.dateForm.numeActivitate || !vm.dateForm.responsabil || !vm.dateForm.etapa || !vm.dateForm.prioritate || !vm.dateForm.perioadaEstimata) {
       vm.formError = 'Unele campuri obligatorii nu sunt completate!';
       return false;
-    } else if (vm.dateForm.perioadaEstimata.dataStart.getTime() >= vm.dateForm.perioadaEstimata.dataSfarsit.getTime()) {
+    } 
+    
+    else if (vm.dateForm.perioadaEstimata.dataStart.getTime() >= vm.dateForm.perioadaEstimata.dataSfarsit.getTime()) {
       vm.formError = "Data de sfarsit trebuie sa fie mai mare ca data de start!";
       return false;
-    } else {
+    } 
+    
+    else {
       vm.formError = '';
       console.log(vm.dateForm);
       return false;

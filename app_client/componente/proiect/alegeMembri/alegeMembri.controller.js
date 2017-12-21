@@ -70,12 +70,17 @@ module.exports = function alegeMembriCtrl() {
     if (!vm.dateForm || !vm.dateForm.membru || !vm.dateForm.rol) {
       vm.formError = 'Toate campurile sunt obligatorii!';
       return false;
-    } else if (vm.alegeMembri.$invalid) {
+    } 
+    
+    else if (vm.alegeMembri.$invalid) {
       vm.formError = 'Unele campuri contin informatii invalide!'; 
-    } else {
+    } 
+    
+    else {
       vm.formError = '';
       console.log(vm.dateForm);
       vm.dateForm = {};
+      
       /** resetare campuri */
       vm.alegeMembri.$setPristine();
       vm.alegeMembri.$setUntouched();

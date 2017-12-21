@@ -4,6 +4,13 @@ var autoIncrement = require('mongoose-auto-increment');
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
 
+var roluri = require('../config/roluri');
+
+var proiectSchema = new mongoose.Schema({
+  proiect: {type: Number, ref: 'Proiect', required: true},
+  rol: {type: Number, min: 0, max: roluri.length, required: true}
+});
+
 var userSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -14,6 +21,7 @@ var userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  proiecte: [proiectSchema],
   hash: String,
   salt: String,
   isVerified: { type: Boolean, default: false },
@@ -39,6 +47,7 @@ userSchema.methods.generateJwt = function() {
     _id: this._id,
     email: this.email,
     numeIntreg: this.numeIntreg,
+    proiecte: this.proiecte,
     exp: parseInt(expiry.getTime() / 1000),
   }, process.env.JWT_SECRET );
 };
@@ -49,7 +58,7 @@ var verifySchema = new mongoose.Schema({
   createdAt: { type: Date, required: true, default: Date.now, expires: 43200 }
 });
 
-userSchema.plugin(autoIncrement.plugin, 'User');
+userSchema.plugin(autoIncrement.plugin, {model: 'User', startAt: 1});
 
 mongoose.model('User', userSchema);
 mongoose.model('Verify', verifySchema);

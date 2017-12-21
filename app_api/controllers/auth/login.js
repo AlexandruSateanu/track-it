@@ -1,9 +1,5 @@
 var passport = require('passport');
-
-var sendJSONResponse = function(res, status, content) {
-  res.status(status);
-  res.json(content);
-};
+var sendJSONResponse = require('../helpers/sendJSONResponse');
 
 module.exports = function(req, res) {
   if(!req.body.email || !req.body.parola) {
@@ -20,17 +16,21 @@ module.exports = function(req, res) {
   
     if (err) {
       sendJSONResponse(res, 404, err);
+
       return;
     }
 
-    if(user) {
+    if (user) {
       /* Generam un JSON Web Token nou si il trimitem ca raspuns. */
       token = user.generateJwt();
       sendJSONResponse(res, 200, {
         "token" : token
       });
-    } else {
+    } 
+    
+    else {
       sendJSONResponse(res, 401, info);
+      
       return;
     }
   })(req, res);

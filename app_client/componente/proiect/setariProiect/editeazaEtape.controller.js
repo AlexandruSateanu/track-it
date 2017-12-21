@@ -13,10 +13,14 @@ module.exports = function editeazaEtapeCtrl($scope) {
     if (!date || !date.numeEtapa || !date.perioada.dataStart || !date.perioada.dataSfarsit) {
       vm.formError[index] = "Toate campurile trebuie completate!";
       return false;
-    } else if (date.perioada.dataStart.getTime() >= date.perioada.dataSfarsit.getTime()) {
+    } 
+    
+    else if (date.perioada.dataStart.getTime() >= date.perioada.dataSfarsit.getTime()) {
       vm.formError[index] = "Datele de sfarsit trebuie sa fie mai mari ca datele de start!";
       return false;
-    } else {
+    } 
+    
+    else {
       vm.formError[index] = '';
       console.log(date);
       return false;
