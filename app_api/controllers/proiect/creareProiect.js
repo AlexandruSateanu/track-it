@@ -16,7 +16,9 @@ module.exports = function(req, res) {
       numeProiect: req.body.numeProiect,
       cheieProiect: req.body.cheieProiect,
       tipProiect: req.body.tipProiect,
-      managerProiect: user._id
+      managerProiect: user._id,
+      dataStart: req.body.dataStart,
+      dataSfarsit: req.body.dataSfarsit
     }, function(err, proiect) {
 
       if (err) {

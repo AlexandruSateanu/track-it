@@ -1,11 +1,8 @@
 var mongoose = require('mongoose');
-var User = mongoose.model('User');
 var Proiect = mongoose.model('Proiect');
 
 var sendJSONResponse = require('../helpers/sendJSONResponse');
 var existaUser = require('../helpers/existaUser');
-
-var roluri = require('../../config/roluri');
 
 module.exports = function(req, res) {
   /* executa callback daca exista user logat */
@@ -35,11 +32,14 @@ module.exports = function(req, res) {
             return;
           }
           
-          /* Extrage perioada din body-ul POST */
-          proiect.perioada.dataStart = req.body.dataStart;
-          proiect.perioada.dataSfarsit = req.body.dataSfarsit;
+          /* Extrage etapele din body-ul POST */
+          proiect.etape.push({
+            numeEtapa: req.body.numeEtapa,
+            dataStart: req.body.dataStart,
+            dataSfarsit: req.body.dataSfarsit
+          });
 
-          /* Salveaza noul proiect cu noile perioade */
+          /* Salveaza noul proiect cu noile etape */
           proiect.save(function(err, proiect) {
             if (err) {
               sendJSONResponse(res, 404, err);
@@ -47,7 +47,7 @@ module.exports = function(req, res) {
             
             else {
               sendJSONResponse(res, 200, {
-                "message": "Perioada a fost salvata.",
+                "message": "Etapele au fost salvate.",
                 "proiect": proiect
               });
             }

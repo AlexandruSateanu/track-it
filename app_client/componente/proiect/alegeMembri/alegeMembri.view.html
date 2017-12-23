@@ -40,6 +40,9 @@
           </fieldset>
           <button type="submit" class="btn btn-primary">Adauga membru</button>
         </form>
+        <div class="page-component">
+          <div ng-show="vm.confirmare">{{ vm.confirmare }}</div>
+        </div>
         <a href="/#proiect-start" class="btn btn-secondary" ng-show="vm.continua">Continua spre Proiect</a>
       </div>
     </div>

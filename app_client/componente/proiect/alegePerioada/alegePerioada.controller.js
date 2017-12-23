@@ -37,6 +37,14 @@ module.exports = function alegePerioadaCtrl(proiect, $location, $routeParams) {
       .then(function(response) {
         vm.confirmare = response.data.message;
 
+        if (response.data.tipProiect === '1') {
+          $location.path('/proiect/' + response.data.proiect._id + '/alege-etape');      
+        }
+
+        else if (response.data.tipProiect === '2') {
+          $location.path('/proiect/' + response.data.proiect._id + '/alege-membri');
+        }
+
       }, function(response) {
         vm.formError = response.data.message;
       });

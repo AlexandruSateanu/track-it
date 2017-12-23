@@ -15,8 +15,25 @@ module.exports = function proiect($http, autentificare) {
     });
   };
 
+  var alegeEtape = function (proiectId, data) {
+    return $http.post('/api/proiect/' + proiectId + '/alege-etape', data, {
+      headers: {
+        Authorization: 'Bearer ' + autentificare.getToken()
+      }
+    });
+  };
+
+  var alegeMembru = function (proiectId, data) {
+    return $http.post('/api/proiect/' + proiectId + '/alege-membru', data, {
+      headers: {
+        Authorization: 'Bearer ' + autentificare.getToken()
+      }
+    });
+  };
+
   return {
     creare: creare,
-    alegePerioada: alegePerioada
+    alegePerioada: alegePerioada,
+    alegeMembru: alegeMembru
   };
 };

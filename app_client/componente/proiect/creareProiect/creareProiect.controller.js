@@ -37,7 +37,14 @@ module.exports = function creareProiectCtrl(proiect, $location) {
       .creare(vm.dateForm)
       .then(function(response) {
         vm.confirmare = response.data.message;
-        $location.path('/proiect/' + response.data.proiect._id + '/alege-perioada');
+
+        if (response.data.tipProiect === '1') {
+          $location.path('/proiect/' + response.data.proiect._id + '/alege-etape');      
+        }
+
+        else if (response.data.tipProiect === '2') {
+          $location.path('/proiect/' + response.data.proiect._id + '/alege-membri');
+        }
 
       }, function(response) {
         vm.formError = response.data.message;

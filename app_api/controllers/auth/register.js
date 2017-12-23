@@ -68,8 +68,7 @@ module.exports = function(req, res) {
 
         /* Trimitem email cu tokenul de verificare. */
         var transporter = nodemailer.createTransport({
-          host: process.env.SENDGRID_HOST,
-          port: process.env.SENDGRID_PORT,
+          service: 'SendGrid',
           auth: { 
             user: process.env.SENDGRID_USERNAME, 
             pass: process.env.SENDGRID_PASSWORD 

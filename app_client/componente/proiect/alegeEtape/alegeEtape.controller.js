@@ -7,7 +7,8 @@ module.exports = function alegeEtapeCtrl() {
 
   vm.dateForm = [{
     numeEtapa: '',
-    perioada: {}
+    dataStart: '',
+    dataSfarsit: ''
   }];
 
   vm.formError = '';
@@ -34,11 +35,11 @@ module.exports = function alegeEtapeCtrl() {
 
     /** validare form: daca exista campuri goale sau perioada gresita */
     for (var i = 0; i < vm.dateForm.length; i++) {
-      if (!vm.dateForm[i].numeEtapa|| !vm.dateForm[i].perioada.dataStart || !vm.dateForm[i].perioada.dataSfarsit) {
+      if (!vm.dateForm[i].numeEtapa|| !vm.dateForm[i].dataStart || !vm.dateForm[i].dataSfarsit) {
         campGol++
       } 
       
-      else if (vm.dateForm[i].perioada.dataStart.getTime() >= vm.dateForm[i].perioada.dataSfarsit.getTime()) {
+      else if (vm.dateForm[i].dataStart.getTime() >= vm.dateForm[i].dataSfarsit.getTime()) {
         perioadaGresita++;
       }
     }
