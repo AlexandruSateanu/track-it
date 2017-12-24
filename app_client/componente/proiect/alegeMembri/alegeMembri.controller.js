@@ -63,7 +63,7 @@ module.exports = function alegeMembriCtrl() {
     rol: ''
   };
 
-  vm.onSubmit = function (listaMembri) {
+  vm.onSubmit = function (listaUseri) {
     vm.formError = '';
 
     /* validare form */

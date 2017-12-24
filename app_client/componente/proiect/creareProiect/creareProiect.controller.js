@@ -8,21 +8,28 @@ module.exports = function creareProiectCtrl(proiect, $location) {
   vm.dateForm = {
     numeProiect: '',
     cheieProiect: '',
-    tipProiect: ''
+    tipProiect: '',
+    dataStart: '',
+    dataSfarsit: ''
   };
 
   vm.onSubmit = function () {
     vm.formError = '';
     
     /* Validare form */
-    if (!vm.dateForm || !vm.dateForm.numeProiect || !vm.dateForm.cheieProiect || !vm.dateForm.tipProiect) {
+    if (!vm.dateForm || !vm.dateForm.numeProiect || !vm.dateForm.cheieProiect || !vm.dateForm.tipProiect || !vm.dateForm.dataStart || !vm.dateForm.dataSfarsit) {
       vm.formError = "Toate campurile sunt obligatorii!";
       return false;
     } 
     
     else if (vm.dateForm.cheieProiect.length > 3) {
       vm.formError = "Cheia trebuie sa aiba maxim 3 caractere!"
-    } 
+    }
+
+    else if (vm.dateForm.dataStart.getTime() >= vm.dateForm.dataSfarsit.getTime()) {
+      vm.formError = "Data de sfarsit trebuie sa fie mai mare ca data de start!";
+      return false;
+    }
     
     else {
       vm.formError = '';
@@ -37,13 +44,16 @@ module.exports = function creareProiectCtrl(proiect, $location) {
       .creare(vm.dateForm)
       .then(function(response) {
         vm.confirmare = response.data.message;
+        
+        var tipProiect = response.data.proiect.tipProiect;
+        var proiectId = response.data.proiect._id;
 
-        if (response.data.tipProiect === '1') {
-          $location.path('/proiect/' + response.data.proiect._id + '/alege-etape');      
+        if (tipProiect === '1') {
+          $location.path('/proiect/' + proiectId + '/alege-etape');      
         }
 
-        else if (response.data.tipProiect === '2') {
-          $location.path('/proiect/' + response.data.proiect._id + '/alege-membri');
+        else if (tipProiect === '2') {
+          $location.path('/proiect/' + proiectId + '/alege-membri');
         }
 
       }, function(response) {

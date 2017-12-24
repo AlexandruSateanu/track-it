@@ -38,11 +38,6 @@ function config($routeProvider, $locationProvider) {
       controller: 'creareProiectCtrl',
       controllerAs: 'vm'
     })
-    .when('/proiect/:proiectId/alege-perioada', {
-      templateUrl: 'componente/proiect/alegePerioada/alegePerioada.view.html',
-      controller: 'alegePerioadaCtrl',
-      controllerAs: 'vm'
-    })
     .when('/proiect/:proiectId/alege-etape', {
       templateUrl: 'componente/proiect/alegeEtape/alegeEtape.view.html',
       controller: 'alegeEtapeCtrl',
