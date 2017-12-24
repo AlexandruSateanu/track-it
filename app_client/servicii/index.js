@@ -7,4 +7,4 @@ app.service('autentificare', ['$window', '$http', require('./autentificare/auten
 app.service('proiect', ['$http', 'autentificare', require('./proiect/proiect.service.js')]);
 
 /* Useri */
-app.service('listaUseri', ['$http', 'autentificare', require('./useri/listaUseri.service.js')]);
+app.service('useri', ['$http', 'autentificare', require('./useri/useri.service.js')]);

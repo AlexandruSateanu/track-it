@@ -1,57 +1,36 @@
-var membri = [
-  {
-    id: 1,
-    nume: 'Cristina Ungureanu'
-  },
-  {
-    id: 2,
-    nume: 'Alex Sateanu'
-  },
-  {
-    id: 3,
-    nume: 'Andreea Ujica'
-  },
-  {
-    id: 4,
-    nume: 'Bogdan Chircu'
-  },
-  {
-    id: 5,
-    nume: 'Test Test'
-  }
-];
-
-var roluri = [
-  {
-    rolId: 1,
-    rol: "Coordonator echipa"
-  },
-  {
-    rolId: 2,
-    rol: "Membru echipa"
-  },
-  {
-    rolId: 3,
-    rol: "Consultant"
-  },
-  {
-    rolId: 4,
-    rol: "Vizitator"
-  },
-];
-
-module.exports = function alegeMembriCtrl() {
+module.exports = function alegeMembriCtrl(proiect, $routeParams, useri) {
   var vm = this;
 
   vm.antetPagina = {
     titlu: 'Alege Membri'
   };
 
-  vm.membri = membri;
-  vm.roluri = roluri;
+  /* Cere o lista cu toti membrii disponibili sa fie adaugati la proiect. */
+  vm.membri = useri
+                .listaUseri()
+                .then(function(response) {
+                  return response.data.listaUseri;
+                }, function(response) {
+                  return null;
+                });
+  
+  /* Cere o lista cu toate rolurile posibile sa fie adaugati la proiect. */
+  vm.roluri = useri
+                .listaRoluri()
+                .then(function(response) {
+                  return response.data.listaRoluri;
+                }, function(response) {
+                  return null;
+                });
 
+  /* Variabile flag pentru a arata form-ul de adaugare membrii sau a trece 
+  mai departe fara a adauga. Folosite cu ng-show in template. */
   vm.faraMembri = true;
   vm.continua = false;
+
+  /* Salveaza id-ul proiectului pentru a-l adauga la URL-ul care duce la noul
+  proiect creat. */
+  vm.proiectStartId = $routeParams.proiectId;
 
   /** amanare introducere membrii */
   vm.toggleMembri = function () {
@@ -63,7 +42,7 @@ module.exports = function alegeMembriCtrl() {
     rol: ''
   };
 
-  vm.onSubmit = function (listaUseri) {
+  vm.onSubmit = function() {
     vm.formError = '';
 
     /* validare form */

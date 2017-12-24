@@ -33,10 +33,12 @@ module.exports = function(req, res) {
           }
           
           /* Extrage etapele din body-ul POST */
-          proiect.etape.push({
-            numeEtapa: req.body.numeEtapa,
-            dataStart: req.body.dataStart,
-            dataSfarsit: req.body.dataSfarsit
+          req.body.forEach(etapa => {
+            proiect.etape.push({
+              numeEtapa: etapa.numeEtapa,
+              dataStart: etapa.dataStart,
+              dataSfarsit: etapa.dataSfarsit
+            });
           });
 
           /* Salveaza noul proiect cu noile etape */

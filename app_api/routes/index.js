@@ -21,5 +21,6 @@ router.post('/proiect/:proiectId/alege-etape', auth, require('../controllers/pro
 
 /* Useri */
 router.get('/lista-useri', auth, require('../controllers/useri/listaUseri'));
+router.get('/lista-roluri', auth, require('../controllers/useri/listaRoluri'));
 
 module.exports = router;

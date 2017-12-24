@@ -1,4 +1,4 @@
-module.exports = function alegeEtapeCtrl() {
+module.exports = function alegeEtapeCtrl(proiect, $location, $routeParams) {
   var vm = this;
 
   vm.antetPagina = {
@@ -33,6 +33,8 @@ module.exports = function alegeEtapeCtrl() {
     var campGol = 0;
     var perioadaGresita = 0;
 
+    var proiectId = $routeParams.proiectId;
+
     /** validare form: daca exista campuri goale sau perioada gresita */
     for (var i = 0; i < vm.dateForm.length; i++) {
       if (!vm.dateForm[i].numeEtapa|| !vm.dateForm[i].dataStart || !vm.dateForm[i].dataSfarsit) {
@@ -56,8 +58,18 @@ module.exports = function alegeEtapeCtrl() {
 
     else {
       vm.formError = '';
-      console.log(vm.dateForm);
-      return false;
+      vm.executaAlegereEtape(proiectId, angular.toJson(vm.dateForm));
     }
+  };
+
+  /* Functie care foloseste serviciul de proiect cu functia lui de alegere etape. */
+  vm.executaAlegereEtape = function(proiectId, date) {
+    proiect
+      .alegeEtape(proiectId, date)
+      .then(function(response) {
+        $location.path('/proiect/' + proiectId + '/alege-membri');      
+      }, function(response) {
+        vm.formError = response.data.message;
+      });
   };
 };

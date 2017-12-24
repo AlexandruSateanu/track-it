@@ -8,7 +8,7 @@ module.exports = function(req, res) {
   /* executa callback daca exista user logat */
   existaUser(req, res, function (req, res, user) {
     
-    /* Selecteaza toti uerii */
+    /* Selecteaza toti userii */
     User.find({}, function(err, useri) {
 
       if (err) {

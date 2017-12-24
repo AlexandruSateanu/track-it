@@ -3,7 +3,7 @@ module.exports = function navigationCtrl($location, autentificare) {
   
   vm.caleCurrenta = $location.path();
 
-  vm.userLogat = autentificare.userLogat();
+  vm.userConectat = autentificare.userConectat();
   vm.userCurrent = autentificare.userCurrent();
 
   vm.deconectare = function() {

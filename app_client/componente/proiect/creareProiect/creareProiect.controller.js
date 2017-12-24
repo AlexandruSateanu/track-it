@@ -26,6 +26,7 @@ module.exports = function creareProiectCtrl(proiect, $location) {
       vm.formError = "Cheia trebuie sa aiba maxim 3 caractere!"
     }
 
+    /* Verificare validitate perioada. */
     else if (vm.dateForm.dataStart.getTime() >= vm.dateForm.dataSfarsit.getTime()) {
       vm.formError = "Data de sfarsit trebuie sa fie mai mare ca data de start!";
       return false;
@@ -33,18 +34,15 @@ module.exports = function creareProiectCtrl(proiect, $location) {
     
     else {
       vm.formError = '';
-      vm.executaCreare();
+      vm.executaCreare(vm.dateForm);
     }
   };
-
-  vm.confirmare = '';
   
-  vm.executaCreare = function() {
+  /* Functie care foloseste serviciul de proiect cu functia lui de creare proiect. */
+  vm.executaCreare = function(date) {
     proiect
-      .creare(vm.dateForm)
+      .creare(date)
       .then(function(response) {
-        vm.confirmare = response.data.message;
-        
         var tipProiect = response.data.proiect.tipProiect;
         var proiectId = response.data.proiect._id;
 
