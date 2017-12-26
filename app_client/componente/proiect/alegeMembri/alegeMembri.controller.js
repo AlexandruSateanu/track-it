@@ -10,6 +10,11 @@ module.exports = function alegeMembriCtrl(proiect, $routeParams, useri, autentif
     .listaUseri()
     .then(function(response) {
       vm.membri = response.data.listaUseri;
+      
+      /* Sterge user-ul logat din lista deoarece el nu se poate adauga pe sine la proiect. */
+      vm.membri = vm.membri.filter(function(membru) {
+        return membru.userId !== autentificare.userCurrent().userId;
+      });
     }, function(response) {
       return null;
     });
@@ -60,9 +65,14 @@ module.exports = function alegeMembriCtrl(proiect, $routeParams, useri, autentif
     else {
       vm.formError = '';
       vm.executaAlegereMembru(vm.proiectId, vm.dateForm);
-      vm.dateForm = {};
+
+      /* Sterge noul membru din lista pentru a nu mai putea fi adaugat la proiect. */
+      vm.membri = vm.membri.filter(function(membru) {
+        return membru.userId !== vm.dateForm.membru.userId;
+      });
       
-      /** resetare campuri */
+      /* Resetare campuri */
+      vm.dateForm = {};
       vm.alegeMembri.$setPristine();
       vm.alegeMembri.$setUntouched();
       vm.continua = true;
