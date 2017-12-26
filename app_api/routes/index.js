@@ -18,10 +18,14 @@ router.post('/confirmation', require('../controllers/auth/confirmation'));
 /* Proiect */
 router.post('/proiect/creare-proiect', auth, require('../controllers/proiect/creareProiect'));
 router.post('/proiect/:proiectId/alege-etape', auth, require('../controllers/proiect/alegeEtape'));
-router.post('/proiect/:proiectId/alege-membri', auth, require('../controllers/proiect/alegeMembri'));
+router.post('/proiect/:proiectId/alege-membru', auth, require('../controllers/proiect/alegeMembru'));
+router.get('/proiect/:proiectId/info-proiect', auth, require('../controllers/proiect/infoProiect'));
 
 /* Useri */
 router.get('/lista-useri', auth, require('../controllers/useri/listaUseri'));
 router.get('/lista-roluri', auth, require('../controllers/useri/listaRoluri'));
+
+/* Tratarea cererilor gresite */
+router.all( "/*", require('../controllers/helpers/cereriGresite'));
 
 module.exports = router;

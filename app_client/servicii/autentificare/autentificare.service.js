@@ -1,6 +1,6 @@
 module.exports = function autentificare($window, $http) {
   /* Salvare token in Local Storage. */
-  var saveToken = function (token) {
+  var saveToken = function(token) {
     $window.localStorage['track-it-token'] = token;
   };
 
@@ -56,8 +56,9 @@ module.exports = function autentificare($window, $http) {
       var payload = JSON.parse($window.atob(token.split('.')[1]));
       
       return {
-        email : payload.email,
-        numeIntreg : payload.numeIntreg
+        userId: payload._id,
+        email: payload.email,
+        numeIntreg: payload.numeIntreg
       };
     }
   };

@@ -28,12 +28,36 @@ module.exports = function alegeEtapeCtrl(proiect, $location, $routeParams) {
       vm.dateForm.splice(pozitieEtapa, 1);
     }
   };
+  
+  var proiectId = $routeParams.proiectId;
+
+  /* Initializeaza valori predefinite pentru perioadele etapelor. */
+  var dataMinima = new Date();
+  var dataMaxima = new Date(2050, 5, 22);
+
+  /* Cere detalii despre proiect si salveaza perioada reala a proiectului
+  in variabilele definite mai sus. */
+  proiect
+    .infoProiect(proiectId)
+    .then(function(response) {
+      dataMinima = response.data.proiect.dataStart;
+      dataMaxima = response.data.proiect.dataSfarsit;
+
+      /* Optiuni pentru directiva Angular de alegere date. */
+      vm.dateOptiuni = {
+        formatYear: 'yy',
+        minDate: new Date(dataMinima),
+        maxDate: new Date(dataMaxima),
+        startingDay: 1
+      };
+    }, function(response) {
+      return null;
+    });
 
   vm.onSubmit = function () {
     var campGol = 0;
     var perioadaGresita = 0;
 
-    var proiectId = $routeParams.proiectId;
 
     /** validare form: daca exista campuri goale sau perioada gresita */
     for (var i = 0; i < vm.dateForm.length; i++) {

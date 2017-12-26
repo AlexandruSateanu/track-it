@@ -1,4 +1,4 @@
-module.exports = function alegeMembriCtrl(proiect, $routeParams, useri) {
+module.exports = function alegeMembriCtrl(proiect, $routeParams, useri, autentificare) {
   var vm = this;
 
   vm.antetPagina = {
@@ -30,12 +30,14 @@ module.exports = function alegeMembriCtrl(proiect, $routeParams, useri) {
 
   /* Salveaza id-ul proiectului pentru a-l adauga la URL-ul care duce la noul
   proiect creat. */
-  vm.proiectStartId = $routeParams.proiectId;
+  vm.proiectId = $routeParams.proiectId;
 
   /** amanare introducere membrii */
   vm.toggleMembri = function () {
     vm.faraMembri = false;
   };
+
+  vm.confirmare = '';
 
   vm.dateForm = {
     membru: '',
@@ -57,14 +59,24 @@ module.exports = function alegeMembriCtrl(proiect, $routeParams, useri) {
     
     else {
       vm.formError = '';
-      console.log(vm.dateForm);
+      vm.executaAlegereMembru(vm.proiectId, vm.dateForm);
       vm.dateForm = {};
       
       /** resetare campuri */
       vm.alegeMembri.$setPristine();
       vm.alegeMembri.$setUntouched();
       vm.continua = true;
-      return false;
     }
+  };
+
+  /* Functie care foloseste serviciul de proiect cu functia lui de alegere membri. */
+  vm.executaAlegereMembru = function(proiectId, date) {
+    proiect
+      .alegeMembru(proiectId, date)
+      .then(function(response) {
+        vm.confirmare = response.data.message;     
+      }, function(response) {
+        vm.formError = response.data.message;
+      });
   };
 };

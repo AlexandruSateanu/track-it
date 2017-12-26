@@ -10,24 +10,28 @@ module.exports = function(req, res) {
     
     /* Selecteaza toti userii */
     User.find({}, function(err, useri) {
-      var listaUseri = [];
 
+      if (err) {
+        sendJSONResponse(res, 404, err);
+
+        return;
+      }
+
+      /* salvaza intr-un nou array doar id-ul si numele user-ului. 
+      (Nu vrem sa trimitem toate datele, gen email) */
+
+      var listaUseri = [];
+      
       useri.forEach(user => {
         listaUseri.push({
           userId: user._id,
           numeIntreg: user.numeIntreg
         });
       });
-
-      if (err) {
-        sendJSONResponse(res, 400, err);
-      }
       
-      else {
-        sendJSONResponse(res, 200, {
-          "listaUseri": listaUseri
-        });
-      }
+      sendJSONResponse(res, 200, {
+        "listaUseri": listaUseri
+      });
     });
   });
 };

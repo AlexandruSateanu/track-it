@@ -27,22 +27,29 @@ module.exports = function(req, res) {
           } 
           
           else if (err) {
-            sendJSONResponse(res, 400, err);
+            sendJSONResponse(res, 404, err);
   
             return;
           }
           
-          /* TO DO */
+          /* Extrage membrul din body-ul POST */
+          var membru = {
+            membru: req.body.membru.userId,
+            rol: req.body.rol
+          };
+
+          /* Adauga membru la array-ul cu membri din modelul de proiect. */
+          proiect.membri.push(membru);
 
           /* Salveaza noul proiect cu noii membri */
           proiect.save(function(err, proiect) {
             if (err) {
-              sendJSONResponse(res, 404, err);
+              sendJSONResponse(res, 400, err);
             } 
             
             else {
               sendJSONResponse(res, 200, {
-                "message": "Membrii au fost salvati.",
+                "message": "Noul membru fost salvat.",
                 "proiect": proiect
               });
             }

@@ -17,7 +17,7 @@ app.controller('panouStartCtrl', require('./panouStart/panouStart.controller.js'
 app.controller('proiectStartCtrl', require('./proiect/proiectStart/proiectStart.controller.js'));
 app.controller('creareProiectCtrl', ['proiect', '$location', require('./proiect/creareProiect/creareProiect.controller.js')]);
 app.controller('alegeEtapeCtrl', ['proiect', '$location', '$routeParams', require('./proiect/alegeEtape/alegeEtape.controller.js')]);
-app.controller('alegeMembriCtrl', ['proiect', '$routeParams', 'useri', require('./proiect/alegeMembri/alegeMembri.controller.js')]);
+app.controller('alegeMembriCtrl', ['proiect', '$routeParams', 'useri', 'autentificare', require('./proiect/alegeMembri/alegeMembri.controller.js')]);
 app.controller('setariProiectCtrl', require('./proiect/setariProiect/setariProiect.controller.js'));
 app.controller('editeazaPerioadaCtrl', ['$scope', require('./proiect/setariProiect/editeazaPerioada.controller.js')]);
 app.controller('editeazaEtapeCtrl', ['$scope', require('./proiect/setariProiect/editeazaEtape.controller.js')]);

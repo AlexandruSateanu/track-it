@@ -37,7 +37,7 @@ module.exports = function paginaActivitateCtrl() {
 
   vm.dateOptions = {
     formatYear: 'yy',
-    maxDate: new Date(2030, 5, 22),
+    maxDate: new Date(2050, 5, 22),
     minDate: vm.activitate.perioadaEstimata.dataStart,
     startingDay: 1
   };
