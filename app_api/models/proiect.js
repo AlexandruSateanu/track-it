@@ -23,6 +23,8 @@ var proiectSchema = new mongoose.Schema({
   dataSfarsit: {type: Date, required: true},
   etape: [etapaSchema],
   membri: [membruSchema]
+}, {
+  usePushEach: true
 });
 
 proiectSchema.plugin(autoIncrement.plugin, {model: 'Proiect', startAt: 1});

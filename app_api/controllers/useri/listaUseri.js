@@ -10,15 +10,22 @@ module.exports = function(req, res) {
     
     /* Selecteaza toti userii */
     User.find({}, function(err, useri) {
+      var listaUseri = [];
+
+      useri.forEach(user => {
+        listaUseri.push({
+          userId: user._id,
+          numeIntreg: user.numeIntreg
+        });
+      });
 
       if (err) {
         sendJSONResponse(res, 400, err);
-      } 
+      }
       
       else {
         sendJSONResponse(res, 200, {
-          "userId": useri._id,
-          "numeIntreg": user.numeIntreg
+          "listaUseri": listaUseri
         });
       }
     });

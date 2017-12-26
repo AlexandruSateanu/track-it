@@ -8,8 +8,12 @@ module.exports = function(req, res) {
   existaUser(req, res, function (req, res, user) {
     /* Trimite ca raspuns un array cu toate rolurile */
     if (roluri) {
+      /* Nu putem trimite rolul de Project Manager, fiindca acesta e folosit
+       doar la creare de proiect. */
+      roluri = roluri.filter(rol => rol.rolId !== 0);
+
       sendJSONResponse(res, 200, {
-        "roluri": roluri
+        "listaRoluri": roluri
       });
     }
 

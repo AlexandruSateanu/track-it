@@ -18,6 +18,7 @@ router.post('/confirmation', require('../controllers/auth/confirmation'));
 /* Proiect */
 router.post('/proiect/creare-proiect', auth, require('../controllers/proiect/creareProiect'));
 router.post('/proiect/:proiectId/alege-etape', auth, require('../controllers/proiect/alegeEtape'));
+router.post('/proiect/:proiectId/alege-membri', auth, require('../controllers/proiect/alegeMembri'));
 
 /* Useri */
 router.get('/lista-useri', auth, require('../controllers/useri/listaUseri'));

@@ -32,16 +32,9 @@ module.exports = function(req, res) {
             return;
           }
           
-          /* Extrage etapele din body-ul POST */
-          req.body.forEach(etapa => {
-            proiect.etape.push({
-              numeEtapa: etapa.numeEtapa,
-              dataStart: etapa.dataStart,
-              dataSfarsit: etapa.dataSfarsit
-            });
-          });
+          /* TO DO */
 
-          /* Salveaza noul proiect cu noile etape */
+          /* Salveaza noul proiect cu noii membri */
           proiect.save(function(err, proiect) {
             if (err) {
               sendJSONResponse(res, 404, err);
@@ -49,7 +42,7 @@ module.exports = function(req, res) {
             
             else {
               sendJSONResponse(res, 200, {
-                "message": "Etapele au fost salvate.",
+                "message": "Membrii au fost salvati.",
                 "proiect": proiect
               });
             }

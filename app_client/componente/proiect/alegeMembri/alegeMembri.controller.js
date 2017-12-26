@@ -6,22 +6,22 @@ module.exports = function alegeMembriCtrl(proiect, $routeParams, useri) {
   };
 
   /* Cere o lista cu toti membrii disponibili sa fie adaugati la proiect. */
-  vm.membri = useri
-                .listaUseri()
-                .then(function(response) {
-                  return response.data.listaUseri;
-                }, function(response) {
-                  return null;
-                });
+  useri
+    .listaUseri()
+    .then(function(response) {
+      vm.membri = response.data.listaUseri;
+    }, function(response) {
+      return null;
+    });
   
   /* Cere o lista cu toate rolurile posibile sa fie adaugati la proiect. */
-  vm.roluri = useri
-                .listaRoluri()
-                .then(function(response) {
-                  return response.data.listaRoluri;
-                }, function(response) {
-                  return null;
-                });
+  useri
+    .listaRoluri()
+    .then(function(response) {
+      vm.roluri = response.data.listaRoluri;
+    }, function(response) {
+      return null;
+    });
 
   /* Variabile flag pentru a arata form-ul de adaugare membrii sau a trece 
   mai departe fara a adauga. Folosite cu ng-show in template. */

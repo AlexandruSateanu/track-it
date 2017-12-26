@@ -10,7 +10,7 @@ module.exports = function proiect($http, autentificare) {
 
   /* Cerere POST catre API pentru a adauga etape la un proiect. Necesita autentificare cu token. */
   var alegeEtape = function (proiectId, data) {
-    return $http.post('/ api/proiect/' + proiectId + '/alege-etape', data, {
+    return $http.post('/api/proiect/' + proiectId + '/alege-etape', data, {
       headers: {
         Authorization: 'Bearer ' + autentificare.getToken()
       }
