@@ -81,12 +81,15 @@ var membri = [
   }
 ];
 
-module.exports = function proiectStartCtrl() {
+module.exports = function proiectStartCtrl($rootScope) {
   var vm = this;
 
   vm.antetPagina = {
     titlu: proiect.numeProiect
   };
+
+  /* Deoarece proiectul a fost deja creat, putem bloca accesul la toate rutele de creare. */
+  $rootScope.proiectInCreare = null;
 
   vm.activitatiRecente = activitatiRecente;
 

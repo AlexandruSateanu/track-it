@@ -1,9 +1,22 @@
-module.exports = function alegeMembriCtrl(proiect, $routeParams, useri, autentificare) {
+module.exports = function alegeMembriCtrl(proiect, $routeParams, useri, autentificare, $rootScope, $location) {
   var vm = this;
-
+  
   vm.antetPagina = {
     titlu: 'Alege Membri'
   };
+
+  /* Salveaza id-ul proiectului pentru a-l adauga la URL-ul care duce la noul
+  proiect creat. */
+  vm.proiectId = $routeParams.proiectId;
+
+  /* Nu permite accesarea paginii de alegere etape cand nu este activ procesul de creare. */
+  $rootScope.$watch(function() {
+    return $location.path();
+  }, function() {
+    if ($rootScope.proiectInCreare != vm.proiectId) {
+      $location.path('/404');
+    }
+  });
 
   /* Cere o lista cu toti membrii disponibili sa fie adaugati la proiect. */
   useri
@@ -33,17 +46,13 @@ module.exports = function alegeMembriCtrl(proiect, $routeParams, useri, autentif
   vm.faraMembri = true;
   vm.continua = false;
 
-  /* Salveaza id-ul proiectului pentru a-l adauga la URL-ul care duce la noul
-  proiect creat. */
-  vm.proiectId = $routeParams.proiectId;
-
-  /** amanare introducere membrii */
+  /* amanare introducere membrii */
   vm.toggleMembri = function () {
     vm.faraMembri = false;
   };
 
   vm.confirmare = '';
-
+  
   vm.dateForm = {
     membru: '',
     rol: ''

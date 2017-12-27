@@ -7,7 +7,6 @@ var existaUser = require('../helpers/existaUser');
 
 var roluri = require('../../config/roluri');
 
-
 module.exports = function(req, res) {
   /* executa callback daca exista user logat */
   existaUser(req, res, function (req, res, user) {

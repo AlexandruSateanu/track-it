@@ -1,4 +1,4 @@
-module.exports = function alegeEtapeCtrl(proiect, $location, $routeParams) {
+module.exports = function alegeEtapeCtrl(proiect, $location, $routeParams,$rootScope) {
   var vm = this;
 
   vm.antetPagina = {
@@ -10,6 +10,17 @@ module.exports = function alegeEtapeCtrl(proiect, $location, $routeParams) {
     dataStart: '',
     dataSfarsit: ''
   }];
+
+  var proiectId = $routeParams.proiectId;
+
+  /* Nu permite accesarea paginii de alegere etape cand nu este activ procesul de creare. */
+  $rootScope.$watch(function() {
+    return $location.path(); 
+  }, function() { 
+    if ($rootScope.proiectInCreare != proiectId) {
+      $location.path('/404');  
+    }  
+  });
 
   vm.formError = '';
 
@@ -28,8 +39,6 @@ module.exports = function alegeEtapeCtrl(proiect, $location, $routeParams) {
       vm.dateForm.splice(pozitieEtapa, 1);
     }
   };
-  
-  var proiectId = $routeParams.proiectId;
 
   /* Initializeaza valori predefinite pentru perioadele etapelor. */
   var dataMinima = new Date();

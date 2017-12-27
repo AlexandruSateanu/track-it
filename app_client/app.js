@@ -6,7 +6,7 @@ require('../production/templates/templateCachePartials');
 
 angular.module('track-it', ['ngRoute', 'ngSanitize', 'trackitPartials', 'ui.bootstrap']);
 
-function config($routeProvider, $locationProvider) {
+function routeConfig($routeProvider, $locationProvider) {
   $routeProvider
     .when('/', {
       templateUrl: 'componente/home/home.view.html',
@@ -73,7 +73,17 @@ function config($routeProvider, $locationProvider) {
       controller: 'creareSarcinaCtrl',
       controllerAs: 'vm'
     })
-    .otherwise({ redirectTo: '/' });
+    .when('/403', {
+      templateUrl: 'componente/altele/pagina403/pagina403.view.html',
+      controller: 'pagina403Ctrl',
+      controllerAs: 'vm'
+    })
+    .when('/404', {
+      templateUrl: 'componente/altele/pagina404/pagina404.view.html',
+      controller: 'pagina404Ctrl',
+      controllerAs: 'vm'
+    })
+    .otherwise({ redirectTo: '/404' });
 
   $locationProvider.html5Mode({
     enabled: true,
@@ -83,7 +93,7 @@ function config($routeProvider, $locationProvider) {
 
 angular
   .module('track-it')
-  .config(['$routeProvider', '$locationProvider', config])
+  .config(['$routeProvider', '$locationProvider', routeConfig])
   .config(['$locationProvider', function($locationProvider) {
     $locationProvider.hashPrefix('');
   }]);

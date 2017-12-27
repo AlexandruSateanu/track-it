@@ -1,4 +1,4 @@
-module.exports = function creareProiectCtrl(proiect, $location) {
+module.exports = function creareProiectCtrl(proiect, $rootScope, $location) {
   var vm = this;
 
   vm.antetPagina = {
@@ -45,6 +45,10 @@ module.exports = function creareProiectCtrl(proiect, $location) {
       .then(function(response) {
         var tipProiect = response.data.proiect.tipProiect;
         var proiectId = response.data.proiect._id;
+
+        /* Salveaza in $rootScope referinta catre proiectul creat pentru a limita 
+        accessul la rutele de creare doar in timpul procesului de creare. */
+        $rootScope.proiectInCreare = proiectId;
 
         if (tipProiect === '1') {
           $location.path('/proiect/' + proiectId + '/alege-etape');      
