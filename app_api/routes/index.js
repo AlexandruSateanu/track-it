@@ -7,16 +7,25 @@ var auth = jwt({
   userProperty: 'payload'
 });
 
-/* Users */
+/* Admin */
+router.post('/admin/creare-user', require('../controllers/admin/creareUser'));
+
+/* Auth */
 router.post('/register', require('../controllers/auth/register'));
 router.post('/login', require('../controllers/auth/login'));
 router.post('/confirmation', require('../controllers/auth/confirmation'));
 
-/* Admin */
-router.post('/admin/creare-user', require('../controllers/admin/creareUser'));
-
 /* Proiect */
 router.post('/proiect/creare-proiect', auth, require('../controllers/proiect/creareProiect'));
-router.post('/proiect/:proiectId/alege-perioada', auth, require('../controllers/proiect/alegePerioada'));
+router.post('/proiect/:proiectId/alege-etape', auth, require('../controllers/proiect/alegeEtape'));
+router.post('/proiect/:proiectId/alege-membru', auth, require('../controllers/proiect/alegeMembru'));
+router.get('/proiect/:proiectId/info-proiect', auth, require('../controllers/proiect/infoProiect'));
+
+/* Useri */
+router.get('/lista-useri', auth, require('../controllers/useri/listaUseri'));
+router.get('/lista-roluri', auth, require('../controllers/useri/listaRoluri'));
+
+/* Tratarea cererilor gresite */
+router.all( "/*", require('../controllers/helpers/cereriGresite'));
 
 module.exports = router;

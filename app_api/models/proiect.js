@@ -3,13 +3,10 @@ var autoIncrement = require('mongoose-auto-increment');
 
 var roluri = require('../config/roluri');
 
-var perioadaSchema = new mongoose.Schema({
-  dataStart: {type: Date, required: true},
-  dataSfarst: {type: Date, required: true}
-});
-
 var etapaSchema = new mongoose.Schema({
-  numeEtapa: {type: String, required: true}
+  numeEtapa: {type: String, required: true},
+  dataStart: {type: Date, required: true},
+  dataSfarsit: {type: Date, required: true}
 });
 
 var membruSchema = new mongoose.Schema({
@@ -22,9 +19,12 @@ var proiectSchema = new mongoose.Schema({
   cheieProiect: {type: String, required: true, trim: true, uppercase: true, maxlength: 3},
   tipProiect: {type: String, enum: ['1', '2'], required: true},
   managerProiect: {type: Number, ref: 'User', required: true},
-  perioada: [perioadaSchema],
+  dataStart: {type: Date, required: true},
+  dataSfarsit: {type: Date, required: true},
   etape: [etapaSchema],
   membri: [membruSchema]
+}, {
+  usePushEach: true
 });
 
 proiectSchema.plugin(autoIncrement.plugin, {model: 'Proiect', startAt: 1});

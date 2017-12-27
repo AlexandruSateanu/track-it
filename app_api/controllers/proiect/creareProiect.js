@@ -16,18 +16,24 @@ module.exports = function(req, res) {
       numeProiect: req.body.numeProiect,
       cheieProiect: req.body.cheieProiect,
       tipProiect: req.body.tipProiect,
-      managerProiect: user._id
+      managerProiect: user._id,
+      dataStart: req.body.dataStart,
+      dataSfarsit: req.body.dataSfarsit
     }, function(err, proiect) {
-
+      
       if (err) {
         sendJSONResponse(res, 400, err);
       } 
       
       else {
+        /* Extrage doar rolul de Manager de Proiect */
+        var rolPM = roluri.filter(rol => rol.rol === 'Manager Proiect');
+        var rolPMId = rolPM[0].rolId;
+
         /* Salveaza referinta catre proiect si in userul care l-a creat si atribuie rol de Project Manager */
         User.findByIdAndUpdate(
           user._id,
-          { $push: { 'proiecte' : { proiect: proiect._id, rol: roluri[0].rolId } } },
+          { $push: { 'proiecte' : { proiect: proiect._id, rol: rolPMId } } },
           {safe: true, new : true},
           function(err) {
             

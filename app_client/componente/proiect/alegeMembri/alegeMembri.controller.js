@@ -1,69 +1,64 @@
-var membri = [
-  {
-    id: 1,
-    nume: 'Cristina Ungureanu'
-  },
-  {
-    id: 2,
-    nume: 'Alex Sateanu'
-  },
-  {
-    id: 3,
-    nume: 'Andreea Ujica'
-  },
-  {
-    id: 4,
-    nume: 'Bogdan Chircu'
-  },
-  {
-    id: 5,
-    nume: 'Test Test'
-  }
-];
-
-var roluri = [
-  {
-    rolId: 1,
-    rol: "Coordonator echipa"
-  },
-  {
-    rolId: 2,
-    rol: "Membru echipa"
-  },
-  {
-    rolId: 3,
-    rol: "Consultant"
-  },
-  {
-    rolId: 4,
-    rol: "Vizitator"
-  },
-];
-
-module.exports = function alegeMembriCtrl() {
+module.exports = function alegeMembriCtrl(proiect, $routeParams, useri, autentificare, $rootScope, $location) {
   var vm = this;
-
+  
   vm.antetPagina = {
     titlu: 'Alege Membri'
   };
 
-  vm.membri = membri;
-  vm.roluri = roluri;
+  /* Salveaza id-ul proiectului pentru a-l adauga la URL-ul care duce la noul
+  proiect creat. */
+  vm.proiectId = $routeParams.proiectId;
 
+  /* Nu permite accesarea paginii de alegere etape cand nu este activ procesul de creare. */
+  $rootScope.$watch(function() {
+    return $location.path();
+  }, function() {
+    if ($rootScope.proiectInCreare != vm.proiectId) {
+      $location.path('/404');
+    }
+  });
+
+  /* Cere o lista cu toti membrii disponibili sa fie adaugati la proiect. */
+  useri
+    .listaUseri()
+    .then(function(response) {
+      vm.membri = response.data.listaUseri;
+      
+      /* Sterge user-ul logat din lista deoarece el nu se poate adauga pe sine la proiect. */
+      vm.membri = vm.membri.filter(function(membru) {
+        return membru.userId !== autentificare.userCurrent().userId;
+      });
+    }, function(response) {
+      return null;
+    });
+  
+  /* Cere o lista cu toate rolurile posibile sa fie adaugati la proiect. */
+  useri
+    .listaRoluri()
+    .then(function(response) {
+      vm.roluri = response.data.listaRoluri;
+    }, function(response) {
+      return null;
+    });
+
+  /* Variabile flag pentru a arata form-ul de adaugare membrii sau a trece 
+  mai departe fara a adauga. Folosite cu ng-show in template. */
   vm.faraMembri = true;
   vm.continua = false;
 
-  /** amanare introducere membrii */
+  /* amanare introducere membrii */
   vm.toggleMembri = function () {
     vm.faraMembri = false;
   };
 
+  vm.confirmare = '';
+  
   vm.dateForm = {
     membru: '',
     rol: ''
   };
 
-  vm.onSubmit = function () {
+  vm.onSubmit = function() {
     vm.formError = '';
 
     /* validare form */
@@ -78,14 +73,29 @@ module.exports = function alegeMembriCtrl() {
     
     else {
       vm.formError = '';
-      console.log(vm.dateForm);
-      vm.dateForm = {};
+      vm.executaAlegereMembru(vm.proiectId, vm.dateForm);
+
+      /* Sterge noul membru din lista pentru a nu mai putea fi adaugat la proiect. */
+      vm.membri = vm.membri.filter(function(membru) {
+        return membru.userId !== vm.dateForm.membru.userId;
+      });
       
-      /** resetare campuri */
+      /* Resetare campuri */
+      vm.dateForm = {};
       vm.alegeMembri.$setPristine();
       vm.alegeMembri.$setUntouched();
       vm.continua = true;
-      return false;
     }
+  };
+
+  /* Functie care foloseste serviciul de proiect cu functia lui de alegere membri. */
+  vm.executaAlegereMembru = function(proiectId, date) {
+    proiect
+      .alegeMembru(proiectId, date)
+      .then(function(response) {
+        vm.confirmare = response.data.message;     
+      }, function(response) {
+        vm.formError = response.data.message;
+      });
   };
 };

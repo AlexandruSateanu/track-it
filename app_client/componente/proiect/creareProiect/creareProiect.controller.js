@@ -1,4 +1,4 @@
-module.exports = function creareProiectCtrl(proiect, $location) {
+module.exports = function creareProiectCtrl(proiect, $rootScope, $location) {
   var vm = this;
 
   vm.antetPagina = {
@@ -8,36 +8,55 @@ module.exports = function creareProiectCtrl(proiect, $location) {
   vm.dateForm = {
     numeProiect: '',
     cheieProiect: '',
-    tipProiect: ''
+    tipProiect: '',
+    dataStart: '',
+    dataSfarsit: ''
   };
 
   vm.onSubmit = function () {
     vm.formError = '';
     
     /* Validare form */
-    if (!vm.dateForm || !vm.dateForm.numeProiect || !vm.dateForm.cheieProiect || !vm.dateForm.tipProiect) {
+    if (!vm.dateForm || !vm.dateForm.numeProiect || !vm.dateForm.cheieProiect || !vm.dateForm.tipProiect || !vm.dateForm.dataStart || !vm.dateForm.dataSfarsit) {
       vm.formError = "Toate campurile sunt obligatorii!";
       return false;
     } 
     
     else if (vm.dateForm.cheieProiect.length > 3) {
       vm.formError = "Cheia trebuie sa aiba maxim 3 caractere!"
-    } 
+    }
+
+    /* Verificare validitate perioada. */
+    else if (vm.dateForm.dataStart.getTime() >= vm.dateForm.dataSfarsit.getTime()) {
+      vm.formError = "Data de sfarsit trebuie sa fie mai mare ca data de start!";
+      return false;
+    }
     
     else {
       vm.formError = '';
-      vm.executaCreare();
+      vm.executaCreare(vm.dateForm);
     }
   };
-
-  vm.confirmare = '';
   
-  vm.executaCreare = function() {
+  /* Functie care foloseste serviciul de proiect cu functia lui de creare proiect. */
+  vm.executaCreare = function(date) {
     proiect
-      .creare(vm.dateForm)
+      .creare(date)
       .then(function(response) {
-        vm.confirmare = response.data.message;
-        $location.path('/proiect/' + response.data.proiect._id + '/alege-perioada');
+        var tipProiect = response.data.proiect.tipProiect;
+        var proiectId = response.data.proiect._id;
+
+        /* Salveaza in $rootScope referinta catre proiectul creat pentru a limita 
+        accessul la rutele de creare doar in timpul procesului de creare. */
+        $rootScope.proiectInCreare = proiectId;
+
+        if (tipProiect === '1') {
+          $location.path('/proiect/' + proiectId + '/alege-etape');      
+        }
+
+        else if (tipProiect === '2') {
+          $location.path('/proiect/' + proiectId + '/alege-membri');
+        }
 
       }, function(response) {
         vm.formError = response.data.message;

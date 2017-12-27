@@ -4,8 +4,8 @@ module.exports = function datePickerCtrl() {
   /** optiuni date picker */
   vm.dateOptions = {
     formatYear: 'yy',
-    maxDate: new Date(2030, 5, 22),
-    minDate: new Date(),
+    maxDate: new Date(2050, 5, 22),
+    minDate: new Date(2010, 1, 1),
     startingDay: 1
   };
 

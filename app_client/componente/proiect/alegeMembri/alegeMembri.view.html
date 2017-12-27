@@ -10,7 +10,7 @@
             <button class="btn btn-success" ng-click="vm.toggleMembri()">Da</button>
           </div>
           <div class="col-xs-6 col-md-6">
-            <a href="/#proiect-start" class="btn btn-danger">Nu</a>
+            <a href="/#proiect/{{ vm.proiectId }}" class="btn btn-danger">Nu</a>
           </div>
         </div>
       </div>
@@ -22,7 +22,7 @@
               <div class="col-xs-12 col-md-5">
                 <div class="form-group">
                   <label for="alegeMembru">Alege membru</label>
-                  <input type="text" nume="alegeMembru" ng-model="vm.dateForm.membru" uib-typeahead="membru as membru.nume for membru in vm.membri | filter:$viewValue | limitTo:5" typeahead-show-hint="true" typeahead-no-results="noResults" typeahead-editable="false" class="form-control">                  
+                  <input type="text" nume="alegeMembru" ng-model="vm.dateForm.membru" uib-typeahead="membru as membru.numeIntreg for membru in vm.membri | filter:$viewValue | limitTo:5" typeahead-show-hint="true" typeahead-no-results="noResults" typeahead-editable="false" class="form-control">                  
                   <div ng-show="noResults">
                     <i class="glyphicon glyphicon-remove"></i> Nu exista rezultate
                   </div>
@@ -40,7 +40,10 @@
           </fieldset>
           <button type="submit" class="btn btn-primary">Adauga membru</button>
         </form>
-        <a href="/#proiect-start" class="btn btn-secondary" ng-show="vm.continua">Continua spre Proiect</a>
+        <div class="page-component">
+          <div ng-show="vm.confirmare">{{ vm.confirmare }}</div>
+        </div>
+        <a href="/#proiect/{{ vm.proiectId }}" class="btn btn-secondary" ng-show="vm.continua">Continua spre Proiect</a>
       </div>
     </div>
   </div>
