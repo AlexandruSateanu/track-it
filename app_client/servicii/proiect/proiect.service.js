@@ -35,10 +35,20 @@ module.exports = function proiect($http, autentificare) {
     });
   };
 
+  /* Cerere PUT catre API pentru a edita perioada proiectului. Necesita autentificare cu token. */
+  var editarePerioada = function(proiectId, data) {
+    return $http.put('/api/proiect/' + proiectId + '/editeaza-perioada', data, {
+      headers: {
+        Authorization: 'Bearer ' + autentificare.getToken()
+      }
+    });
+  };
+
   return {
     creare: creare,
     alegeEtape: alegeEtape,
     alegeMembru: alegeMembru,
-    infoProiect: infoProiect
+    infoProiect: infoProiect,
+    editarePerioada: editarePerioada
   };
 };

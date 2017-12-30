@@ -17,9 +17,9 @@ module.exports = function alegeEtapeCtrl(proiect, $location, $routeParams,$rootS
   $rootScope.$watch(function() {
     return $location.path(); 
   }, function() { 
-    if ($rootScope.proiectInCreare != proiectId) {
+    if ($rootScope.proiectInCreare != proiectId && $location.path().indexOf('setari-proiect') === -1) {
       $location.path('/404');  
-    }  
+    }
   });
 
   vm.formError = '';
@@ -63,6 +63,8 @@ module.exports = function alegeEtapeCtrl(proiect, $location, $routeParams,$rootS
       return null;
     });
 
+  vm.confirmare = '';
+
   vm.onSubmit = function () {
     var campGol = 0;
     var perioadaGresita = 0;
@@ -100,7 +102,13 @@ module.exports = function alegeEtapeCtrl(proiect, $location, $routeParams,$rootS
     proiect
       .alegeEtape(proiectId, date)
       .then(function(response) {
-        $location.path('/proiect/' + proiectId + '/alege-membri');      
+        if ($location.path().indexOf('setari-proiect') === -1) {
+          $location.path('/proiect/' + proiectId + '/alege-membri');
+        }
+
+        else {
+          vm.confirmare = response.data.message;
+        }
       }, function(response) {
         vm.formError = response.data.message;
       });

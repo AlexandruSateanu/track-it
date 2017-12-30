@@ -22,10 +22,10 @@ app.controller('proiectStartCtrl', ['$rootScope', require('./proiect/proiectStar
 app.controller('creareProiectCtrl', ['proiect', '$rootScope', '$location', require('./proiect/creareProiect/creareProiect.controller.js')]);
 app.controller('alegeEtapeCtrl', ['proiect', '$location', '$routeParams', '$rootScope', require('./proiect/alegeEtape/alegeEtape.controller.js')]);
 app.controller('alegeMembriCtrl', ['proiect', '$routeParams', 'useri', 'autentificare', '$rootScope', '$location', require('./proiect/alegeMembri/alegeMembri.controller.js')]);
-app.controller('setariProiectCtrl', require('./proiect/setariProiect/setariProiect.controller.js'));
-app.controller('editeazaPerioadaCtrl', ['$scope', require('./proiect/setariProiect/editeazaPerioada.controller.js')]);
-app.controller('editeazaEtapeCtrl', ['$scope', require('./proiect/setariProiect/editeazaEtape.controller.js')]);
-app.controller('editeazaMembriCtrl', ['$scope', require('./proiect/setariProiect/editeazaMembri.controller.js')]);
+app.controller('setariProiectCtrl', ['proiect', '$routeParams', require('./proiect/setariProiect/setariProiect.controller.js')]);
+app.controller('editeazaPerioadaCtrl', ['proiect', '$routeParams', '$window', require('./proiect/setariProiect/editeazaPerioada.controller.js')]);
+app.controller('editeazaEtapeCtrl', ['proiect', '$routeParams', require('./proiect/setariProiect/editeazaEtape.controller.js')]);
+app.controller('editeazaMembriCtrl', ['proiect', '$routeParams', 'useri', 'autentificare', require('./proiect/setariProiect/editeazaMembri.controller.js')]);
 
 /* Activitate */
 app.controller('creareActivitateCtrl', ['$location', require('./activitate/creareActivitate/creareActivitate.controller.js')]);

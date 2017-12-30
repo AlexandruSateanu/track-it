@@ -1,53 +1,39 @@
-var membri = [
-  {
-    id: 1,
-    nume: 'Cristina Ungureanu'
-  },
-  {
-    id: 2,
-    nume: 'Alex Sateanu'
-  },
-  {
-    id: 3,
-    nume: 'Andreea Ujica'
-  },
-  {
-    id: 4,
-    nume: 'Bogdan Chircu'
-  },
-  {
-    id: 5,
-    nume: 'Test Test'
-  }
-];
-
-var roluri = [
-  {
-    rolId: 1,
-    rol: "Coordonator echipa"
-  },
-  {
-    rolId: 2,
-    rol: "Membru echipa"
-  },
-  {
-    rolId: 3,
-    rol: "Consultant"
-  },
-  {
-    rolId: 4,
-    rol: "Vizitator"
-  },
-];
-
-module.exports = function editeazaMembriCtrl($scope) {
+module.exports = function editeazaMembriCtrl(proiect, $routeParams, useri, autentificare) {
   var vm = this;
 
-  /* Accesare date din scope-ul parinte */
-  vm.dateForm = $scope.vm.proiect.membri;
+  var proiectId = $routeParams.proiectId;
+  
+  /* Cere detalii despre proiect si extrage membri curenti. */
+  proiect
+    .infoProiect(proiectId)
+    .then(function(response) {
+      vm.dateForm = response.data.membri;
+    }, function(response) {
+      return null;
+    });
 
-  vm.membri = membri;
-  vm.roluri = roluri;
+  /* Cere o lista cu toti membrii disponibili sa fie adaugati la proiect. */
+  useri
+    .listaUseri()
+    .then(function(response) {
+      vm.membri = response.data.listaUseri;
+      
+      /* Sterge user-ul logat din lista deoarece el nu se poate adauga pe sine la proiect. */
+      vm.membri = vm.membri.filter(function(membru) {
+        return membru.userId !== autentificare.userCurrent().userId;
+      });
+    }, function(response) {
+      return null;
+    });
+  
+  /* Cere o lista cu toate rolurile posibile. */
+  useri
+    .listaRoluri()
+    .then(function(response) {
+      vm.roluri = response.data.listaRoluri;
+    }, function(response) {
+      return null;
+    });
   
   vm.formError = [];
   

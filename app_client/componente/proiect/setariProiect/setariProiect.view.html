@@ -27,6 +27,9 @@
                     <date-picker ng-model="ep.dateForm"></date-picker>
                     <button type="submit" class="btn btn-primary">Salveaza date</button>
                   </form>
+                  <div class="page-component">
+                    <div ng-show="ep.confirmare">{{ ep.confirmare }}</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -45,7 +48,7 @@
                           <input type="text" class="form-control" name="numeEtapa-{{$index}}" placeholder="Nume etapa" ng-model="ee.dateForm[$index].numeEtapa">
                         </div>
                         <div class="col-xs-12 col-md-5">
-                          <date-picker ng-model="ee.dateForm[$index].perioada"></date-picker>
+                          <date-picker-custom ng-model="ee.dateForm[$index]" datepicker-options="ee.dateOptiuni"></date-picker-custom>
                         </div>
                         <div class="col-xs-12 col-md-2">
                           <button type="submit" class="btn btn-primary">Salveaza</button>
@@ -69,7 +72,7 @@
                           <input type="text" class="form-control" name="numeEtapa" placeholder="Nume etapa" ng-model="ae.dateForm[$index].numeEtapa">
                         </div>
                         <div class="col-xs-12 col-md-5">
-                          <date-picker ng-model="ae.dateForm[$index].perioada"></date-picker>
+                          <date-picker-custom ng-model="ae.dateForm[$index]" datepicker-options="ae.dateOptiuni"></date-picker-custom>
                         </div>
                         <div class="col-xs-12 col-md-2">
                           <div class="delete-btn-label">Sterge</div>
@@ -81,6 +84,9 @@
                   </div>
                   <button type="submit" class="btn btn-primary">Salveaza etape</button>
                 </form>
+                <div class="page-component">
+                  <div ng-show="ae.confirmare">{{ ae.confirmare }}</div>
+                </div>
               </div>
             </div>
           </uib-tab>
