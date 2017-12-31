@@ -19,6 +19,7 @@ module.exports = function editeazaEtapeCtrl(proiect, $routeParams) {
 
       etape.forEach(function(etapa) {
         vm.dateForm.push({
+          etapaId: etapa._id,
           numeEtapa: etapa.numeEtapa,
           dataStart: new Date(etapa.dataStart),
           dataSfarsit: new Date(etapa.dataSfarsit)
@@ -37,6 +38,8 @@ module.exports = function editeazaEtapeCtrl(proiect, $routeParams) {
     });
   
   vm.formError = [];
+
+  vm.confirmare = [];
   
   vm.etapaOnSubmit = function(index) {
     var date = vm.dateForm[index];
@@ -54,8 +57,18 @@ module.exports = function editeazaEtapeCtrl(proiect, $routeParams) {
     
     else {
       vm.formError[index] = '';
-      console.log(date);
-      return false;
+      vm.executaEditareEtapa(proiectId, angular.toJson(vm.dateForm[index]), index);
     }
+  };
+
+  /* Functie care foloseste serviciul de proiect cu functia lui de editare etapa. */
+  vm.executaEditareEtapa = function(proiectId, date, index) {
+    proiect
+      .editareEtapa(proiectId, date)
+      .then(function(response) {
+        vm.confirmare[index] = response.data.message;
+      }, function(response) {
+        vm.formError[index] = response.data.message;
+      });
   };
 };

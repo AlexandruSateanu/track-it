@@ -44,11 +44,22 @@ module.exports = function proiect($http, autentificare) {
     });
   };
 
+  /* Cerere PUT catre API pentru a edita o etapa a proiectului. Necesita autentificare cu token. */
+  var editareEtapa = function(proiectId, data) {
+    console.log(data);
+    return $http.put('/api/proiect/' + proiectId + '/editeaza-etape', data, {
+      headers: {
+        Authorization: 'Bearer ' + autentificare.getToken()
+      }
+    });
+  };
+
   return {
     creare: creare,
     alegeEtape: alegeEtape,
     alegeMembru: alegeMembru,
     infoProiect: infoProiect,
-    editarePerioada: editarePerioada
+    editarePerioada: editarePerioada,
+    editareEtapa: editareEtapa
   };
 };

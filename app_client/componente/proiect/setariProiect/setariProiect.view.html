@@ -38,7 +38,7 @@
             <div class="page-component">
               <h4>Editeaza etapele proiectului</h4>
               <div ng-controller="editeazaEtapeCtrl as ee">
-                <form ng-repeat="etapa in ee.dateForm" name="ee.editEtape-{{$index}}" ng-submit="ee.etapaOnSubmit($index)">
+                <form ng-repeat="etapa in ee.dateForm" id="{{ ee.dateForm[$index].etapaId }}" ng-submit="ee.etapaOnSubmit($index)">
                   <div role="alert" class="alert alert-danger" ng-show="ee.formError[$index]">{{ ee.formError[$index] }}</div>
                   <div class="form-group">
                     <fieldset class="grup-separator">
@@ -55,6 +55,9 @@
                         </div>
                       </div>
                     </fieldset>
+                  </div>
+                  <div class="page-component">
+                    <div ng-show="ee.confirmare[$index]">{{ ee.confirmare }}</div>
                   </div>
                 </form>
               </div>

@@ -15,6 +15,7 @@ module.exports = function(req, res) {
       /* Selecteaza proiectul dupa id */
       Proiect
         .findById(proiectId)
+        .select('dataStart dataSfarsit')
         .exec(function(err, proiect) {
           
           /* verifica daca proiectul cu id-ul dat exista */
@@ -24,7 +25,7 @@ module.exports = function(req, res) {
             });
   
             return
-          } 
+          }
           
           else if (err) {
             sendJSONResponse(res, 404, err);
@@ -36,7 +37,7 @@ module.exports = function(req, res) {
           proiect.dataStart = req.body.dataStart;
           proiect.dataSfarsit = req.body.dataSfarsit;
 
-          /* Salveaza noul proiect cu noua perioada */
+          /* Salveaza proiectul cu noua perioada */
           proiect.save(function(err, proiect) {
             if (err) {
               sendJSONResponse(res, 400, err);
