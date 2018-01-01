@@ -46,8 +46,16 @@ module.exports = function proiect($http, autentificare) {
 
   /* Cerere PUT catre API pentru a edita o etapa a proiectului. Necesita autentificare cu token. */
   var editareEtapa = function(proiectId, data) {
-    console.log(data);
     return $http.put('/api/proiect/' + proiectId + '/editeaza-etape', data, {
+      headers: {
+        Authorization: 'Bearer ' + autentificare.getToken()
+      }
+    });
+  };
+
+  /* Cerere PUT catre API pentru a edita un membru al proiectului. Necesita autentificare cu token. */
+  var editareMembru = function(proiectId, data) {
+    return $http.put('/api/proiect/' + proiectId + '/editeaza-membri', data, {
       headers: {
         Authorization: 'Bearer ' + autentificare.getToken()
       }
@@ -60,6 +68,7 @@ module.exports = function proiect($http, autentificare) {
     alegeMembru: alegeMembru,
     infoProiect: infoProiect,
     editarePerioada: editarePerioada,
-    editareEtapa: editareEtapa
+    editareEtapa: editareEtapa,
+    editareMembru: editareMembru
   };
 };

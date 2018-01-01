@@ -4,7 +4,6 @@ var Proiect = mongoose.model('Proiect');
 
 var sendJSONResponse = require('../helpers/sendJSONResponse');
 var existaUser = require('../helpers/existaUser');
-var roluri = require('../../config/roluri');
 
 var nodemailer = require('nodemailer');
 
@@ -55,7 +54,7 @@ module.exports = function(req, res) {
               User.findByIdAndUpdate(
                 membruNou.membru,
                 { $push: { 'proiecte' : { proiect: proiect._id, rol: membruNou.rol } } },
-                {safe: true, new : true},
+                { safe: true, new : true },
                 function(err, user) {
                   
                   if (err) {
@@ -64,7 +63,7 @@ module.exports = function(req, res) {
                   
                   else {
                     /* Daca membrul a fost adaugat cu succes, trimitem raspuns catre client 
-                    si email de notiifcare catre membru. */
+                    si email de notificare catre membru. */
                     var transporter = nodemailer.createTransport({
                       service: 'SendGrid',
                       auth: { 
@@ -92,8 +91,7 @@ module.exports = function(req, res) {
 
                     sendJSONResponse(res, 200, {
                       "message": "Noul membru fost salvat.",
-                      "proiect": proiect,
-                      "membru": user
+                      "membri": proiect.membri
                     });
                   }
                 }

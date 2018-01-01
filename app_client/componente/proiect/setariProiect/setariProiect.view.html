@@ -27,9 +27,7 @@
                     <date-picker ng-model="ep.dateForm"></date-picker>
                     <button type="submit" class="btn btn-primary">Salveaza date</button>
                   </form>
-                  <div class="page-component">
-                    <div ng-show="ep.confirmare">{{ ep.confirmare }}</div>
-                  </div>
+                  <div class="alert alert-success" ng-show="ep.confirmare">{{ ep.confirmare }}</div>
                 </div>
               </div>
             </div>
@@ -54,10 +52,8 @@
                           <button type="submit" class="btn btn-primary">Salveaza</button>
                         </div>
                       </div>
+                      <div class="alert alert-success" ng-show="ee.confirmare[$index]">{{ ee.confirmare[$index] }}</div>
                     </fieldset>
-                  </div>
-                  <div class="page-component">
-                    <div ng-show="ee.confirmare[$index]">{{ ee.confirmare }}</div>
                   </div>
                 </form>
               </div>
@@ -87,9 +83,7 @@
                   </div>
                   <button type="submit" class="btn btn-primary">Salveaza etape</button>
                 </form>
-                <div class="page-component">
-                  <div ng-show="ae.confirmare">{{ ae.confirmare }}</div>
-                </div>
+                <div class="alert alert-success" ng-show="ae.confirmare">{{ ae.confirmare }}</div>
               </div>
             </div>
           </uib-tab>
@@ -125,6 +119,7 @@
                     </div>
                   </fieldset>
                 </form>
+                <div class="alert alert-success" ng-show="em.confirmare[$index]">{{ em.confirmare[$index] }}</div>
               </div>
             </div>
             <div class="page-component">

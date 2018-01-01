@@ -48,8 +48,18 @@ module.exports = function editeazaMembriCtrl(proiect, $routeParams, useri, auten
     
     else {
       vm.formError[index] = '';
-      console.log(date);
-      return false;
+      vm.executaEditareMembru(proiectId, angular.toJson(vm.dateForm[index]), index);
     }
+  };
+
+  /* Functie care foloseste serviciul de proiect cu functia lui de editare membru. */
+  vm.executaEditareMembru = function(proiectId, date, index) {
+    proiect
+      .editareMembru(proiectId, date)
+      .then(function(response) {
+        vm.confirmare[index] = response.data.message;
+      }, function(response) {
+        vm.formError[index] = response.data.message;
+      });
   };
 };

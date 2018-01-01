@@ -53,7 +53,7 @@ module.exports = function editeazaEtapeCtrl(proiect, $routeParams) {
     else if (date.dataStart.getTime() >= date.dataSfarsit.getTime()) {
       vm.formError[index] = "Datele de sfarsit trebuie sa fie mai mari ca datele de start!";
       return false;
-    } 
+    }
     
     else {
       vm.formError[index] = '';

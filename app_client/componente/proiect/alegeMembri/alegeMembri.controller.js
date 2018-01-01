@@ -93,7 +93,7 @@ module.exports = function alegeMembriCtrl(proiect, $routeParams, useri, autentif
     proiect
       .alegeMembru(proiectId, date)
       .then(function(response) {
-        vm.confirmare = response.data.message;     
+        vm.confirmare = response.data.message;
       }, function(response) {
         vm.formError = response.data.message;
       });

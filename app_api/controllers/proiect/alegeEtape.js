@@ -50,7 +50,7 @@ module.exports = function(req, res) {
             else {
               sendJSONResponse(res, 200, {
                 "message": "Etapele au fost salvate.",
-                "proiect": proiect
+                "etape": proiect.etape
               });
             }
           });
