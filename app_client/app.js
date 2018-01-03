@@ -53,7 +53,7 @@ function routeConfig($routeProvider, $locationProvider) {
       controller: 'proiectStartCtrl',
       controllerAs: 'vm'
     })
-    .when('/setari-proiect', {
+    .when('/proiect/:proiectId/setari-proiect', {
       templateUrl: 'componente/proiect/setariProiect/setariProiect.view.html',
       controller: 'setariProiectCtrl',
       controllerAs: 'vm'

@@ -27,6 +27,7 @@
                     <date-picker ng-model="ep.dateForm"></date-picker>
                     <button type="submit" class="btn btn-primary">Salveaza date</button>
                   </form>
+                  <div class="alert alert-success" ng-show="ep.confirmare">{{ ep.confirmare }}</div>
                 </div>
               </div>
             </div>
@@ -35,7 +36,7 @@
             <div class="page-component">
               <h4>Editeaza etapele proiectului</h4>
               <div ng-controller="editeazaEtapeCtrl as ee">
-                <form ng-repeat="etapa in ee.dateForm" name="ee.editEtape-{{$index}}" ng-submit="ee.etapaOnSubmit($index)">
+                <form ng-repeat="etapa in ee.dateForm" id="{{ ee.dateForm[$index].etapaId }}" ng-submit="ee.etapaOnSubmit($index)">
                   <div role="alert" class="alert alert-danger" ng-show="ee.formError[$index]">{{ ee.formError[$index] }}</div>
                   <div class="form-group">
                     <fieldset class="grup-separator">
@@ -45,12 +46,13 @@
                           <input type="text" class="form-control" name="numeEtapa-{{$index}}" placeholder="Nume etapa" ng-model="ee.dateForm[$index].numeEtapa">
                         </div>
                         <div class="col-xs-12 col-md-5">
-                          <date-picker ng-model="ee.dateForm[$index].perioada"></date-picker>
+                          <date-picker-custom ng-model="ee.dateForm[$index]" datepicker-options="ee.dateOptiuni"></date-picker-custom>
                         </div>
                         <div class="col-xs-12 col-md-2">
                           <button type="submit" class="btn btn-primary">Salveaza</button>
                         </div>
                       </div>
+                      <div class="alert alert-success" ng-show="ee.confirmare[$index]">{{ ee.confirmare[$index] }}</div>
                     </fieldset>
                   </div>
                 </form>
@@ -69,7 +71,7 @@
                           <input type="text" class="form-control" name="numeEtapa" placeholder="Nume etapa" ng-model="ae.dateForm[$index].numeEtapa">
                         </div>
                         <div class="col-xs-12 col-md-5">
-                          <date-picker ng-model="ae.dateForm[$index].perioada"></date-picker>
+                          <date-picker-custom ng-model="ae.dateForm[$index]" datepicker-options="ae.dateOptiuni"></date-picker-custom>
                         </div>
                         <div class="col-xs-12 col-md-2">
                           <div class="delete-btn-label">Sterge</div>
@@ -81,6 +83,7 @@
                   </div>
                   <button type="submit" class="btn btn-primary">Salveaza etape</button>
                 </form>
+                <div class="alert alert-success" ng-show="ae.confirmare">{{ ae.confirmare }}</div>
               </div>
             </div>
           </uib-tab>
@@ -88,18 +91,18 @@
             <div class="page-component">
               <h4>Editeaza membrii proiectului</h4>
               <div ng-controller="editeazaMembriCtrl as em">
-                <form ng-repeat="membru in em.dateForm" name="em.editMembri-[$index]" ng-submit="em.membruOnSubmit($index)">
+                <form ng-repeat="membru in em.dateForm" id="{{ em.dateForm[$index].etapaId }}" ng-submit="em.membruOnSubmit($index)">
                   <div role="alert" class="alert alert-danger" ng-show="em.formError[$index]">{{ em.formError[$index] }}</div>
                   <fieldset class="grup-separator">
                     <div class="row">
                       <div class="col-xs-12 col-md-5">
                         <div>
                           <span>Nume membru: </span>
-                          <span>{{ em.dateForm[$index].nume }}</span>
+                          <span>{{ em.dateForm[$index].numeIntreg }}</span>
                         </div>
                         <div>
                           <span>Rol curent: </span>
-                          <span>{{ em.dateForm[$index].rolId }}</span>
+                          <span>{{ em.dateForm[$index].numeRol }}</span>
                         </div>
                       </div>
                       <div class="col-xs-12 col-md-5">
@@ -114,6 +117,7 @@
                         <button type="submit" class="btn btn-primary">Salveaza</button>
                       </div>
                     </div>
+                    <div class="alert alert-success" ng-show="em.confirmare[$index]">{{ em.confirmare[$index] }}</div>
                   </fieldset>
                 </form>
               </div>
@@ -128,7 +132,7 @@
                       <div class="col-xs-12 col-md-5">
                         <div class="form-group">
                           <label for="alegeMembru">Alege membru</label>
-                          <input type="text" nume="alegeMembru" ng-model="am.dateForm.membru" uib-typeahead="membru as membru.nume for membru in am.membri | filter:$viewValue | limitTo:5" typeahead-show-hint="true" typeahead-no-results="noResults" typeahead-editable="false" class="form-control">                  
+                          <input type="text" nume="alegeMembru" ng-model="am.dateForm.membru" uib-typeahead="membru as membru.numeIntreg for membru in am.membri | filter:$viewValue | limitTo:5" typeahead-show-hint="true" typeahead-no-results="noResults" typeahead-editable="false" class="form-control">                  
                           <div ng-show="noResults">
                             <i class="glyphicon glyphicon-remove"></i> Nu exista rezultate
                           </div>
@@ -146,6 +150,7 @@
                   </fieldset>
                   <button type="submit" class="btn btn-primary">Adauga membru</button>
                 </form>
+                <div class="alert alert-success" ng-show="am.confirmare">{{ am.confirmare }}</div>
               </div>
             </div>
           </uib-tab>

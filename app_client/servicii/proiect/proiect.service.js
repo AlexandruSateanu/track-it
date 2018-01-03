@@ -35,10 +35,40 @@ module.exports = function proiect($http, autentificare) {
     });
   };
 
+  /* Cerere PUT catre API pentru a edita perioada proiectului. Necesita autentificare cu token. */
+  var editarePerioada = function(proiectId, data) {
+    return $http.put('/api/proiect/' + proiectId + '/editeaza-perioada', data, {
+      headers: {
+        Authorization: 'Bearer ' + autentificare.getToken()
+      }
+    });
+  };
+
+  /* Cerere PUT catre API pentru a edita o etapa a proiectului. Necesita autentificare cu token. */
+  var editareEtapa = function(proiectId, data) {
+    return $http.put('/api/proiect/' + proiectId + '/editeaza-etape', data, {
+      headers: {
+        Authorization: 'Bearer ' + autentificare.getToken()
+      }
+    });
+  };
+
+  /* Cerere PUT catre API pentru a edita un membru al proiectului. Necesita autentificare cu token. */
+  var editareMembru = function(proiectId, data) {
+    return $http.put('/api/proiect/' + proiectId + '/editeaza-membri', data, {
+      headers: {
+        Authorization: 'Bearer ' + autentificare.getToken()
+      }
+    });
+  };
+
   return {
     creare: creare,
     alegeEtape: alegeEtape,
     alegeMembru: alegeMembru,
-    infoProiect: infoProiect
+    infoProiect: infoProiect,
+    editarePerioada: editarePerioada,
+    editareEtapa: editareEtapa,
+    editareMembru: editareMembru
   };
 };

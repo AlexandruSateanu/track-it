@@ -1,16 +1,24 @@
-module.exports = function editeazaPerioadaCtrl($scope) {
+module.exports = function editeazaPerioadaCtrl(proiect, $routeParams, $window) {
   var vm = this;
 
-  /* Accesare date din scope-ul parinte */
-  vm.proiect = $scope.vm.proiect;
-
-  vm.dataStartCurenta = vm.proiect.perioada.dataStart;
-  vm.dataSfarsitCurenta = vm.proiect.perioada.dataSfarsit;
+  var proiectId = $routeParams.proiectId;
+  
+  /* Cere detalii despre proiect si extrage perioada. */
+  proiect
+    .infoProiect(proiectId)
+    .then(function(response) {
+      vm.dataStartCurenta = response.data.proiect.dataStart;
+      vm.dataSfarsitCurenta = response.data.proiect.dataSfarsit;
+    }, function(response) {
+      return null;
+    });
 
   vm.dateForm = {
     dataStart: '',
     dataSfarsit: ''
   };
+
+  vm.confirmare = '';
 
   vm.perioadaOnSubmit = function () {
     vm.formError = '';
@@ -28,8 +36,19 @@ module.exports = function editeazaPerioadaCtrl($scope) {
     
     else {
       vm.formError = '';
-      console.log(vm.dateForm);
-      return false;
+      vm.executaEditarePerioada(proiectId, angular.toJson(vm.dateForm));
     }
+  };
+
+  /* Functie care foloseste serviciul de proiect cu functia lui de editare perioada. */
+  vm.executaEditarePerioada = function(proiectId, date) {
+    proiect
+      .editarePerioada(proiectId, date)
+      .then(function(response) {
+        vm.confirmare = response.data.message;
+        $window.location.reload();
+      }, function(response) {
+        vm.formError = response.data.message;
+      });
   };
 };

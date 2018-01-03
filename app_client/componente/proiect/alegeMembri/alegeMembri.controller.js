@@ -13,7 +13,7 @@ module.exports = function alegeMembriCtrl(proiect, $routeParams, useri, autentif
   $rootScope.$watch(function() {
     return $location.path();
   }, function() {
-    if ($rootScope.proiectInCreare != vm.proiectId) {
+    if ($rootScope.proiectInCreare != vm.proiectId && $location.path().indexOf('setari-proiect') === -1) {
       $location.path('/404');
     }
   });
@@ -32,7 +32,7 @@ module.exports = function alegeMembriCtrl(proiect, $routeParams, useri, autentif
       return null;
     });
   
-  /* Cere o lista cu toate rolurile posibile sa fie adaugati la proiect. */
+  /* Cere o lista cu toate rolurile posibile. */
   useri
     .listaRoluri()
     .then(function(response) {
@@ -93,7 +93,7 @@ module.exports = function alegeMembriCtrl(proiect, $routeParams, useri, autentif
     proiect
       .alegeMembru(proiectId, date)
       .then(function(response) {
-        vm.confirmare = response.data.message;     
+        vm.confirmare = response.data.message;
       }, function(response) {
         vm.formError = response.data.message;
       });

@@ -20,6 +20,9 @@ router.post('/proiect/creare-proiect', auth, require('../controllers/proiect/cre
 router.post('/proiect/:proiectId/alege-etape', auth, require('../controllers/proiect/alegeEtape'));
 router.post('/proiect/:proiectId/alege-membru', auth, require('../controllers/proiect/alegeMembru'));
 router.get('/proiect/:proiectId/info-proiect', auth, require('../controllers/proiect/infoProiect'));
+router.put('/proiect/:proiectId/editeaza-perioada', auth, require('../controllers/proiect/editeazaPerioada'));
+router.put('/proiect/:proiectId/editeaza-etape', auth, require('../controllers/proiect/editeazaEtape'));
+router.put('/proiect/:proiectId/editeaza-membri', auth, require('../controllers/proiect/editeazaMembri'));
 
 /* Useri */
 router.get('/lista-useri', auth, require('../controllers/useri/listaUseri'));
