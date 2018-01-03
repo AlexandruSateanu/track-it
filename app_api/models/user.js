@@ -27,6 +27,8 @@ var userSchema = new mongoose.Schema({
   isVerified: { type: Boolean, default: false },
   passwordResetToken: String,
   passwordResetExpires: Date
+}, {
+  usePushEach: true
 });
 
 userSchema.methods.setPassword = function(password) {

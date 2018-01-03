@@ -58,10 +58,10 @@ module.exports = function(req, res) {
               } 
               
               else {
-                User.findByIdAndUpdate(
-                  membru.membru,
-                  { $set: { 'proiecte' : { rol: membru.rol } } },
-                  { safe: true, new : true },
+                User.findOneAndUpdate(
+                  { "_id": membru.membru, "proiecte.proiect": proiectId },
+                  { $set: { 'proiecte.$.rol': membru.rol } },
+                  { safe: true, new: true },
                   function(err, user) {
                     
                     if (err) {
