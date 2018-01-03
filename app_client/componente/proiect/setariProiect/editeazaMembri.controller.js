@@ -1,5 +1,7 @@
-module.exports = function editeazaMembriCtrl(proiect, $routeParams, useri, autentificare) {
+module.exports = function editeazaMembriCtrl(proiect, $routeParams, useri) {
   var vm = this;
+
+  vm.dateForm = [];
 
   var proiectId = $routeParams.proiectId;
   
@@ -7,35 +9,56 @@ module.exports = function editeazaMembriCtrl(proiect, $routeParams, useri, auten
   proiect
     .infoProiect(proiectId)
     .then(function(response) {
-      vm.dateForm = response.data.membri;
-    }, function(response) {
-      return null;
-    });
+      vm.membriProiect = response.data.proiect.membri;
 
-  /* Cere o lista cu toti membrii disponibili sa fie adaugati la proiect. */
-  useri
-    .listaUseri()
-    .then(function(response) {
-      vm.membri = response.data.listaUseri;
-      
-      /* Sterge user-ul logat din lista deoarece el nu se poate adauga pe sine la proiect. */
-      vm.membri = vm.membri.filter(function(membru) {
-        return membru.userId !== autentificare.userCurrent().userId;
-      });
-    }, function(response) {
-      return null;
-    });
-  
-  /* Cere o lista cu toate rolurile posibile. */
-  useri
-    .listaRoluri()
-    .then(function(response) {
-      vm.roluri = response.data.listaRoluri;
+      /* Cere o lista cu toti membrii pentru a extrage numele. */
+      useri
+        .listaUseri()
+        .then(function(response) {
+          vm.useri = response.data.listaUseri;
+
+          vm.membriProiect.forEach(function(membru) {
+            var userCautat = vm.useri.filter(function(user) {
+              return user.userId === membru.membru;
+            });
+
+            membru.numeIntreg = userCautat[0].numeIntreg;
+            
+            vm.dateForm.push({
+              numeIntreg: membru.numeIntreg,
+              membruId: membru._id,
+              rol: membru.rol
+            });
+          });
+
+          /* Cere o lista cu toate rolurile posibile. */
+          useri
+            .listaRoluri()
+            .then(function(response) {
+              vm.roluri = response.data.listaRoluri;
+
+              vm.dateForm.forEach(function(data, index, dateForm) {
+                var rol = vm.roluri.filter(function(rol) {
+                  return rol.rolId === data.rol; 
+                });
+
+                var numeRol = rol[0].rol;
+
+                dateForm[index].numeRol = numeRol;
+              });
+            }, function(response) {
+              return null;
+            });
+        }, function(response) {
+          return null;
+        });
     }, function(response) {
       return null;
     });
   
   vm.formError = [];
+
+  vm.confirmare = [];
   
   vm.membruOnSubmit = function(index) {
     var date = vm.dateForm[index];

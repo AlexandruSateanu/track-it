@@ -91,18 +91,18 @@
             <div class="page-component">
               <h4>Editeaza membrii proiectului</h4>
               <div ng-controller="editeazaMembriCtrl as em">
-                <form ng-repeat="membru in em.dateForm" name="em.editMembri-[$index]" ng-submit="em.membruOnSubmit($index)">
+                <form ng-repeat="membru in em.dateForm" id="{{ em.dateForm[$index].etapaId }}" ng-submit="em.membruOnSubmit($index)">
                   <div role="alert" class="alert alert-danger" ng-show="em.formError[$index]">{{ em.formError[$index] }}</div>
                   <fieldset class="grup-separator">
                     <div class="row">
                       <div class="col-xs-12 col-md-5">
                         <div>
                           <span>Nume membru: </span>
-                          <span>{{ em.dateForm[$index].nume }}</span>
+                          <span>{{ em.dateForm[$index].numeIntreg }}</span>
                         </div>
                         <div>
                           <span>Rol curent: </span>
-                          <span>{{ em.dateForm[$index].rolId }}</span>
+                          <span>{{ em.dateForm[$index].numeRol }}</span>
                         </div>
                       </div>
                       <div class="col-xs-12 col-md-5">
@@ -117,9 +117,9 @@
                         <button type="submit" class="btn btn-primary">Salveaza</button>
                       </div>
                     </div>
+                    <div class="alert alert-success" ng-show="em.confirmare[$index]">{{ em.confirmare[$index] }}</div>
                   </fieldset>
                 </form>
-                <div class="alert alert-success" ng-show="em.confirmare[$index]">{{ em.confirmare[$index] }}</div>
               </div>
             </div>
             <div class="page-component">
