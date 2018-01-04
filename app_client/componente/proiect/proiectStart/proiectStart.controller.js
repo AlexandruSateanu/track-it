@@ -1,9 +1,3 @@
-var proiect = {
-  id: 1,
-  numeProiect: "Proiect 1",
-  projectManager: "Alex Sateanu"
-};
-
 var activitatiRecente = [
   {
     cod: "PR1-ACT2",
@@ -19,6 +13,7 @@ var activitatiRecente = [
   }
 ];
 
+/*
 var statistici = {
   status: [
     {
@@ -57,6 +52,7 @@ var statistici = {
     }
   ]
 };
+*/
 
 var membri = [
   {
@@ -81,23 +77,58 @@ var membri = [
   }
 ];
 
-module.exports = function proiectStartCtrl($rootScope) {
+module.exports = function proiectStartCtrl($rootScope, $routeParams, proiect, useri) {
   var vm = this;
 
-  vm.antetPagina = {
-    titlu: proiect.numeProiect
-  };
+  vm.proiectId = $routeParams.proiectId;
 
   /* Deoarece proiectul a fost deja creat, putem bloca accesul la toate rutele de creare. */
   $rootScope.proiectInCreare = null;
 
   vm.activitatiRecente = activitatiRecente;
 
+  /*
   vm.statisticiStatus = statistici.status;
 
   vm.statisticiPrioritate = statistici.prioritate;
+  */
 
-  vm.proiect = proiect;
+  /* Cere detalii despre proiect si populeaza cu date. */
+  proiect
+    .infoProiect(vm.proiectId)
+    .then(function(response) {
+      vm.proiect = response.data.proiect;
 
-  vm.membri = membri;
+      vm.antetPagina = {
+        titlu: vm.proiect.numeProiect
+      };
+
+      vm.membriProiect = vm.proiect.membri;
+      vm.managerProiectId = vm.proiect.managerProiect;
+
+      useri
+        .listaUseri()
+        .then(function(response) {
+          var useri = response.data.listaUseri;
+
+          vm.membriProiect.forEach(function(membru, index, membriProiect) {
+            var userCautat = useri.filter(function(user) {
+              return user.userId === membru.membru;
+            });
+
+            membriProiect[index].numeIntreg = userCautat[0].numeIntreg;
+          });
+
+          var dateManagerProiect = useri.filter(function(user) {
+            return user.userId === vm.proiect.managerProiect;
+          });
+
+          vm.managerProiectNume = dateManagerProiect[0].numeIntreg;
+
+        }, function(response) {
+          return null;
+        });
+    }, function(response) {
+      return null;
+    });
 };

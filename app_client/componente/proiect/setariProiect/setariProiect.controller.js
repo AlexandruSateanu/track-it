@@ -1,11 +1,11 @@
 module.exports = function setariProiectCtrl(proiect, $routeParams) {
   var vm = this;
 
-  var proiectId = $routeParams.proiectId;
+  vm.proiectId = $routeParams.proiectId;
 
   /* Cere detalii despre proiect si extrage tipul si numele proiectului. */
   proiect
-    .infoProiect(proiectId)
+    .infoProiect(vm.proiectId)
     .then(function(response) {
       vm.tipProiect = response.data.proiect.tipProiect;
       vm.numeProiect = response.data.proiect.numeProiect;
