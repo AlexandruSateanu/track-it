@@ -18,7 +18,7 @@ app.controller('confirmareCtrl', ['$location', 'autentificare', require('./auten
 app.controller('panouStartCtrl', require('./panouStart/panouStart.controller.js'));
 
 /* Proiect */
-app.controller('proiectStartCtrl', ['$rootScope', require('./proiect/proiectStart/proiectStart.controller.js')]);
+app.controller('proiectStartCtrl', ['$rootScope', '$routeParams', 'proiect', 'useri', require('./proiect/proiectStart/proiectStart.controller.js')]);
 app.controller('creareProiectCtrl', ['proiect', '$rootScope', '$location', require('./proiect/creareProiect/creareProiect.controller.js')]);
 app.controller('alegeEtapeCtrl', ['proiect', '$location', '$routeParams', '$rootScope', require('./proiect/alegeEtape/alegeEtape.controller.js')]);
 app.controller('alegeMembriCtrl', ['proiect', '$routeParams', 'useri', 'autentificare', '$rootScope', '$location', require('./proiect/alegeMembri/alegeMembri.controller.js')]);

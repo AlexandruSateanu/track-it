@@ -13,7 +13,7 @@ module.exports = function alegeMembriCtrl(proiect, $routeParams, useri, autentif
   $rootScope.$watch(function() {
     return $location.path();
   }, function() {
-    if ($rootScope.proiectInCreare != vm.proiectId && $location.path().indexOf('setari-proiect') === -1) {
+    if ($rootScope.proiectInCreare != vm.proiectId && $location.path().indexOf('alege-membri') !== -1) {
       $location.path('/404');
     }
   });

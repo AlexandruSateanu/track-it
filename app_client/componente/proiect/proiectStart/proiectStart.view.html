@@ -4,9 +4,14 @@
   <div class="row">
     <div class="col-xs-12 col-md-6">
       <div class="page-component">
+        <h4>Echipa proiect</h4>
+        <tabel-membri membri="vm.membriProiect"></tabel-membri>
+      </div>
+      <div class="page-component">
         <h4>Ultimele activitati</h4>
         <tabel-recente recente="vm.activitatiRecente"></tabel-recente>
       </div>
+      <!--
       <h4>Statistici rapide</h4>
       <div class="page-component">
         <h5>Sarcini in functie de status</h5>
@@ -19,19 +24,16 @@
           <a href="#">Statistici detaliate</a>
         </div>
       </div>
+      -->
     </div>
     <div class="col-xs-12 col-md-6">
       <div class="page-component">
         <h4>Manager proiect</h4>
         <ul class="list-group">
           <li class="list-group-item">
-            <a href="#">{{ vm.proiect.projectManager }}</a>
+            <a href="/#user/{{ vm.managerProiectId }}">{{ vm.managerProiectNume }}</a>
           </li>
         </ul>
-      </div>
-      <div class="page-component">
-        <h4>Echipa proiect</h4>
-        <tabel-membri membri="vm.membri"></tabel-membri>
       </div>
       <div class="page-component">
         <h4>Tablouri</h4>
@@ -48,14 +50,11 @@
         <h4>Optiuni</h4>
         <ul>
           <li>
-            <a href="/#proiect/{{ vm.proiect.id }}/creare-activitate">Creeaza activitate noua</a>
+            <a href="/#proiect/{{ vm.proiectId }}/creare-activitate">Creeaza activitate noua</a>
           </li>
           <li>
-            <a href="/#setari-proiect">Setari proiect</a>
+            <a href="/#proiect/{{ vm.proiectId }}/setari-proiect">Setari proiect</a>
           </li>
-          <li>
-              <a href="/">Membrii proiectului</a>
-            </li>
         </ul>
       </div>
     </div>

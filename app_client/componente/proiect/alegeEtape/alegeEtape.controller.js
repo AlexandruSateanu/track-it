@@ -17,7 +17,7 @@ module.exports = function alegeEtapeCtrl(proiect, $location, $routeParams,$rootS
   $rootScope.$watch(function() {
     return $location.path(); 
   }, function() { 
-    if ($rootScope.proiectInCreare != proiectId && $location.path().indexOf('setari-proiect') === -1) {
+    if ($rootScope.proiectInCreare != proiectId && $location.path().indexOf('alege-etape') !== -1) {
       $location.path('/404');  
     }
   });
