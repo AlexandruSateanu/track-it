@@ -109,20 +109,19 @@ function routeConfig($routeProvider, $locationProvider) {
 
 /* Verificare pentru permisiuni ale user-ului inainte de acesarea rutei. 
 Rutele pot avea nevoie de user logat sau de acces la proiect (daca e ruta de proiect). */
-function verificarePermisiuni($rootScope, $route, $location, autentificare) {
+function verificarePermisiuni($rootScope, $location, autentificare) {
   /* Evenimentul $routeChangeStart este emis inainte de schimbare unei rute. 
   In obiectul next avem informatii despre viitoarea ruta. */
   $rootScope.$on('$routeChangeStart', function (event, next) {
     var proiectId = next.params.proiectId;
     var rutaNoua = next.$$route;
 
-    console.log(autentificare.verificaPermisiuniRuta(rutaNoua, proiectId));
+    var verificare = autentificare.verificaPermisiuniRuta(rutaNoua, proiectId);
 
-    /*if (!autentificare.verificaPermisiuniRuta(rutaNoua, proiectId)) {
-      console.log('acces interzis');
-      //event.preventDefault();
-      //$location.path("/login");
-    }*/
+    if (!verificare) {
+      event.preventDefault();
+      $location.path('/');
+    }
   });
 }
 
@@ -132,7 +131,7 @@ angular
   .config(['$locationProvider', function($locationProvider) {
     $locationProvider.hashPrefix('');
   }])
-  .run(['$rootScope', '$route', '$location', 'autentificare', verificarePermisiuni]);
+  .run(['$rootScope', '$location', 'autentificare', verificarePermisiuni]);
 
 require('./servicii');
 require('./comune');
