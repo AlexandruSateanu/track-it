@@ -27,6 +27,7 @@ router.put('/proiect/:proiectId/editeaza-membri', auth, require('../controllers/
 /* Useri */
 router.get('/lista-useri', auth, require('../controllers/useri/listaUseri'));
 router.get('/lista-roluri', auth, require('../controllers/useri/listaRoluri'));
+router.get('/lista-proiecte-user/:userId', auth, require('../controllers/useri/listaProiecteUser'));
 
 /* Tratarea cererilor gresite */
 router.all( "/*", require('../controllers/helpers/cereriGresite'));

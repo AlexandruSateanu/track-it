@@ -19,7 +19,6 @@ module.exports = function(req, res) {
 
       /* salvaza intr-un nou array doar id-ul si numele user-ului. 
       (Nu vrem sa trimitem toate datele, gen email) */
-
       var listaUseri = [];
       
       useri.forEach(user => {

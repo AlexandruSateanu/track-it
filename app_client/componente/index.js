@@ -15,7 +15,7 @@ app.controller('registerCtrl', ['$location', 'autentificare', require('./autenti
 app.controller('confirmareCtrl', ['$location', 'autentificare', require('./autentificare/confirmare/confirmare.controller.js')]);
 
 /* Start */
-app.controller('panouStartCtrl', require('./panouStart/panouStart.controller.js'));
+app.controller('panouStartCtrl', ['autentificare', 'useri', require('./panouStart/panouStart.controller.js')]);
 
 /* Proiect */
 app.controller('proiectStartCtrl', ['$scope', 'creareProiectActiva', '$routeParams', 'proiect', 'useri', require('./proiect/proiectStart/proiectStart.controller.js')]);

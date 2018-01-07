@@ -1,11 +1,24 @@
 .nav-item {
   position: relative;
+
+  .dropdown-toggle {
+    display: block;
+    padding: .5rem 0;
+  }
 }
 
 @media (max-width: 991px) {
   .navbar-nav {
     .nav-item + .nav-item {
       margin-left: 0;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .nav-item {
+    .dropdown-toggle {
+      padding: .5rem;
     }
   }
 }

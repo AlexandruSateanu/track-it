@@ -1,14 +1,3 @@
-var proiecteleMele = [
-  {
-    id: 1,
-    numeProiect: "Proiectul 1"
-  },
-  {
-    id: 2,
-    numeProiect: "Proiectul 2"
-  }
-];
-
 var activitatiRecente = [
   {
     cod: "PR1-ACT2",
@@ -45,16 +34,33 @@ var activitateaMea = [
   }
 ];
 
-module.exports = function panouStartCtrl() {
+module.exports = function panouStartCtrl(autentificare, useri) {
   var vm = this;
 
   vm.antetPagina = {
     titlu: 'Panou start'
   };
 
+  var userId = autentificare.userCurrent().userId;
+
+  /* Apelam serviciul user si cerem lista proiectelor userului. */
+  useri
+    .listaProiecteUser(userId)
+    .then(function(response) {
+      var proiecteleMele = response.data.listaProiecte;
+
+      if (proiecteleMele === []) {
+        vm.faraProiecte = 'Momentan nu aveti niciun proiect.'
+      }
+
+      else {
+        vm.proiecteleMele = response.data.listaProiecte;
+      }
+    }, function(response) {
+      vm.faraProiecte = 'A intervenit o eroare cu obtinerea proiectelor.';
+    });
+
   vm.activitatiRecente = activitatiRecente;
 
   vm.activitateaMea = activitateaMea;
-
-  vm.proiecteleMele = proiecteleMele;
 }
