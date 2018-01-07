@@ -77,13 +77,14 @@ var membri = [
   }
 ];
 
-module.exports = function proiectStartCtrl($rootScope, $routeParams, proiect, useri) {
+module.exports = function proiectStartCtrl($scope, creareProiectActiva, $routeParams, proiect, useri) {
   var vm = this;
 
   vm.proiectId = $routeParams.proiectId;
 
   /* Deoarece proiectul a fost deja creat, putem bloca accesul la toate rutele de creare. */
-  $rootScope.proiectInCreare = null;
+  $scope.creareProiectActiva = creareProiectActiva;
+  $scope.creareProiectActiva = {};
 
   vm.activitatiRecente = activitatiRecente;
 

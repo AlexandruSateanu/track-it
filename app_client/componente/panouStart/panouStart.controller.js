@@ -49,7 +49,7 @@ module.exports = function panouStartCtrl() {
   var vm = this;
 
   vm.antetPagina = {
-    titlu: 'Panoul tau de start'
+    titlu: 'Panou start'
   };
 
   vm.activitatiRecente = activitatiRecente;

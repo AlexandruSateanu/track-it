@@ -11,7 +11,8 @@ function routeConfig($routeProvider, $locationProvider) {
     .when('/', {
       templateUrl: 'componente/home/home.view.html',
       controller: 'homeCtrl',
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      necesitaUserNeconectat: true
     })
     .when('/panou-start', {
       templateUrl: 'componente/panouStart/panouStart.view.html',
@@ -22,7 +23,8 @@ function routeConfig($routeProvider, $locationProvider) {
     .when('/register', {
       templateUrl: 'componente/autentificare/register/register.view.html',
       controller: 'registerCtrl',
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      necesitaUserNeconectat: true
     })
     .when('/confirmare', {
       templateUrl: 'componente/autentificare/confirmare/confirmare.view.html',
@@ -116,11 +118,35 @@ function verificarePermisiuni($rootScope, $location, autentificare) {
     var proiectId = next.params.proiectId;
     var rutaNoua = next.$$route;
 
-    var verificare = autentificare.verificaPermisiuniRuta(rutaNoua, proiectId);
+    if (rutaNoua) {
+      /* Folosim serviciul de autentificare cu metoda care verifica permisiuni. */
+      var verificare = autentificare.verificaPermisiuniRuta(rutaNoua, proiectId);
 
-    if (!verificare) {
-      event.preventDefault();
-      $location.path('/');
+      /* Cand functia returneaza obiect de tip promise, trebuie extras rezultatul cu then(). */
+      if (typeof verificare === 'object') {
+        verificare.then(function(rezultat) {
+          if (!rezultat) {
+            /* Daca userul nu are permisiuni, redirectare catre home. */
+            event.preventDefault();
+            $location.path('/');
+          }
+        });
+      } 
+      
+      else {
+        if (!verificare) {
+          /* Daca userul nu are permisiuni, redirectare catre home. */
+          event.preventDefault();
+          $location.path('/');
+        }
+      }
+  
+      /* Userul logat nu trebuie sa poata accesa rutele pentru useri nelogati.
+      Redirectare catre pagina de start a userului. */
+      if (rutaNoua.necesitaUserNeconectat && autentificare.userConectat()) {
+        event.preventDefault();
+        $location.path('/panou-start');
+      }
     }
   });
 }

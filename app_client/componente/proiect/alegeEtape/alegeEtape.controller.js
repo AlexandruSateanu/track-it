@@ -1,4 +1,4 @@
-module.exports = function alegeEtapeCtrl(proiect, $location, $routeParams,$rootScope) {
+module.exports = function alegeEtapeCtrl(proiect, $location, $routeParams, $rootScope, $scope, creareProiectActiva) {
   var vm = this;
 
   vm.antetPagina = {
@@ -13,12 +13,14 @@ module.exports = function alegeEtapeCtrl(proiect, $location, $routeParams,$rootS
 
   var proiectId = $routeParams.proiectId;
 
+  $scope.creareProiectActiva = creareProiectActiva;
+
   /* Nu permite accesarea paginii de alegere etape cand nu este activ procesul de creare. */
   $rootScope.$watch(function() {
-    return $location.path(); 
+    return $location.path();
   }, function() { 
-    if ($rootScope.proiectInCreare != proiectId && $location.path().indexOf('alege-etape') !== -1) {
-      $location.path('/404');  
+    if ($scope.creareProiectActiva.proiectId != proiectId && $location.path().indexOf('alege-etape') !== -1) {
+      $location.path('/404');
     }
   });
 
