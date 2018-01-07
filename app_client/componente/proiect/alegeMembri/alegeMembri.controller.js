@@ -1,4 +1,4 @@
-module.exports = function alegeMembriCtrl(proiect, $routeParams, useri, autentificare, $rootScope, $location) {
+module.exports = function alegeMembriCtrl(proiect, $routeParams, useri, autentificare, $location, $rootScope, $scope, creareProiectActiva) {
   var vm = this;
   
   vm.antetPagina = {
@@ -9,11 +9,13 @@ module.exports = function alegeMembriCtrl(proiect, $routeParams, useri, autentif
   proiect creat. */
   vm.proiectId = $routeParams.proiectId;
 
+  $scope.creareProiectActiva = creareProiectActiva;
+
   /* Nu permite accesarea paginii de alegere etape cand nu este activ procesul de creare. */
   $rootScope.$watch(function() {
     return $location.path();
   }, function() {
-    if ($rootScope.proiectInCreare != vm.proiectId && $location.path().indexOf('alege-membri') !== -1) {
+    if ($scope.creareProiectActiva.proiectId != vm.proiectId && $location.path().indexOf('alege-membri') !== -1) {
       $location.path('/404');
     }
   });

@@ -15,13 +15,13 @@ app.controller('registerCtrl', ['$location', 'autentificare', require('./autenti
 app.controller('confirmareCtrl', ['$location', 'autentificare', require('./autentificare/confirmare/confirmare.controller.js')]);
 
 /* Start */
-app.controller('panouStartCtrl', require('./panouStart/panouStart.controller.js'));
+app.controller('panouStartCtrl', ['autentificare', 'useri', require('./panouStart/panouStart.controller.js')]);
 
 /* Proiect */
-app.controller('proiectStartCtrl', ['$rootScope', '$routeParams', 'proiect', 'useri', require('./proiect/proiectStart/proiectStart.controller.js')]);
-app.controller('creareProiectCtrl', ['proiect', '$rootScope', '$location', require('./proiect/creareProiect/creareProiect.controller.js')]);
-app.controller('alegeEtapeCtrl', ['proiect', '$location', '$routeParams', '$rootScope', require('./proiect/alegeEtape/alegeEtape.controller.js')]);
-app.controller('alegeMembriCtrl', ['proiect', '$routeParams', 'useri', 'autentificare', '$rootScope', '$location', require('./proiect/alegeMembri/alegeMembri.controller.js')]);
+app.controller('proiectStartCtrl', ['$scope', 'creareProiectActiva', '$routeParams', 'proiect', 'useri', require('./proiect/proiectStart/proiectStart.controller.js')]);
+app.controller('creareProiectCtrl', ['proiect', '$location', '$scope', 'creareProiectActiva', require('./proiect/creareProiect/creareProiect.controller.js')]);
+app.controller('alegeEtapeCtrl', ['proiect', '$location', '$routeParams', '$rootScope', '$scope', 'creareProiectActiva', require('./proiect/alegeEtape/alegeEtape.controller.js')]);
+app.controller('alegeMembriCtrl', ['proiect', '$routeParams', 'useri', 'autentificare', '$location', '$rootScope', '$scope', 'creareProiectActiva', require('./proiect/alegeMembri/alegeMembri.controller.js')]);
 app.controller('setariProiectCtrl', ['proiect', '$routeParams', require('./proiect/setariProiect/setariProiect.controller.js')]);
 app.controller('editeazaPerioadaCtrl', ['proiect', '$routeParams', '$window', require('./proiect/setariProiect/editeazaPerioada.controller.js')]);
 app.controller('editeazaEtapeCtrl', ['proiect', '$routeParams', require('./proiect/setariProiect/editeazaEtape.controller.js')]);

@@ -40,7 +40,7 @@ module.exports = function autentificare($window, $http) {
   var userConectat = function() {
     var token = getToken();
     
-    if(token) {
+    if (token) {
       var payload = JSON.parse($window.atob(token.split('.')[1]));
 
       return payload.exp > Date.now() / 1000;
@@ -51,16 +51,88 @@ module.exports = function autentificare($window, $http) {
 
   /* Citirea din token a informatiilor despre user. */
   var userCurrent = function() {
-    if(userConectat()) {
+    if (userConectat()) {
       var token = getToken();
       var payload = JSON.parse($window.atob(token.split('.')[1]));
-      
+  
       return {
         userId: payload._id,
         email: payload.email,
-        numeIntreg: payload.numeIntreg
+        numeIntreg: payload.numeIntreg,
+        proiecte: payload.proiecte
       };
     }
+  };
+
+  /* Verificare daca ruta necesita autentificare. */
+  var verificaPermisiuniRuta = function(ruta, proiectId) {
+    if (!ruta.necesitaAuthentificare) {
+      return true;
+    }
+    
+    /* Pasam la urmatoarea metoda informatia despre ruta si id-ul de proiect. */
+    return verificaAutentificareRuta(ruta, proiectId);
+  };
+  
+  /* Daca ruta necesita autentificare, verifica daca userul e conectat. */
+  var verificaAutentificareRuta = function(ruta, proiectId) {
+
+    if (!userConectat()) {
+      return false;
+    }
+    
+    /* Daca userul e conectat, verifica daca ruta necesita acces la proiect. */
+    if (!ruta.necesitaAccesProiect) {
+      return true;
+    }
+    
+    /* Pasam la urmatoarea metoda id-ul de proiect. */
+    return verificaAccesProiect(proiectId);
+  };
+
+  /* Verifica daca userul are acces la proiect. */
+  var verificaAccesProiect = function(proiectId) {
+    if (!userConectat()){
+      return false;
+    }
+
+    /* Extrage id-ul userului curent din token. */
+    var userId = userCurrent().userId;
+
+    /* Verificam daca userul conectat face parte din proiectul cu id-ul primit. */
+    var verificare = function() {
+      return $http.get('/api/proiect/' + proiectId + '/info-proiect', {
+        headers: {
+          Authorization: 'Bearer ' + getToken()
+        }
+      })
+      .then(function(response) {
+        var proiect = response.data.proiect;
+        
+        var membruGasit = proiect.membri.filter(function(membru) {
+          return membru.membru === userId;
+        });
+
+        if (membruGasit.length > 0) {
+          return true;
+        }
+  
+        /* Cazul in care userul e manager de proiect. */
+        else if (proiect.managerProiect === userId) {
+          return true;
+        }
+  
+        else {
+          return false;
+        }
+      }, function(response) {
+        return false;
+      });
+    };
+    
+    return verificare().then(function(rezultat) {
+      return rezultat;
+    });
   };
 
   return {
@@ -72,6 +144,9 @@ module.exports = function autentificare($window, $http) {
     deconectare : deconectare,
     adminCreareUser : adminCreareUser,
     userConectat : userConectat,
-    userCurrent : userCurrent
+    userCurrent : userCurrent,
+    verificaPermisiuniRuta : verificaPermisiuniRuta,
+    verificaAutentificareRuta : verificaAutentificareRuta,
+    verificaAccesProiect : verificaAccesProiect
   };
 };

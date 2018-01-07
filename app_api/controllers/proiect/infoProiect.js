@@ -21,7 +21,7 @@ module.exports = function(req, res) {
               "message": "Proiectul nu a fost gasit"
             });
       
-            return
+            return;
           }
       
           else if (err) {
@@ -41,6 +41,5 @@ module.exports = function(req, res) {
         "message": "Nu exista id de proiect in request."
       });
     }
-    
   });
 };

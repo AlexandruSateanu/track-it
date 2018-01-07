@@ -17,8 +17,18 @@ module.exports = function useri($http, autentificare) {
     });
   };
 
+  /* Cerere GET catre API pentru lista proiectelor unui user. Necesita autentificare cu token. */
+  var listaProiecteUser = function(userId) {
+    return $http.get('/api/lista-proiecte-user/' + userId, {
+      headers: {
+        Authorization: 'Bearer ' + autentificare.getToken()
+      }
+    });
+  };
+
   return {
     listaUseri: listaUseri,
-    listaRoluri: listaRoluri
+    listaRoluri: listaRoluri,
+    listaProiecteUser: listaProiecteUser
   };
 };
