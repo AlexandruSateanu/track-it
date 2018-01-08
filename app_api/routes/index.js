@@ -24,6 +24,9 @@ router.put('/proiect/:proiectId/editeaza-perioada', auth, require('../controller
 router.put('/proiect/:proiectId/editeaza-etape', auth, require('../controllers/proiect/editeazaEtape'));
 router.put('/proiect/:proiectId/editeaza-membri', auth, require('../controllers/proiect/editeazaMembri'));
 
+/* Activitate */
+router.put('/proiect/:proiectId/creare-activitate', auth, require('../controllers/activitate/creareActivitate'));
+
 /* Useri */
 router.get('/lista-useri', auth, require('../controllers/useri/listaUseri'));
 router.get('/lista-roluri', auth, require('../controllers/useri/listaRoluri'));

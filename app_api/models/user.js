@@ -11,6 +11,10 @@ var proiectSchema = new mongoose.Schema({
   rol: {type: Number, min: 0, max: roluri.length, required: true}
 });
 
+var activitateSchema = new mongoose.Schema({
+  activitateId: {type: Number, ref: 'Activitate', required: true}
+});
+
 var userSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -21,12 +25,13 @@ var userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  proiecte: [proiectSchema],
   hash: String,
   salt: String,
   isVerified: { type: Boolean, default: false },
   passwordResetToken: String,
-  passwordResetExpires: Date
+  passwordResetExpires: Date,
+  proiecte: [proiectSchema],
+  activitati: [activitateSchema]
 }, {
   usePushEach: true
 });
@@ -50,6 +55,7 @@ userSchema.methods.generateJwt = function() {
     email: this.email,
     numeIntreg: this.numeIntreg,
     proiecte: this.proiecte,
+    activitati: this.activitati,
     exp: parseInt(expiry.getTime() / 1000),
   }, process.env.JWT_SECRET );
 };
