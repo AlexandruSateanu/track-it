@@ -34,7 +34,7 @@ module.exports = function(req, res) {
         User.findByIdAndUpdate(
           user._id,
           { $push: { 'proiecte' : { proiect: proiect._id, rol: rolPMId } } },
-          {safe: true, new : true},
+          { safe: true, new : true },
           function(err) {
             
             if (err) {

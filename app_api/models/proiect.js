@@ -15,7 +15,8 @@ var membruSchema = new mongoose.Schema({
 });
 
 var activitateSchema = new mongoose.Schema({
-  activitateId: {type: Number, ref: 'Activitate', required: true}
+  activitateId: {type: Number, ref: 'Activitate', required: true},
+  cod: String
 });
 
 var proiectSchema = new mongoose.Schema({

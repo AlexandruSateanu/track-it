@@ -38,7 +38,7 @@ module.exports = function(req, res) {
           var etapa = proiect.etape.id(etapaId);
 
           /* Verifica existenta etapei si editeaza. */
-          if(!etapa) {
+          if (!etapa) {
             sendJSONResponse(res, 404, {
               "message": "Etapa nu exista!"
             });

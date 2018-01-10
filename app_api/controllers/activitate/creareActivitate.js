@@ -6,49 +6,90 @@ var Proiect = mongoose.model('Proiect');
 var sendJSONResponse = require('../helpers/sendJSONResponse');
 var existaUser = require('../helpers/existaUser');
 
-var status = require('../config/status');
+var status = require('../../config/status');
 
 module.exports = function(req, res) {
   /* executa callback daca exista user logat */
   existaUser(req, res, function (req, res, user) {
+    var proiectId = req.params.proiectId;
+    var etapaId = req.body.etapaId;
 
-    /* Salveaza activitatea noua */
-    Activitate.create({
-      numeActivitate: req.body.numeActivitate,
-      responsabil: req.body.responsabil,
-      proiect: req.body.proiect
-    }, function(err, activitate) {
-      
-      if (err) {
-        sendJSONResponse(res, 400, err);
-      } 
-      
-      else {
-        /* Extrage doar rolul de Manager de Proiect */
-        var rolPM = roluri.filter(rol => rol.rol === 'Manager Proiect');
-        var rolPMId = rolPM[0].rolId;
+    /* verifica daca avem parametru cu id-ul de proiect in URL */
+    if (proiectId) {
+      Proiect
+        .findById(proiectId)
+        .exec(function(err, proiect) {
+          /* Extrage etapa de care apartine activitatea. */
+          var etapa = proiect.etape.id(etapaId);
 
-        /* Salveaza referinta catre proiect si in userul care l-a creat si atribuie rol de Project Manager */
-        User.findByIdAndUpdate(
-          user._id,
-          { $push: { 'proiecte' : { proiect: proiect._id, rol: rolPMId } } },
-          {safe: true, new : true},
-          function(err) {
-            
-            if (err) {
-              sendJSONResponse(res, 400, err);
-            } 
-            
-            else {
-              /* Daca proiectul a fost creat cu succes, il trimitem ca raspuns */
-              sendJSONResponse(res, 201, {
-                "message": "Proiectul a fost creat.",
-                "proiect": proiect
+          /* Verifica existenta etapei. */
+          if (!etapa) {
+            sendJSONResponse(res, 404, {
+              "message": "Etapa nu exista!"
+            });
+          } 
+          
+          else {
+            /* Salveaza activitatea noua */
+            Activitate.create({
+              numeActivitate: req.body.numeActivitate,
+              responsabil: user._id,
+              proiectId: proiectId,
+              etapaId: etapaId,
+              status: 0,
+              estimare: req.body.estimare,
+              descriere: req.body.descriere
+            }, function(err, activitate) {
+              
+              if (err) {
+                sendJSONResponse(res, 400, err);
+              }
+
+              var codActivitate = proiect.cheieProiect + '-' + (proiect.activitati.length + 1);
+
+              proiect.activitati.push({
+                activitateId: activitate._id,
+                cod: codActivitate
               });
-            }
+
+              proiect.save(function(err, proiect) {
+                
+                if (err) {
+                  sendJSONResponse(res, 400, err);
+                } 
+                
+                else {
+                  User.findByIdAndUpdate(
+                    user._id,
+                    { $push: { 'activitati' : { activitateId: activitate._id } } },
+                    { safe: true, new : true },
+                    function(err) {
+                      
+                      if (err) {
+                        sendJSONResponse(res, 400, err);
+                      } 
+                      
+                      else {
+                        /* Daca activitatea a fost creata cu succes, trimitem raspuns */
+                        sendJSONResponse(res, 201, {
+                          "message": "Activitatea a fost creata.",
+                          "activitate": activitate
+                        });
+                      }
+                    }
+                  );
+                }
+              });
+            });
           }
-        );
-      }
-    });
+        });
+    }
+
+    else {
+      sendJSONResponse(res, 404, {
+        "message": "Nu exista id de proiect in request."
+      });
+    }
+
   });
 };

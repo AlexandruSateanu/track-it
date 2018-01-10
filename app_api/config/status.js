@@ -1,18 +1,22 @@
 module.exports = [
   {
     statusId: 0,
-    numeStatus: 'Deschisa'
+    numeStatus: 'Planificata'
   },
   {
     statusId: 1,
-    numeStatus: 'In Curs'
+    numeStatus: 'In Asteptare'
   },
   {
     statusId: 2,
-    numeStatus: 'In Evaluare'
+    numeStatus: 'In Executie'
   },
   {
     statusId: 3,
+    numeStatus: 'In Evaluare'
+  },
+  {
+    statusId: 4,
     numeStatus: 'Finalizata'
   }
 ];
