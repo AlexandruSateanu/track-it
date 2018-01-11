@@ -28,7 +28,7 @@ app.controller('editeazaEtapeCtrl', ['proiect', '$routeParams', require('./proie
 app.controller('editeazaMembriCtrl', ['proiect', '$routeParams', 'useri', 'autentificare', require('./proiect/setariProiect/editeazaMembri.controller.js')]);
 
 /* Activitate */
-app.controller('creareActivitateCtrl', ['$location', require('./activitate/creareActivitate/creareActivitate.controller.js')]);
+app.controller('creareActivitateCtrl', ['$routeParams', 'proiect', 'activitate', 'useri', '$location', require('./activitate/creareActivitate/creareActivitate.controller.js')]);
 app.controller('paginaActivitateCtrl', require('./activitate/paginaActivitate/paginaActivitate.controller.js'));
 
 /* Sarcina */

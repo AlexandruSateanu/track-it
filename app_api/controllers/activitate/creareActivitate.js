@@ -12,7 +12,8 @@ module.exports = function(req, res) {
   /* executa callback daca exista user logat */
   existaUser(req, res, function (req, res, user) {
     var proiectId = req.params.proiectId;
-    var etapaId = req.body.etapaId;
+    var etapaId = req.body.etapa;
+    var responsabil = parseInt(req.body.responsabil);
 
     /* verifica daca avem parametru cu id-ul de proiect in URL */
     if (proiectId) {
@@ -21,19 +22,26 @@ module.exports = function(req, res) {
         .exec(function(err, proiect) {
           /* Extrage etapa de care apartine activitatea. */
           var etapa = proiect.etape.id(etapaId);
-
+          var membruGasit = proiect.membri.filter(membru => membru.membru === responsabil).length || (proiect.managerProiect === responsabil);
+          
           /* Verifica existenta etapei. */
           if (!etapa) {
             sendJSONResponse(res, 404, {
-              "message": "Etapa nu exista!"
+              "message": "Etapa nu exista in proiect!"
             });
-          } 
+          }
+
+          else if (!membruGasit) {
+            sendJSONResponse(res, 404, {
+              "message": "Responsabilul nu exista in proiect!"
+            });
+          }
           
           else {
             /* Salveaza activitatea noua */
             Activitate.create({
               numeActivitate: req.body.numeActivitate,
-              responsabil: user._id,
+              responsabil: responsabil,
               proiectId: proiectId,
               etapaId: etapaId,
               status: 0,
@@ -60,7 +68,7 @@ module.exports = function(req, res) {
                 
                 else {
                   User.findByIdAndUpdate(
-                    user._id,
+                    responsabil,
                     { $push: { 'activitati' : { activitateId: activitate._id } } },
                     { safe: true, new : true },
                     function(err) {
@@ -90,6 +98,5 @@ module.exports = function(req, res) {
         "message": "Nu exista id de proiect in request."
       });
     }
-
   });
 };
