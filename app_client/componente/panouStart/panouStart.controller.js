@@ -41,24 +41,26 @@ module.exports = function panouStartCtrl(autentificare, useri) {
     titlu: 'Panou start'
   };
 
+  vm.faraProiecte = '';
+
   var userId = autentificare.userCurrent().userId;
 
   /* Apelam serviciul user si cerem lista proiectelor userului. */
   useri
     .listaProiecteUser(userId)
-    .then(function(response) {
-      var proiecteleMele = response.data.listaProiecte;
+      .then(function(response) {
+        var proiecteleMele = response.data.listaProiecte;
 
-      if (proiecteleMele === []) {
-        vm.faraProiecte = 'Momentan nu aveti niciun proiect.'
-      }
+        if (proiecteleMele.length <= 0) {
+          vm.faraProiecte = 'Momentan nu aveti niciun proiect.'
+        }
 
-      else {
-        vm.proiecteleMele = response.data.listaProiecte;
-      }
-    }, function(response) {
-      vm.faraProiecte = 'A intervenit o eroare cu obtinerea proiectelor.';
-    });
+        else {
+          vm.proiecteleMele = response.data.listaProiecte;
+        }
+      }, function(response) {
+        vm.faraProiecte = 'A intervenit o eroare cu obtinerea proiectelor.';
+      });
 
   vm.activitatiRecente = activitatiRecente;
 

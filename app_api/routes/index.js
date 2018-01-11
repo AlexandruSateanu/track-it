@@ -24,6 +24,17 @@ router.put('/proiect/:proiectId/editeaza-perioada', auth, require('../controller
 router.put('/proiect/:proiectId/editeaza-etape', auth, require('../controllers/proiect/editeazaEtape'));
 router.put('/proiect/:proiectId/editeaza-membri', auth, require('../controllers/proiect/editeazaMembri'));
 
+/* Activitate */
+router.post('/proiect/:proiectId/creare-activitate', auth, require('../controllers/activitate/creareActivitate'));
+// router.get('/proiect/:proiectId/info-activitate/:activitateId', auth, require('../controllers/activitate/infoActivitate'));
+// router.get('/proiect/:proiectId/listaActivitati', auth, require('../controllers/activitate/listaActivitati'));
+// router.put('/proiect/:proiectId/activitate/:activitateId/editeaza-activitate', auth, require('../controllers/activitate/editeazaActivitate'));
+// router.delete('/proiect/:proiectId/activitate/:activitateId/sterge-activitate', auth, require('../controllers/activitate/stergeActivitate'));
+// router.put('/proiect/:proiectId/activitate/:activitateId/editeaza-status', auth, require('../controllers/activitate/editeazaStatus'));
+// router.post('/proiect/:proiectId/activitate/:activitateId/adauga-comentariu', auth, require('../controllers/activitate/adaugaComentariu'));
+// router.get('/proiect/:proiectId/activitate/:activitateId/lista-comentarii', auth, require('../controllers/activitate/listaComentarii'));
+router.get('/lista-status', auth, require('../controllers/activitate/listaStatus'));
+
 /* Useri */
 router.get('/lista-useri', auth, require('../controllers/useri/listaUseri'));
 router.get('/lista-roluri', auth, require('../controllers/useri/listaRoluri'));

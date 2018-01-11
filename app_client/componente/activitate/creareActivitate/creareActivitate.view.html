@@ -1,6 +1,9 @@
 <navigare></navigare>
 <div class="container page-container">
   <antet-pagina content="vm.antetPagina"></antet-pagina>
+  <div class="page-component">
+    Inapoi la <a href="/#proiect/{{ vm.proiect._id }}">{{ vm.proiect.numeProiect }}</a>
+  </div>
   <div class="row">
     <div class="col-xs-12 col-md-6">
       <form id="creareActivitate" name="creareActivitate" ng-submit="vm.onSubmit()">
@@ -11,7 +14,7 @@
         </div>
         <div class="form-group">
           <label for="responsabil">Responsabil</label>
-          <input type="text" name="responsabil" placeholder="Responsabil" ng-model="vm.dateForm.responsabil" uib-typeahead="membru as membru.nume for membru in vm.proiect.membri | filter:$viewValue | limitTo:5" typeahead-show-hint="true" typeahead-no-results="noResults" typeahead-editable="false" class="form-control">                  
+          <input type="text" name="responsabil" placeholder="Responsabil" ng-model="vm.dateForm.responsabil" uib-typeahead="membru as membru.numeIntreg for membru in vm.proiect.membri | filter:$viewValue | limitTo:5" typeahead-show-hint="true" typeahead-no-results="noResults" typeahead-editable="false" class="form-control">                  
           <div ng-show="noResults">
             <i class="glyphicon glyphicon-remove"></i> Nu exista rezultate
           </div>
@@ -19,17 +22,12 @@
         <div class="form-group">
           <label for="etapa">Etapa</label>
           <select class="form-control" name="etapa" ng-model="vm.dateForm.etapa">
-            <option ng-repeat="etapa in vm.proiect.etape" value="{{ etapa.id }}">{{ etapa.numeEtapa }}</option>
+            <option ng-repeat="etapa in vm.proiect.etape" value="{{ etapa._id }}">{{ etapa.numeEtapa }}</option>
           </select>
         </div>
         <div class="form-group">
-          <label for="prioritate">Prioritate</label>
-          <select class="form-control" name="prioritate" ng-model="vm.dateForm.prioritate">
-            <option ng-repeat="prioritate in vm.prioritate" value="{{ prioritate.id }}">{{prioritate.nume }}</option>
-          </select>
-        </div>
-        <div>
-          <date-picker ng-model="vm.dateForm.perioadaEstimata"></date-picker>
+          <label for="estimare">Estimare (in zile)</label>
+          <input type="text" class="form-control" name="estimare" placeholder="Estimare" ng-model="vm.dateForm.estimare">
         </div>
         <div class="form-group">
           <label for="descriere">Descriere</label>

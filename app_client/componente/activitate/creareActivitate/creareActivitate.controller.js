@@ -1,123 +1,78 @@
-var proiect = {
-  id: 1,
-  numeProiect: "Proiect 1",
-  cheieProiect: 'PRJ',
-  tipProiect: 1,
-  projectManager: 1234,
-  perioada: {
-    dataStart: new Date('2017-12-14T00:00:00Z'),
-    dataSfarsit: new Date('2018-03-28T00:00:00Z')
-  },
-  etape: [
-    {
-      id: 100,
-      numeEtapa: 'Etapa unu',
-      perioada: {
-        dataStart: new Date('2017-12-14T00:00:00Z'),
-        dataSfarsit: new Date('2018-01-05T00:00:00Z')
-      }
-    },
-    {
-      id: 200,
-      numeEtapa: 'Etapa doi',
-      perioada: {
-        dataStart: new Date('2018-01-05T00:00:00Z'),
-        dataSfarsit: new Date('2018-02-05T00:00:00Z')
-      }
-    },
-    {
-      id: 300,
-      numeEtapa: 'Etapa trei',
-      perioada: {
-        dataStart: new Date('2018-02-05T00:00:00Z'),
-        dataSfarsit: new Date('2018-03-28T00:00:00Z')
-      }
-    },
-  ],
-  membri: [
-    {
-      id: 1,
-      nume: 'Cristina Ungureanu',
-      rolId: 1
-    },
-    {
-      id: 2,
-      nume: 'Alex Sateanu',
-      rolId: 2
-    },
-    {
-      id: 3,
-      nume: 'Andreea Ujica',
-      rolId: 2
-    },
-    {
-      id: 4,
-      nume: 'Bogdan Chircu',
-      rolId: 2
-    },
-    {
-      id: 5,
-      nume: 'Test Test',
-      rolId: 4
-    }
-  ]
-};
-
-var prioritate = [
-  {
-    id: 11,
-    nume: 'Minora'
-  },
-  {
-    id: 22,
-    nume: 'Medie'
-  },
-  {
-    id: 33,
-    nume: 'Mare'
-  },
-  {
-    id: 44,
-    nume: 'Majora'
-  },
-];
-
-module.exports = function creareActivitateCtrl($location) {
+module.exports = function creareActivitateCtrl($routeParams, proiect, activitate, useri, $location) {
   var vm = this;
 
   vm.antetPagina = {
     titlu: 'Creaza activitate noua'
   };
 
-  vm.proiect = proiect;
-  vm.prioritate = prioritate;
+  var proiectId = $routeParams.proiectId;
+
+  proiect
+    .infoProiect(proiectId)
+    .then(function(response) {
+      vm.proiect = response.data.proiect;
+
+      useri
+        .listaUseri()
+        .then(function(response) {
+          var useri = response.data.listaUseri;
+
+          vm.proiect.membri.forEach(function(membru, index, membriProiect) {
+            var userCautat = useri.filter(function(user) {
+              return user.userId === membru.membru;
+            });
+
+            membriProiect[index].numeIntreg = userCautat[0].numeIntreg;
+          });
+
+          var managerProiect = useri.filter(function(user) {
+            return user.userId === vm.proiect.managerProiect;
+          })[0];
+
+          managerProiect.membru = vm.proiect.managerProiect;
+          vm.proiect.membri.push(managerProiect);
+        }, function(response) {
+          return null;
+        });
+    }, function(response) {
+      return null;
+    });
 
   vm.dateForm = {
     numeActivitate: '',
     responsabil: '',
     etapa: '',
-    prioritate: '',
-    perioadaEstimata: {},
+    estimare: '',
     descriere: ''
   };
 
   vm.onSubmit = function () {
     vm.formError = '';
     /** validare form */
-    if (!vm.dateForm || !vm.dateForm.numeActivitate || !vm.dateForm.responsabil || !vm.dateForm.etapa || !vm.dateForm.prioritate || !vm.dateForm.perioadaEstimata) {
+    if (!vm.dateForm || !vm.dateForm.numeActivitate || !vm.dateForm.responsabil || !vm.dateForm.etapa || !vm.dateForm.estimare) {
       vm.formError = 'Unele campuri obligatorii nu sunt completate!';
       return false;
-    } 
-    
-    else if (vm.dateForm.perioadaEstimata.dataStart.getTime() >= vm.dateForm.perioadaEstimata.dataSfarsit.getTime()) {
-      vm.formError = "Data de sfarsit trebuie sa fie mai mare ca data de start!";
-      return false;
-    } 
+    }
+
+    else if (isNaN(vm.dateForm.estimare)) {
+      vm.formError = 'Estimarea trebuie sa fie un numar intreg!';
+    }
     
     else {
+      vm.dateForm.responsabil = vm.dateForm.responsabil.membru;
       vm.formError = '';
-      console.log(vm.dateForm);
-      return false;
+      vm.executaCreare(proiectId, vm.dateForm);
     }
+  };
+
+  /* Functie care foloseste serviciul de activitate cu functia lui de creare. */
+  vm.executaCreare = function(proiectId, date) {
+    activitate
+      .creare(proiectId, date)
+      .then(function(response) {
+        $location.path('/proiect/' + proiectId);
+      }, function(response) {
+        vm.formError = response.data.message;
+      });
   };
 };

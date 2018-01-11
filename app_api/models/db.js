@@ -59,3 +59,4 @@ process.on('SIGTERM', function() {
 
 require('./user');
 require('./proiect');
+require('./activitate');

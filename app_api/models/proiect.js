@@ -14,6 +14,11 @@ var membruSchema = new mongoose.Schema({
   rol: {type: Number, min: 0, max: roluri.length, required: true}
 });
 
+var activitateSchema = new mongoose.Schema({
+  activitateId: {type: Number, ref: 'Activitate', required: true},
+  cod: String
+});
+
 var proiectSchema = new mongoose.Schema({
   numeProiect: {type: String, required: true},
   cheieProiect: {type: String, required: true, trim: true, uppercase: true, maxlength: 3},
@@ -22,7 +27,8 @@ var proiectSchema = new mongoose.Schema({
   dataStart: {type: Date, required: true},
   dataSfarsit: {type: Date, required: true},
   etape: [etapaSchema],
-  membri: [membruSchema]
+  membri: [membruSchema],
+  activitati: [activitateSchema]
 }, {
   usePushEach: true
 });
