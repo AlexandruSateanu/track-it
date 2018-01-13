@@ -3,12 +3,13 @@ var Activitate = mongoose.model('Activitate');
 var Proiect = mongoose.model('Proiect');
 
 var sendJSONResponse = require('../helpers/sendJSONResponse');
-var existaUser = require('../helpers/existaUser');
+var existaUserProiect = require('../helpers/existaUserProiect');
 
 module.exports = function(req, res) {
-  /* executa callback daca exista user logat */
-  existaUser(req, res, function (req, res, user) {
-    var proiectId = req.params.proiectId;
+  var proiectId = req.params.proiectId;
+
+  /* executa callback daca exista user logat si face parte din proiect. */
+  existaUserProiect(req, res, proiectId, function (req, res, user) {
     var activitateId = req.params.activitateId;
     
     /* verifica daca avem parametru cu id-ul de proiect in URL */

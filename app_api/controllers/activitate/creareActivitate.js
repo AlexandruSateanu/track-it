@@ -4,14 +4,15 @@ var User = mongoose.model('User');
 var Proiect = mongoose.model('Proiect');
 
 var sendJSONResponse = require('../helpers/sendJSONResponse');
-var existaUser = require('../helpers/existaUser');
+var existaUserProiect = require('../helpers/existaUserProiect');
 
 var status = require('../../config/status');
 
 module.exports = function(req, res) {
-  /* executa callback daca exista user logat */
-  existaUser(req, res, function (req, res, user) {
-    var proiectId = req.params.proiectId;
+  var proiectId = req.params.proiectId;
+
+  /* executa callback daca exista user logat si face parte din proiect.  */
+  existaUserProiect(req, res, proiectId, function (req, res, user) {
     var etapaId = req.body.etapa;
     var responsabil = parseInt(req.body.responsabil);
 

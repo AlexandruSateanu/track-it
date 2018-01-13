@@ -26,9 +26,19 @@ module.exports = function useri($http, autentificare) {
     });
   };
 
+  /* Cerere PUT catre API pentru a edita statusul unei activitati. Necesita autentificare cu token. */
+  var schimbaStatus = function (proiectId, activitateId, data) {
+    return $http.put('/api/proiect/' + proiectId + '/activitate/' + activitateId + '/schimba-status', data, {
+      headers: {
+        Authorization: 'Bearer ' + autentificare.getToken()
+      }
+    });
+  };
+
   return {
     listaStatus: listaStatus,
     creare: creare,
-    infoActivitate: infoActivitate
+    infoActivitate: infoActivitate,
+    schimbaStatus: schimbaStatus
   };
 };

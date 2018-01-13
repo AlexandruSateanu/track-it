@@ -39,6 +39,18 @@ module.exports = function paginaActivitateCtrl($routeParams, proiect, activitate
             }, function(response) {
               return null;
             });
+
+          activitate
+            .listaStatus()
+            .then(function(response) {
+              vm.statusuri = response.data.listaStatus;
+
+              vm.activitateStatus = vm.statusuri.filter(function(status) {
+                return status.statusId === vm.activitate.status;
+              })[0];
+            }, function(response) {
+              return null;
+            });
         }, function(response) {
           return null;
         });
@@ -46,19 +58,39 @@ module.exports = function paginaActivitateCtrl($routeParams, proiect, activitate
       return null;
     });
 
-  // vm.onSubmit = function () {
-  //   vm.formError = '';
+  vm.dateForm = {
+    statusNou: ''
+  };
 
-  //   /** validare form */
-  //   if (!vm.perioadaRealizata || !vm.perioadaRealizata.dataStart || !vm.perioadaRealizata.dataSfarsit) {
-  //     vm.formError = "Alege ambele date!";
-  //     return false;
-  //   }
+  vm.confirmare = '';
+
+  vm.onSubmit = function () {
+    vm.formError = '';
+
+    /** validare form status. */
+    if (!vm.dateForm || !vm.dateForm.statusNou) {
+      vm.formError = "Selecteaza un status!";
+      return false;
+    }
     
-  //   else {
-  //     vm.formError = '';
-  //     console.log(vm.perioadaRealizata);
-  //     return false;
-  //   }
-  // };
+    else {
+      vm.formError = '';
+      vm.executaSchimbaStatus(vm.proiectId, vm.activitateId, vm.dateForm);
+    }
+  };
+
+  /* Functie care foloseste serviciul de proiect cu functia lui de editare membru. */
+  vm.executaSchimbaStatus = function(proiectId, activitateId, date) {
+    activitate
+      .schimbaStatus(proiectId, activitateId, date)
+      .then(function(response) {
+        vm.confirmare = response.data.message;
+
+        vm.activitateStatus = vm.statusuri.filter(function(status) {
+          return status.statusId === response.data.activitate.status;
+        })[0];
+      }, function(response) {
+        vm.formError = response.data.message;
+      });
+  };
 };

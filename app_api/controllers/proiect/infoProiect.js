@@ -2,12 +2,13 @@ var mongoose = require('mongoose');
 var Proiect = mongoose.model('Proiect');
 
 var sendJSONResponse = require('../helpers/sendJSONResponse');
-var existaUser = require('../helpers/existaUser');
+var existaUserProiect = require('../helpers/existaUserProiect');
 
 module.exports = function(req, res) {
+  var proiectId = req.params.proiectId;
+
   /* executa callback daca exista user logat */
-  existaUser(req, res, function (req, res, user) {
-    var proiectId = req.params.proiectId;
+  existaUserProiect(req, res, proiectId, function (req, res, user) {
     
     /* verifica daca avem parametru cu id-ul de proiect in URL */
     if (proiectId) {
