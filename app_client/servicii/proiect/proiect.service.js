@@ -62,6 +62,15 @@ module.exports = function proiect($http, autentificare) {
     });
   };
 
+  /* Cerere GET catre API pentru lista cu membrii unui proiect. Necesita autentificare cu token. */
+  var membriProiect = function(proiectId) {
+    return $http.get('/api/proiect/' + proiectId + '/membri-proiect', {
+      headers: {
+        Authorization: 'Bearer ' + autentificare.getToken()
+      }
+    });
+  };
+
   return {
     creare: creare,
     alegeEtape: alegeEtape,
@@ -69,6 +78,7 @@ module.exports = function proiect($http, autentificare) {
     infoProiect: infoProiect,
     editarePerioada: editarePerioada,
     editareEtapa: editareEtapa,
-    editareMembru: editareMembru
+    editareMembru: editareMembru,
+    membriProiect: membriProiect
   };
 };

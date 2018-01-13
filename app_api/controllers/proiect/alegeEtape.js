@@ -45,6 +45,8 @@ module.exports = function(req, res) {
           proiect.save(function(err, proiect) {
             if (err) {
               sendJSONResponse(res, 400, err);
+
+              return;
             } 
             
             else {
@@ -61,6 +63,8 @@ module.exports = function(req, res) {
       sendJSONResponse(res, 404, {
         "message": "Nu exista id de proiect in request."
       });
+
+      return;
     }
   });
 };

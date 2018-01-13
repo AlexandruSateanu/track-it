@@ -46,6 +46,8 @@ module.exports = function(req, res) {
             sendJSONResponse(res, 404, {
               "message": "Membrul nu exista!"
             });
+
+            return;
           }
 
           else {
@@ -55,6 +57,8 @@ module.exports = function(req, res) {
             proiect.save(function(err, proiect) {
               if (err) {
                 sendJSONResponse(res, 400, err);
+
+                return;
               } 
               
               else {
@@ -66,6 +70,8 @@ module.exports = function(req, res) {
                     
                     if (err) {
                       sendJSONResponse(res, 400, err);
+
+                      return;
                     } 
                     
                     else {
@@ -116,6 +122,8 @@ module.exports = function(req, res) {
       sendJSONResponse(res, 404, {
         "message": "Nu exista id de proiect si de membru in request."
       });
+
+      return;
     }
   });
 };

@@ -29,12 +29,16 @@ module.exports = function(req, res) {
             sendJSONResponse(res, 404, {
               "message": "Etapa nu exista in proiect!"
             });
+
+            return;
           }
 
           else if (!membruGasit) {
             sendJSONResponse(res, 404, {
               "message": "Responsabilul nu exista in proiect!"
             });
+
+            return;
           }
           
           else {
@@ -51,6 +55,8 @@ module.exports = function(req, res) {
               
               if (err) {
                 sendJSONResponse(res, 400, err);
+
+                return;
               }
 
               var codActivitate = proiect.cheieProiect + '-' + (proiect.activitati.length + 1);
@@ -64,6 +70,9 @@ module.exports = function(req, res) {
                 
                 if (err) {
                   sendJSONResponse(res, 400, err);
+
+
+                  return;
                 } 
                 
                 else {
@@ -75,6 +84,8 @@ module.exports = function(req, res) {
                       
                       if (err) {
                         sendJSONResponse(res, 400, err);
+
+                        return;
                       } 
                       
                       else {
@@ -97,6 +108,8 @@ module.exports = function(req, res) {
       sendJSONResponse(res, 404, {
         "message": "Nu exista id de proiect in request."
       });
+
+      return;
     }
   });
 };

@@ -9,15 +9,11 @@
       </div>
       <div class="page-component">
         <span>Etapa: </span>
-        <span>{{ vm.activitate.etapa }}</span>
+        <span>{{ vm.etapa.numeEtapa }}</span>
       </div>
       <div class="page-component">
         <span>Responsabil: </span>
-        <span>{{ vm.activitate.responsabil }}</span>
-      </div>
-      <div class="page-component">
-        <span>Prioritate: </span>
-        <span>{{ vm.activitate.prioritate }}</span>
+        <span>{{ vm.responsabil.numeIntreg }}</span>
       </div>
       <div class="page-component">
           <span>Descriere: </span>
@@ -26,28 +22,20 @@
     </div>
     <div class="col-xs-12 col-md-6">
       <div class="page-component">
-        <a href="/#editeaza-activitate/{{ vm.activitate.id }}">Editeaza actvitatea</a>
+        <a href="/#editeaza-activitate/{{ vm.activitateId }}">Editeaza actvitatea</a>
       </div>
+      <!--
       <div class="page-component">
-        <h4>Perioada estimata</h4>
-        <div>
-          <span>Data start: </span>
-          <span>{{ vm.activitate.perioadaEstimata.dataStart | date: 'dd MMMM yyyy' }}</span>
-        </div>
-        <div>
-          <span>Data sfarsit: </span>
-          <span>{{ vm.activitate.perioadaEstimata.dataSfarsit | date: 'dd MMMM yyyy' }}</span>
-        </div>
-      </div>
-      <div class="page-component">
-        <h4>Perioada realizata</h4>
-        <form id="perioadaRealizata" name="perioadaRealizata" ng-submit="vm.onSubmit()">
+        <h4>Schimba Status</h4>
+        <form id="schimbaStatus" name="schimbaStatus" ng-submit="vm.onSubmit()">
           <div role="alert" class="alert alert-danger" ng-show="vm.formError">{{ vm.formError }}</div>
-          <date-picker-custom ng-model="vm.perioadaRealizata" datepicker-options="vm.dateOptions"></date-picker-custom>
-          <button type="submit" class="btn btn-primary">Salveaza perioada</button>
+          <div class="form-group">
+            <select class="form-control" name="etapa" ng-model="vm.dateForm.status">
+              <option ng-repeat="status in vm.status" value="{{ status.statusId }}">{{ status.numeStatus }}</option>
+            </select>
+          </div>
         </form>
-      </div>
+      </div>-->
     </div>
   </div>
 </div>
-  

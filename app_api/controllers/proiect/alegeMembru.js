@@ -63,6 +63,8 @@ module.exports = function(req, res) {
                     
                     if (err) {
                       sendJSONResponse(res, 400, err);
+
+                      return;
                     } 
                     
                     else {
@@ -108,6 +110,8 @@ module.exports = function(req, res) {
             sendJSONResponse(res, 400, {
               "message": "Userul face parte deja din proiect."
             });
+
+            return;
           }
         });
     } 
@@ -116,6 +120,8 @@ module.exports = function(req, res) {
       sendJSONResponse(res, 404, {
         "message": "Nu exista id de proiect in request."
       });
+
+      return;
     }
   });
 };

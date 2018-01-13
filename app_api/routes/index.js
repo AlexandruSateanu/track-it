@@ -23,10 +23,11 @@ router.get('/proiect/:proiectId/info-proiect', auth, require('../controllers/pro
 router.put('/proiect/:proiectId/editeaza-perioada', auth, require('../controllers/proiect/editeazaPerioada'));
 router.put('/proiect/:proiectId/editeaza-etape', auth, require('../controllers/proiect/editeazaEtape'));
 router.put('/proiect/:proiectId/editeaza-membri', auth, require('../controllers/proiect/editeazaMembri'));
+router.get('/proiect/:proiectId/membri-proiect', auth, require('../controllers/proiect/membriProiect'));
 
 /* Activitate */
 router.post('/proiect/:proiectId/creare-activitate', auth, require('../controllers/activitate/creareActivitate'));
-// router.get('/proiect/:proiectId/info-activitate/:activitateId', auth, require('../controllers/activitate/infoActivitate'));
+router.get('/proiect/:proiectId/activitate/:activitateId', auth, require('../controllers/activitate/infoActivitate'));
 // router.get('/proiect/:proiectId/listaActivitati', auth, require('../controllers/activitate/listaActivitati'));
 // router.put('/proiect/:proiectId/activitate/:activitateId/editeaza-activitate', auth, require('../controllers/activitate/editeazaActivitate'));
 // router.delete('/proiect/:proiectId/activitate/:activitateId/sterge-activitate', auth, require('../controllers/activitate/stergeActivitate'));
