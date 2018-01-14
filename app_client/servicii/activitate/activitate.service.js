@@ -35,10 +35,20 @@ module.exports = function useri($http, autentificare) {
     });
   };
 
+  /* Cerere PUT catre API pentru a edita o activitate. Necesita autentificare cu token. */
+  var editeazaActivitate = function (proiectId, activitateId, data) {
+    return $http.put('/api/proiect/' + proiectId + '/activitate/' + activitateId + '/editeaza-activitate', data, {
+      headers: {
+        Authorization: 'Bearer ' + autentificare.getToken()
+      }
+    });
+  };
+
   return {
     listaStatus: listaStatus,
     creare: creare,
     infoActivitate: infoActivitate,
-    schimbaStatus: schimbaStatus
+    schimbaStatus: schimbaStatus,
+    editeazaActivitate: editeazaActivitate
   };
 };
