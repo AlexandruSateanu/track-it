@@ -3,19 +3,19 @@
   <antet-pagina content="vm.antetPagina"></antet-pagina>
   <div class="row">
     <div class="col-xs-12 col-md-6">
-      <form id="creareProiect" name="creareProiect" ng-submit="vm.onSubmit()">
+      <form id="creareProiect" name="creareProiect" ng-submit="vm.onSubmit()" novalidate>
         <div role="alert" class="alert alert-danger" ng-show="vm.formError">{{ vm.formError }}</div>
         <div class="form-group">
           <label for="numeProiect">Nume</label>
-          <input type="text" class="form-control" id="numeProiect" name="numeProiect" placeholder="Numele proiectului" ng-model="vm.dateForm.numeProiect">
+          <input type="text" ng-required="true" class="form-control" id="numeProiect" name="numeProiect" placeholder="Numele proiectului" ng-model="vm.dateForm.numeProiect">
         </div>
         <div class="form-group">
           <label for="cheieProiect">Cheie - va fi folosita pentru codul activitatilor din proiect (ex: PRJ) - Maxim 3 caractere</label>
-          <input type="text" class="form-control" id="cheieProiect" name="cheieProiect" placeholder="Introduceti cheia" ng-model="vm.dateForm.cheieProiect">
+          <input type="text" ng-required="true" class="form-control" id="cheieProiect" name="cheieProiect" placeholder="Introduceti cheia" ng-model="vm.dateForm.cheieProiect">
         </div>
         <div class="form-group">
           <label for="tipProiect">Tip de proiect (cu sau fara etape definite)</label>
-          <select class="form-control" id="tipProiect" name="tipProiect" ng-model="vm.dateForm.tipProiect">
+          <select ng-required="true" class="form-control" id="tipProiect" name="tipProiect" ng-model="vm.dateForm.tipProiect">
             <option value="1">Cu etape</option>
             <option value="2">Fara etape</option>
           </select>

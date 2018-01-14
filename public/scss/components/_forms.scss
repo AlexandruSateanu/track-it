@@ -15,7 +15,11 @@
 }
 
 .ng-invalid {
-  border-color: #e74c3c;
+  &.ng-submitted {
+    .ng-invalid {
+      border-color: #e74c3c;
+    }
+  }
 }
 
 .delete-btn-label {

@@ -7,15 +7,15 @@
     </div>
     <div class="col-xs-12 col-md-4">
       <h4>Conectare</h4>
-      <form id="login" name="login" ng-submit="vm.onSubmit()">
+      <form id="login" name="login" ng-submit="vm.onSubmit()" novalidate>
         <div role="alert" class="alert alert-danger" ng-show="vm.formError">{{ vm.formError }}</div>
         <div class="form-group">
           <label for="email">Adresa email</label>
-          <input type="email" class="form-control" id="email" placeholder="Introduceti email-ul" ng-model="vm.credentiale.email">
+          <input type="email" ng-required="true" class="form-control" id="email" placeholder="Introduceti email-ul" ng-model="vm.credentiale.email">
         </div>
         <div class="form-group">
           <label for="parola">Parola</label>
-          <input type="password" class="form-control" id="parola" placeholder="Introduceti parola" ng-model="vm.credentiale.parola">
+          <input type="password" ng-required="true" class="form-control" id="parola" placeholder="Introduceti parola" ng-model="vm.credentiale.parola">
         </div>
         <button type="submit" class="btn btn-primary">Intrati</button>
       </form>
