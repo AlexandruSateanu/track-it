@@ -54,29 +54,6 @@ var statistici = {
 };
 */
 
-var membri = [
-  {
-    id: 1,
-    nume: 'Cristina Ungureanu'
-  },
-  {
-    id: 2,
-    nume: 'Alex Sateanu'
-  },
-  {
-    id: 3,
-    nume: 'Andreea Ujica'
-  },
-  {
-    id: 4,
-    nume: 'Bogdan Chircu'
-  },
-  {
-    id: 5,
-    nume: 'Test Test'
-  }
-];
-
 module.exports = function proiectStartCtrl($scope, creareProiectActiva, $routeParams, proiect, useri) {
   var vm = this;
 
@@ -104,28 +81,23 @@ module.exports = function proiectStartCtrl($scope, creareProiectActiva, $routePa
         titlu: vm.proiect.numeProiect
       };
 
-      vm.membriProiect = vm.proiect.membri;
       vm.managerProiectId = vm.proiect.managerProiect;
 
-      useri
-        .listaUseri()
+      /* Membri proiect. */
+      proiect
+        .membriProiect(vm.proiectId)
         .then(function(response) {
-          var useri = response.data.listaUseri;
+          vm.membriProiect = response.data.membriProiect;
 
-          vm.membriProiect.forEach(function(membru, index, membriProiect) {
-            var userCautat = useri.filter(function(user) {
-              return user.userId === membru.membru;
-            });
+          /* Nume manager Proiect. */
+          vm.managerProiect = vm.membriProiect.filter(function(membru) {
+            return vm.managerProiectId === membru.userId;
+          })[0];
 
-            membriProiect[index].numeIntreg = userCautat[0].numeIntreg;
+          /* Scoate managerul de proiect din liste de membri. Il afisam separat. */
+          vm.membriProiect = vm.membriProiect.filter(function(membru) {
+            return vm.managerProiectId !== membru.userId;
           });
-
-          var dateManagerProiect = useri.filter(function(user) {
-            return user.userId === vm.proiect.managerProiect;
-          });
-
-          vm.managerProiectNume = dateManagerProiect[0].numeIntreg;
-
         }, function(response) {
           return null;
         });

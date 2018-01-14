@@ -30,6 +30,21 @@ module.exports = function alegeMembriCtrl(proiect, $routeParams, useri, autentif
       vm.membri = vm.membri.filter(function(membru) {
         return membru.userId !== autentificare.userCurrent().userId;
       });
+
+      /* Sterge userii deja adaugati. */
+      proiect
+        .membriProiect(vm.proiectId)
+        .then(function(response) {
+          var membriExistenti = response.data.membriProiect;
+
+          membriExistenti.forEach(function(membruExistent) {
+            vm.membri = vm.membri.filter(function(membru) {
+              return membru.userId !== membruExistent.userId;
+            });
+          });
+        }, function(response) {
+          return null;
+        });
     }, function(response) {
       return null;
     });

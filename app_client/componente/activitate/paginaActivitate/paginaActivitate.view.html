@@ -3,51 +3,46 @@
   <antet-activitate content="vm.antetActivitate"></antet-activitate>
   <div class="row">
     <div class="col-xs-12 col-md-6">
+      <h4>Detalii</h4>
       <div class="page-component">
         <span>Proiect: </span>
-        <span>{{ vm.proiect.numeProiect }}</span>
+        <a href="/#proiect/{{ vm.proiectId }}">{{ vm.proiect.numeProiect }}</a>
       </div>
       <div class="page-component">
         <span>Etapa: </span>
-        <span>{{ vm.activitate.etapa }}</span>
+        <span>{{ vm.etapa.numeEtapa }}</span>
       </div>
       <div class="page-component">
         <span>Responsabil: </span>
-        <span>{{ vm.activitate.responsabil }}</span>
+        <a href="/#user/{{ vm.responsabil.userId }}">{{ vm.responsabil.numeIntreg }}</a>
       </div>
       <div class="page-component">
-        <span>Prioritate: </span>
-        <span>{{ vm.activitate.prioritate }}</span>
+        <span>Descriere: </span>
+        <div class="activitate-descriere">{{ vm.activitate.descriere }}</div>
       </div>
       <div class="page-component">
-          <span>Descriere: </span>
-          <div>{{ vm.activitate.descriere }}</div>
-        </div>
+        <a href="/#proiect/{{ vm.proiectId }}/activitate/{{ vm.activitateId }}/editeaza-activitate">Editeaza actvitatea</a>
+      </div>
     </div>
     <div class="col-xs-12 col-md-6">
+      <h4>Status</h4>
       <div class="page-component">
-        <a href="/#editeaza-activitate/{{ vm.activitate.id }}">Editeaza actvitatea</a>
+        <span>Status: </span>
+        <span>{{ vm.activitateStatus.numeStatus }}</span>
       </div>
       <div class="page-component">
-        <h4>Perioada estimata</h4>
-        <div>
-          <span>Data start: </span>
-          <span>{{ vm.activitate.perioadaEstimata.dataStart | date: 'dd MMMM yyyy' }}</span>
-        </div>
-        <div>
-          <span>Data sfarsit: </span>
-          <span>{{ vm.activitate.perioadaEstimata.dataSfarsit | date: 'dd MMMM yyyy' }}</span>
-        </div>
-      </div>
-      <div class="page-component">
-        <h4>Perioada realizata</h4>
-        <form id="perioadaRealizata" name="perioadaRealizata" ng-submit="vm.onSubmit()">
+        <form id="schimbaStatus" name="schimbaStatus" ng-submit="vm.onSubmit()" novalidate>
           <div role="alert" class="alert alert-danger" ng-show="vm.formError">{{ vm.formError }}</div>
-          <date-picker-custom ng-model="vm.perioadaRealizata" datepicker-options="vm.dateOptions"></date-picker-custom>
-          <button type="submit" class="btn btn-primary">Salveaza perioada</button>
+          <div class="form-group">
+            <label for="status">Schimba Status</label>
+            <select ng-required="true" class="form-control" name="status" ng-model="vm.dateForm.statusNou">
+              <option ng-repeat="status in vm.statusuri" value="{{ status.statusId }}">{{ status.numeStatus }}</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Schimba status</button>
         </form>
+        <div class="alert alert-success" ng-show="vm.confirmare">{{ vm.confirmare }}</div>
       </div>
     </div>
   </div>
 </div>
-  

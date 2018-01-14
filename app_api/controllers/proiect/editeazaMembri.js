@@ -3,15 +3,16 @@ var User = mongoose.model('User');
 var Proiect = mongoose.model('Proiect');
 
 var sendJSONResponse = require('../helpers/sendJSONResponse');
-var existaUser = require('../helpers/existaUser');
+var existaUserProiect = require('../helpers/existaUserProiect');
 var roluri = require('../../config/roluri');
 
 var nodemailer = require('nodemailer');
 
 module.exports = function(req, res) {
-  /* executa callback daca exista user logat */
-  existaUser(req, res, function (req, res, user) {
-    var proiectId = req.params.proiectId;
+  var proiectId = req.params.proiectId;
+
+  /* executa callback daca exista user logat si daca face parte din proiect. */
+  existaUserProiect(req, res, proiectId, function (req, res, user) {
     var membruId = req.body.membruId;
     
     /* verifica daca avem parametru cu id-ul de proiect in URL */
@@ -46,6 +47,8 @@ module.exports = function(req, res) {
             sendJSONResponse(res, 404, {
               "message": "Membrul nu exista!"
             });
+
+            return;
           }
 
           else {
@@ -55,6 +58,8 @@ module.exports = function(req, res) {
             proiect.save(function(err, proiect) {
               if (err) {
                 sendJSONResponse(res, 400, err);
+
+                return;
               } 
               
               else {
@@ -66,6 +71,8 @@ module.exports = function(req, res) {
                     
                     if (err) {
                       sendJSONResponse(res, 400, err);
+
+                      return;
                     } 
                     
                     else {
@@ -116,6 +123,8 @@ module.exports = function(req, res) {
       sendJSONResponse(res, 404, {
         "message": "Nu exista id de proiect si de membru in request."
       });
+
+      return;
     }
   });
 };

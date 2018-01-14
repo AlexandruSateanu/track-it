@@ -3,7 +3,7 @@
   <antet-pagina content="vm.antetPagina"></antet-pagina>
   <div class="row">
     <div class="col-xs-12 col-md-12">
-      <form id="alegeEtape" name="vm.alegeEtape" ng-submit="vm.onSubmit()">
+      <form id="alegeEtape" name="vm.alegeEtape" ng-submit="vm.onSubmit()" novalidate>
         <div role="alert" class="alert alert-danger" ng-show="vm.formError">{{ vm.formError }}</div>
         <div class="form-group">
           <fieldset ng-repeat="etapa in vm.dateForm" class="grup-separator">
@@ -11,7 +11,7 @@
               <div class="col-xs-12 col-md-5">
                 <div class="form-group">
                   <label for="numeEtapa-[$index]">Nume etapa</label>
-                  <input type="text" class="form-control" name="numeEtapa-[$index]" placeholder="Nume etapa" ng-model="vm.dateForm[$index].numeEtapa">
+                  <input type="text" ng-required="true" class="form-control" name="numeEtapa-[$index]" placeholder="Nume etapa" ng-model="vm.dateForm[$index].numeEtapa">
                 </div>
               </div>
               <div class="col-xs-12 col-md-5">

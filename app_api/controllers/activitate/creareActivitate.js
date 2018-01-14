@@ -4,14 +4,15 @@ var User = mongoose.model('User');
 var Proiect = mongoose.model('Proiect');
 
 var sendJSONResponse = require('../helpers/sendJSONResponse');
-var existaUser = require('../helpers/existaUser');
+var existaUserProiect = require('../helpers/existaUserProiect');
 
 var status = require('../../config/status');
 
 module.exports = function(req, res) {
-  /* executa callback daca exista user logat */
-  existaUser(req, res, function (req, res, user) {
-    var proiectId = req.params.proiectId;
+  var proiectId = req.params.proiectId;
+
+  /* executa callback daca exista user logat si face parte din proiect.  */
+  existaUserProiect(req, res, proiectId, function (req, res, user) {
     var etapaId = req.body.etapa;
     var responsabil = parseInt(req.body.responsabil);
 
@@ -22,6 +23,8 @@ module.exports = function(req, res) {
         .exec(function(err, proiect) {
           /* Extrage etapa de care apartine activitatea. */
           var etapa = proiect.etape.id(etapaId);
+
+          /* Verifica existenta responsabilului. */
           var membruGasit = proiect.membri.filter(membru => membru.membru === responsabil).length || (proiect.managerProiect === responsabil);
           
           /* Verifica existenta etapei. */
@@ -29,12 +32,16 @@ module.exports = function(req, res) {
             sendJSONResponse(res, 404, {
               "message": "Etapa nu exista in proiect!"
             });
+
+            return;
           }
 
           else if (!membruGasit) {
             sendJSONResponse(res, 404, {
               "message": "Responsabilul nu exista in proiect!"
             });
+
+            return;
           }
           
           else {
@@ -51,6 +58,8 @@ module.exports = function(req, res) {
               
               if (err) {
                 sendJSONResponse(res, 400, err);
+
+                return;
               }
 
               var codActivitate = proiect.cheieProiect + '-' + (proiect.activitati.length + 1);
@@ -64,17 +73,22 @@ module.exports = function(req, res) {
                 
                 if (err) {
                   sendJSONResponse(res, 400, err);
+
+
+                  return;
                 } 
                 
                 else {
                   User.findByIdAndUpdate(
                     responsabil,
-                    { $push: { 'activitati' : { activitateId: activitate._id } } },
+                    { $push: { "activitati" : { activitateId: activitate._id } } },
                     { safe: true, new : true },
                     function(err) {
                       
                       if (err) {
                         sendJSONResponse(res, 400, err);
+
+                        return;
                       } 
                       
                       else {
@@ -97,6 +111,8 @@ module.exports = function(req, res) {
       sendJSONResponse(res, 404, {
         "message": "Nu exista id de proiect in request."
       });
+
+      return;
     }
   });
 };

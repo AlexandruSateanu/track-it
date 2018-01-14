@@ -23,6 +23,8 @@ module.exports = function(req, res) {
       
       if (err) {
         sendJSONResponse(res, 400, err);
+
+        return;
       } 
       
       else {
@@ -39,6 +41,8 @@ module.exports = function(req, res) {
             
             if (err) {
               sendJSONResponse(res, 400, err);
+
+              return;
             } 
             
             else {

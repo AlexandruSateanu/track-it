@@ -84,6 +84,13 @@ function routeConfig($routeProvider, $locationProvider) {
       necesitaAccesProiect: true,
       necesitaAuthentificare: true
     })
+    .when('/proiect/:proiectId/activitate/:activitateId/editeaza-activitate', {
+      templateUrl: 'componente/activitate/editeazaActivitate/editeazaActivitate.view.html',
+      controller: 'editeazaActivitateCtrl',
+      controllerAs: 'vm',
+      necesitaAccesProiect: true,
+      necesitaAuthentificare: true
+    })
     .when('/proiect/:proiectId/activitate/:activitateId/creare-sarcina', {
       templateUrl: 'componente/sarcina/creareSarcina/creareSarcina.view.html',
       controller: 'creareSarcinaCtrl',

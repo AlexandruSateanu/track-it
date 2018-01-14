@@ -1,0 +1,69 @@
+<navigare></navigare>
+<div class="container page-container">
+  <antet-pagina content="vm.antetPagina"></antet-pagina>
+  <div class="page-component">
+    Inapoi la <a href="/#proiect/{{ vm.proiectId }}/activitate/{{ vm.activitateId }}">{{ vm.activitateCod }}</a>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-md-12">
+      <form id="editActivitate" name="editActivitate" ng-submit="vm.onSubmit()" novalidate>
+        <div role="alert" class="alert alert-danger" ng-show="vm.formError">{{ vm.formError }}</div>
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+              <label for="numeActivitate">Nume activitate</label>
+              <input type="text" ng-required="true" class="form-control" name="numeActivitate" placeholder="Numele activitatii" ng-model="vm.dateForm.numeActivitate">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <div>Responsabil curent: </div>
+            <div><a href="/#user/{{ vm.responsabil.userId }}">{{ vm.responsabil.numeIntreg }}</a></div>
+          </div>
+          <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+              <label for="responsabil">Responsabil nou</label>
+              <input type="text" ng-required="true" name="responsabil" placeholder="Responsabil" ng-model="vm.dateForm.responsabil" uib-typeahead="membru as membru.numeIntreg for membru in vm.membriProiect | filter:$viewValue | limitTo:5" typeahead-show-hint="true" typeahead-no-results="noResults" typeahead-editable="false" class="form-control">                  
+              <div ng-show="noResults">
+                <i class="glyphicon glyphicon-remove"></i> Nu exista rezultate
+              </div>
+            </div>
+          </div>          
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <div>Etapa curenta: </div>
+            <div>{{ vm.etapa.numeEtapa }}</div>
+          </div>
+          <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+              <label for="etapa">Etapa noua</label>
+              <select ng-required="true" class="form-control" name="etapa" ng-model="vm.dateForm.etapa">
+                <option ng-repeat="etapa in vm.proiect.etape" value="{{ etapa._id }}">{{ etapa.numeEtapa }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+              <label for="estimare">Estimare (in zile)</label>
+              <input type="number" ng-required="true" class="form-control" name="estimare" placeholder="Estimare" ng-model="vm.dateForm.estimare">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <div class="form-group">
+              <label for="descriere">Descriere</label>
+              <textarea class="form-control" name="descriere" placeholder="Descriere" rows="7" ng-model="vm.dateForm.descriere"></textarea>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Salveaza activitate</button>
+      </form>
+      <div class="alert alert-success" ng-show="vm.confirmare">{{ vm.confirmare }}</div>
+    </div>
+  </div>
+</div>

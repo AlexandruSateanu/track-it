@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-xs-12 col-md-6">
                   <h5>Perioada noua</h5>
-                  <form id="editeazaPerioada" name="editeazaPerioada" ng-submit="ep.perioadaOnSubmit()">
+                  <form id="editeazaPerioada" name="editeazaPerioada" ng-submit="ep.perioadaOnSubmit()" novalidate>
                     <div role="alert" class="alert alert-danger" ng-show="ep.formError">{{ ep.formError }}</div>
                     <date-picker ng-model="ep.dateForm"></date-picker>
                     <button type="submit" class="btn btn-primary">Salveaza date</button>
@@ -39,14 +39,14 @@
             <div class="page-component">
               <h4>Editeaza etapele proiectului</h4>
               <div ng-controller="editeazaEtapeCtrl as ee">
-                <form ng-repeat="etapa in ee.dateForm" id="{{ ee.dateForm[$index].etapaId }}" ng-submit="ee.etapaOnSubmit($index)">
+                <form ng-repeat="etapa in ee.dateForm" id="{{ ee.dateForm[$index].etapaId }}" ng-submit="ee.etapaOnSubmit($index)" novalidate>
                   <div role="alert" class="alert alert-danger" ng-show="ee.formError[$index]">{{ ee.formError[$index] }}</div>
                   <div class="form-group">
                     <fieldset class="grup-separator">
                       <div class="row">
                         <div class="col-xs-12 col-md-5">
                           <label for="alegeEtapa-{{$index}}">Editeaza nume etapa</label>
-                          <input type="text" class="form-control" name="numeEtapa-{{$index}}" placeholder="Nume etapa" ng-model="ee.dateForm[$index].numeEtapa">
+                          <input type="text" ng-required="true" class="form-control" name="numeEtapa-{{$index}}" placeholder="Nume etapa" ng-model="ee.dateForm[$index].numeEtapa">
                         </div>
                         <div class="col-xs-12 col-md-5">
                           <date-picker-custom ng-model="ee.dateForm[$index]" datepicker-options="ee.dateOptiuni"></date-picker-custom>
@@ -64,14 +64,14 @@
             <div class="page-component">
               <h4>Adauga etape noi</h4>
               <div ng-controller="alegeEtapeCtrl as ae">
-                <form id="adaugaEtape" name="ae.adaugaEtape" ng-submit="ae.onSubmit()">
+                <form id="adaugaEtape" name="ae.adaugaEtape" ng-submit="ae.onSubmit()" novalidate>
                   <div role="alert" class="alert alert-danger" ng-show="ae.formError">{{ ae.formError }}</div>
                   <div class="form-group">
                     <fieldset ng-repeat="etapa in ae.dateForm" class="grup-separator">
                       <div class="row">
                         <div class="col-xs-12 col-md-5">
                           <label for="alegeEtapa">Nume etapa</label>
-                          <input type="text" class="form-control" name="numeEtapa" placeholder="Nume etapa" ng-model="ae.dateForm[$index].numeEtapa">
+                          <input type="text" ng-required="true" class="form-control" name="numeEtapa" placeholder="Nume etapa" ng-model="ae.dateForm[$index].numeEtapa">
                         </div>
                         <div class="col-xs-12 col-md-5">
                           <date-picker-custom ng-model="ae.dateForm[$index]" datepicker-options="ae.dateOptiuni"></date-picker-custom>
@@ -94,7 +94,7 @@
             <div class="page-component">
               <h4>Editeaza membrii proiectului</h4>
               <div ng-controller="editeazaMembriCtrl as em">
-                <form ng-repeat="membru in em.dateForm" id="{{ em.dateForm[$index].etapaId }}" ng-submit="em.membruOnSubmit($index)">
+                <form ng-repeat="membru in em.dateForm" id="{{ em.dateForm[$index].etapaId }}" ng-submit="em.membruOnSubmit($index)" novalidate>
                   <div role="alert" class="alert alert-danger" ng-show="em.formError[$index]">{{ em.formError[$index] }}</div>
                   <fieldset class="grup-separator">
                     <div class="row">
@@ -111,7 +111,7 @@
                       <div class="col-xs-12 col-md-5">
                         <div class="form-group">
                           <label for="alegeRol-[$index]">Alege rol nou</label>
-                          <select class="form-control" name="alegeRol-[$index]" ng-model="em.dateForm[$index].rol">
+                          <select ng-required="true" class="form-control" name="alegeRol-[$index]" ng-model="em.dateForm[$index].rol">
                             <option ng-repeat="rol in em.roluri" value="{{ rol.rolId }}">{{ rol.rol }}</option>
                           </select>
                         </div>
@@ -128,14 +128,14 @@
             <div class="page-component">
               <h4>Adauga membri noi</h4>
               <div ng-controller="alegeMembriCtrl as am">
-                <form id="alegeMembri" name="am.alegeMembri" ng-submit="am.onSubmit()">
+                <form id="alegeMembri" name="am.alegeMembri" ng-submit="am.onSubmit()" novalidate>
                   <div role="alert" class="alert alert-danger" ng-show="am.formError">{{ am.formError }}</div>
                   <fieldset>
                     <div class="row">
                       <div class="col-xs-12 col-md-5">
                         <div class="form-group">
                           <label for="alegeMembru">Alege membru</label>
-                          <input type="text" nume="alegeMembru" ng-model="am.dateForm.membru" uib-typeahead="membru as membru.numeIntreg for membru in am.membri | filter:$viewValue | limitTo:5" typeahead-show-hint="true" typeahead-no-results="noResults" typeahead-editable="false" class="form-control">                  
+                          <input type="text" ng-required="true" nume="alegeMembru" ng-model="am.dateForm.membru" uib-typeahead="membru as membru.numeIntreg for membru in am.membri | filter:$viewValue | limitTo:5" typeahead-show-hint="true" typeahead-no-results="noResults" typeahead-editable="false" class="form-control">                  
                           <div ng-show="noResults">
                             <i class="glyphicon glyphicon-remove"></i> Nu exista rezultate
                           </div>
@@ -144,7 +144,7 @@
                       <div class="col-xs-12 col-md-5">
                         <div class="form-group">
                           <label for="alegeRol">Alege rol</label>
-                          <select class="form-control" name="alegeRol" ng-model="am.dateForm.rol">
+                          <select ng-required="true" class="form-control" name="alegeRol" ng-model="am.dateForm.rol">
                             <option ng-repeat="rol in am.roluri" value="{{ rol.rolId }}">{{ rol.rol }}</option>
                           </select>
                         </div>
