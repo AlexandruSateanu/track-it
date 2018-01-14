@@ -23,6 +23,8 @@ module.exports = function(req, res) {
         .exec(function(err, proiect) {
           /* Extrage etapa de care apartine activitatea. */
           var etapa = proiect.etape.id(etapaId);
+
+          /* Verifica existenta responsabilului. */
           var membruGasit = proiect.membri.filter(membru => membru.membru === responsabil).length || (proiect.managerProiect === responsabil);
           
           /* Verifica existenta etapei. */
@@ -79,7 +81,7 @@ module.exports = function(req, res) {
                 else {
                   User.findByIdAndUpdate(
                     responsabil,
-                    { $push: { 'activitati' : { activitateId: activitate._id } } },
+                    { $push: { "activitati" : { activitateId: activitate._id } } },
                     { safe: true, new : true },
                     function(err) {
                       
