@@ -9,7 +9,6 @@ var existaUserProiect = require('../helpers/existaUserProiect');
 module.exports = function(req, res) {
   var proiectId = req.params.proiectId;
   var activitateId = req.params.activitateId;
-
   
   /* executa callback daca exista user logat si face parte din proiect.  */
   existaUserProiect(req, res, proiectId, function (req, res, user) {

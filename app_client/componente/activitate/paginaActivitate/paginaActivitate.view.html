@@ -21,7 +21,12 @@
         <div class="activitate-descriere">{{ vm.activitate.descriere }}</div>
       </div>
       <div class="page-component">
-        <a href="/#proiect/{{ vm.proiectId }}/activitate/{{ vm.activitateId }}/editeaza-activitate">Editeaza actvitatea</a>
+        <div>
+          <a href="/#proiect/{{ vm.proiectId }}/activitate/{{ vm.activitateId }}/editeaza-activitate">Editeaza actvitatea</a>
+        </div>
+        <div>
+          <a href="" ng-click="vm.executaStergeActivitate(vm.proiectId, vm.activitateId)">Sterge actvitatea</a>
+        </div>
       </div>
     </div>
     <div class="col-xs-12 col-md-6">
@@ -41,7 +46,7 @@
           </div>
           <button type="submit" class="btn btn-primary">Schimba status</button>
         </form>
-        <div class="alert alert-success" ng-show="vm.confirmare">{{ vm.confirmare }}</div>
+        <div class="alert alert-success" ng-show="vm.confirmareStatus">{{ vm.confirmareStatus }}</div>
       </div>
     </div>
   </div>

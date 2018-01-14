@@ -44,11 +44,21 @@ module.exports = function useri($http, autentificare) {
     });
   };
 
+  /* Cerere DELETE catre API pentru a sterge o activitate. Necesita autentificare cu token. */
+  var stergeActivitate = function (proiectId, activitateId) {
+    return $http.delete('/api/proiect/' + proiectId + '/activitate/' + activitateId + '/sterge-activitate', {
+      headers: {
+        Authorization: 'Bearer ' + autentificare.getToken()
+      }
+    });
+  };
+
   return {
     listaStatus: listaStatus,
     creare: creare,
     infoActivitate: infoActivitate,
     schimbaStatus: schimbaStatus,
-    editeazaActivitate: editeazaActivitate
+    editeazaActivitate: editeazaActivitate,
+    stergeActivitate: stergeActivitate
   };
 };

@@ -30,7 +30,7 @@ router.post('/proiect/:proiectId/creare-activitate', auth, require('../controlle
 router.get('/proiect/:proiectId/activitate/:activitateId', auth, require('../controllers/activitate/infoActivitate'));
 // router.get('/proiect/:proiectId/listaActivitati', auth, require('../controllers/activitate/listaActivitati'));
 router.put('/proiect/:proiectId/activitate/:activitateId/editeaza-activitate', auth, require('../controllers/activitate/editeazaActivitate'));
-// router.delete('/proiect/:proiectId/activitate/:activitateId/sterge-activitate', auth, require('../controllers/activitate/stergeActivitate'));
+router.delete('/proiect/:proiectId/activitate/:activitateId/sterge-activitate', auth, require('../controllers/activitate/stergeActivitate'));
 router.put('/proiect/:proiectId/activitate/:activitateId/schimba-status', auth, require('../controllers/activitate/schimbaStatus'));
 // router.post('/proiect/:proiectId/activitate/:activitateId/adauga-comentariu', auth, require('../controllers/activitate/adaugaComentariu'));
 // router.get('/proiect/:proiectId/activitate/:activitateId/lista-comentarii', auth, require('../controllers/activitate/listaComentarii'));

@@ -1,4 +1,4 @@
-module.exports = function paginaActivitateCtrl($routeParams, proiect, activitate) {
+module.exports = function paginaActivitateCtrl($routeParams, proiect, activitate, $location) {
   var vm = this;
 
   vm.proiectId = $routeParams.proiectId;
@@ -62,7 +62,7 @@ module.exports = function paginaActivitateCtrl($routeParams, proiect, activitate
     statusNou: ''
   };
 
-  vm.confirmare = '';
+  vm.confirmareStatus = '';
 
   vm.onSubmit = function () {
     vm.formError = '';
@@ -79,18 +79,29 @@ module.exports = function paginaActivitateCtrl($routeParams, proiect, activitate
     }
   };
 
-  /* Functie care foloseste serviciul de proiect cu functia lui de editare membru. */
+  /* Functie care foloseste serviciul de proiect cu functia lui de editare activitate. */
   vm.executaSchimbaStatus = function(proiectId, activitateId, date) {
     activitate
       .schimbaStatus(proiectId, activitateId, date)
       .then(function(response) {
-        vm.confirmare = response.data.message;
+        vm.confirmareStatus = response.data.message;
 
         vm.activitateStatus = vm.statusuri.filter(function(status) {
           return status.statusId === response.data.activitate.status;
         })[0];
       }, function(response) {
         vm.formError = response.data.message;
+      });
+  };
+
+  /* Functie care foloseste serviciul de proiect cu functia lui de stergere activitate. */
+  vm.executaStergeActivitate = function(proiectId, activitateId) {
+    activitate
+      .stergeActivitate(proiectId, activitateId)
+      .then(function(response) {
+        $location.path('/proiect/' + proiectId);
+      }, function(response) {
+        return null;
       });
   };
 };
