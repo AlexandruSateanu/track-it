@@ -3,6 +3,7 @@ module.exports = function creareActivitateCtrl($routeParams, proiect, activitate
 
   vm.proiectId = $routeParams.proiectId;
   vm.activitateId = $routeParams.activitateId;
+  vm.proiectCuEtape = false;
 
   activitate
     .infoActivitate(vm.proiectId, vm.activitateId)
@@ -21,6 +22,10 @@ module.exports = function creareActivitateCtrl($routeParams, proiect, activitate
         .infoProiect(vm.proiectId)
         .then(function(response) {
           vm.proiect = response.data.proiect;
+
+          if (vm.proiect.tipProiect === '1') {
+            vm.proiectCuEtape = true;
+          }
 
           vm.activitateCod = vm.proiect.activitati.filter(function(activitate) {
             return activitate.activitateId === parseInt(vm.activitateId);
@@ -58,7 +63,7 @@ module.exports = function creareActivitateCtrl($routeParams, proiect, activitate
   vm.onSubmit = function () {
     vm.formError = '';
     /** validare form */
-    if (!vm.dateForm || !vm.dateForm.numeActivitate || !vm.dateForm.responsabil || !vm.dateForm.etapa || !vm.dateForm.estimare) {
+    if (!vm.dateForm || !vm.dateForm.numeActivitate || !vm.dateForm.responsabil || !vm.dateForm.estimare) {
       vm.formError = 'Unele campuri obligatorii nu sunt completate!';
       return false;
     }

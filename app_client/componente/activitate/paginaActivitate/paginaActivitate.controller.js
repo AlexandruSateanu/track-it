@@ -15,6 +15,10 @@ module.exports = function paginaActivitateCtrl($routeParams, proiect, activitate
         .then(function(response) {
           var membri = response.data.membriProiect;
 
+          if (vm.proiect.tipProiect === '1') {
+            vm.proiectCuEtape = true;
+          }
+
           activitate
             .infoActivitate(vm.proiectId, vm.activitateId)
             .then(function(response) {
@@ -41,10 +45,17 @@ module.exports = function paginaActivitateCtrl($routeParams, proiect, activitate
                 .listaStatus()
                 .then(function(response) {
                   vm.statusuri = response.data.listaStatus;
+                  vm.perioadaRealizata = '';
+                  vm.activitateFinalizata = false;
     
                   vm.activitateStatus = vm.statusuri.filter(function(status) {
                     return status.statusId === vm.activitate.status;
                   })[0];
+
+                  if (vm.activitateStatus.statusId === 4) {
+                    vm.perioadaRealizata = activitate.calculeazaZile(new Date(vm.activitate.dataFinalizare), new Date(vm.activitate.dataStart));
+                    vm.activitateFinalizata = true;
+                  }
                 }, function(response) {
                   return null;
                 });
@@ -124,10 +135,20 @@ module.exports = function paginaActivitateCtrl($routeParams, proiect, activitate
       .schimbaStatus(proiectId, activitateId, date)
       .then(function(response) {
         vm.confirmareStatus = response.data.message;
+        vm.activitate = response.data.activitate;
 
         vm.activitateStatus = vm.statusuri.filter(function(status) {
-          return status.statusId === response.data.activitate.status;
+          return status.statusId === vm.activitate.status;
         })[0];
+
+        if (vm.activitateStatus.statusId === 4) {
+          vm.perioadaRealizata = activitate.calculeazaZile(new Date(vm.activitate.dataFinalizare), new Date(vm.activitate.dataStart));
+          vm.activitateFinalizata = true;
+        }
+        
+        else {
+          vm.perioadaRealizata = '';
+        }
       }, function(response) {
         vm.statusFormError = response.data.message;
       });

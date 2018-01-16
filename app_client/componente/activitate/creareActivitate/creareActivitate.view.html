@@ -19,7 +19,7 @@
             <i class="glyphicon glyphicon-remove"></i> Nu exista rezultate
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-show="vm.proiectCuEtape">
           <label for="etapa">Etapa</label>
           <select ng-required="true" class="form-control" name="etapa" ng-model="vm.dateForm.etapa">
             <option ng-repeat="etapa in vm.proiect.etape" value="{{ etapa._id }}">{{ etapa.numeEtapa }}</option>

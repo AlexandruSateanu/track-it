@@ -28,7 +28,7 @@ router.get('/proiect/:proiectId/membri-proiect', auth, require('../controllers/p
 /* Activitate */
 router.post('/proiect/:proiectId/creare-activitate', auth, require('../controllers/activitate/creareActivitate'));
 router.get('/proiect/:proiectId/activitate/:activitateId', auth, require('../controllers/activitate/infoActivitate'));
-// router.get('/proiect/:proiectId/listaActivitati', auth, require('../controllers/activitate/listaActivitati'));
+router.get('/proiect/:proiectId/lista-activitati', auth, require('../controllers/activitate/listaActivitati'));
 router.put('/proiect/:proiectId/activitate/:activitateId/editeaza-activitate', auth, require('../controllers/activitate/editeazaActivitate'));
 router.delete('/proiect/:proiectId/activitate/:activitateId/sterge-activitate', auth, require('../controllers/activitate/stergeActivitate'));
 router.put('/proiect/:proiectId/activitate/:activitateId/schimba-status', auth, require('../controllers/activitate/schimbaStatus'));

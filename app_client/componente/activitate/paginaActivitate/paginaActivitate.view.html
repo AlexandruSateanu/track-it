@@ -8,7 +8,7 @@
         <span>Proiect: </span>
         <a href="/#proiect/{{ vm.proiectId }}">{{ vm.proiect.numeProiect }}</a>
       </div>
-      <div class="page-component">
+      <div class="page-component" ng-show="vm.proiectCuEtape">
         <span>Etapa: </span>
         <span>{{ vm.etapa.numeEtapa }}</span>
       </div>
@@ -47,6 +47,14 @@
           <button type="submit" class="btn btn-primary">Schimba status</button>
         </form>
         <div class="alert alert-success" ng-show="vm.confirmareStatus">{{ vm.confirmareStatus }}</div>
+      </div>
+      <div class="page-component">
+        <span>Estimare: </span>
+        <span>{{ vm.activitate.estimare }} zile</span>
+      </div>
+      <div class="page-component" ng-show="vm.activitateFinalizata">
+        <span>Perioada realizata: </span>
+        <span>{{ vm.perioadaRealizata }} zile</span>
       </div>
     </div>
   </div>

@@ -9,27 +9,31 @@ var existaUserProiect = require('../helpers/existaUserProiect');
 module.exports = function(req, res) {
   var proiectId = req.params.proiectId;
   var activitateId = req.params.activitateId;
+  var etapaId = null;
   
   /* executa callback daca exista user logat si face parte din proiect.  */
   existaUserProiect(req, res, proiectId, function (req, res, user) {
     if (activitateId) {
-      var etapaId = req.body.etapa;
       var responsabil = parseInt(req.body.responsabil);
 
       Proiect
         .findById(proiectId)
         .exec(function(err, proiect) {
-          if (etapaId) {
-            /* Extrage etapa care vrem sa o adaugam. */
-            var etapa = proiect.etape.id(etapaId);
-
-            /* Verifica existenta etapei. */
-            if (!etapa) {
-              sendJSONResponse(res, 404, {
-                "message": "Noua etapa nu exista in proiect!"
-              });
+          if (req.body.etapa) {
+            etapaId = req.body.etapa;
+            
+            if (proiect.tipProiect === '1') {
+              /* Extrage etapa de care apartine activitatea. */
+              var etapa = proiect.etape.id(etapaId);
   
-              return;
+              /* Verifica existenta etapei. */
+              if (!etapa) {
+                sendJSONResponse(res, 404, {
+                  "message": "Noua etapa nu exista in proiect!"
+                });
+  
+                return;
+              }
             }
           }
 

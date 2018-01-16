@@ -64,7 +64,7 @@ module.exports = function(req, res) {
 
     else {
       sendJSONResponse(res, 404, {
-        "message": "Nu exista id de proiect in request."
+        "message": "Nu exista id de user in request."
       });
     }
   });

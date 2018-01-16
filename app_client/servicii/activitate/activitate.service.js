@@ -71,6 +71,22 @@ module.exports = function useri($http, autentificare) {
     });
   };
 
+  /* Calculeaza numarul de zile dintre doua date. */
+  var calculeazaZile = function(dataFinal, dataStart) {
+    /* O zi in milisecunde. */
+    var zi = 1000 * 60 * 60 * 24;
+
+    /* Converteste datele in milisecunde. */
+    var dateFinalMs = dataFinal.getTime();
+    var dataStartMs = dataStart.getTime();
+
+    /* Calculeaza diferenta in millisecunde. */
+    var diferentaMs = dateFinalMs - dataStartMs;
+    
+    /* Converteste inapoi in zile si returneaza. */
+    return Math.round(diferentaMs / zi); 
+  };
+
   return {
     listaStatus: listaStatus,
     creare: creare,
@@ -79,6 +95,7 @@ module.exports = function useri($http, autentificare) {
     editeazaActivitate: editeazaActivitate,
     stergeActivitate: stergeActivitate,
     adaugaComentariu: adaugaComentariu,
-    listaComentarii: listaComentarii
+    listaComentarii: listaComentarii,
+    calculeazaZile: calculeazaZile
   };
 };
