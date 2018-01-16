@@ -53,12 +53,32 @@ module.exports = function useri($http, autentificare) {
     });
   };
 
+  /* Cerere POST catre API pentru a adauga un comentariu. Necesita autentificare cu token. */
+  var adaugaComentariu = function (proiectId, activitateId, data) {
+    return $http.post('/api/proiect/' + proiectId + '/activitate/' + activitateId + '/adauga-comentariu', data, {
+      headers: {
+        Authorization: 'Bearer ' + autentificare.getToken()
+      }
+    });
+  };
+
+  /* Cerere GET catre API pentru a primi o lista de comentarii. Necesita autentificare cu token. */
+  var listaComentarii = function (proiectId, activitateId) {
+    return $http.get('/api/proiect/' + proiectId + '/activitate/' + activitateId + '/lista-comentarii', {
+      headers: {
+        Authorization: 'Bearer ' + autentificare.getToken()
+      }
+    });
+  };
+
   return {
     listaStatus: listaStatus,
     creare: creare,
     infoActivitate: infoActivitate,
     schimbaStatus: schimbaStatus,
     editeazaActivitate: editeazaActivitate,
-    stergeActivitate: stergeActivitate
+    stergeActivitate: stergeActivitate,
+    adaugaComentariu: adaugaComentariu,
+    listaComentarii: listaComentarii
   };
 };
