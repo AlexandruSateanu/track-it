@@ -87,6 +87,15 @@ module.exports = function useri($http, autentificare) {
     return Math.round(diferentaMs / zi); 
   };
 
+  /* Cerere GET catre API pentru a primi o lista cu toate activitatile dintr-un proiect. Necesita autentificare cu token. */
+  var listaActivitati = function (proiectId) {
+    return $http.get('/api/proiect/' + proiectId + '/lista-activitati', {
+      headers: {
+        Authorization: 'Bearer ' + autentificare.getToken()
+      }
+    });
+  };
+
   return {
     listaStatus: listaStatus,
     creare: creare,
@@ -96,6 +105,7 @@ module.exports = function useri($http, autentificare) {
     stergeActivitate: stergeActivitate,
     adaugaComentariu: adaugaComentariu,
     listaComentarii: listaComentarii,
-    calculeazaZile: calculeazaZile
+    calculeazaZile: calculeazaZile,
+    listaActivitati: listaActivitati
   };
 };

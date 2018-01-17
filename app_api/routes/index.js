@@ -40,6 +40,7 @@ router.get('/lista-status', auth, require('../controllers/activitate/listaStatus
 router.get('/lista-useri', auth, require('../controllers/useri/listaUseri'));
 router.get('/lista-roluri', auth, require('../controllers/useri/listaRoluri'));
 router.get('/lista-proiecte-user/:userId', auth, require('../controllers/useri/listaProiecteUser'));
+router.get('/lista-activitati-user/:userId', auth, require('../controllers/useri/listaActivitatiUser'));
 
 /* Tratarea cererilor gresite */
 router.all( "/*", require('../controllers/helpers/cereriGresite'));
