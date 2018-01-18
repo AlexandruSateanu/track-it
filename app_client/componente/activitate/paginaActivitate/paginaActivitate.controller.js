@@ -1,4 +1,4 @@
-module.exports = function paginaActivitateCtrl($routeParams, proiect, activitate) {
+module.exports = function paginaActivitateCtrl($routeParams, proiect, activitate, $location, autentificare) {
   var vm = this;
 
   vm.proiectId = $routeParams.proiectId;
@@ -10,44 +10,73 @@ module.exports = function paginaActivitateCtrl($routeParams, proiect, activitate
     .then(function(response) {
       vm.proiect = response.data.proiect;
 
-      activitate
-        .infoActivitate(vm.proiectId, vm.activitateId)
+      proiect
+        .membriProiect(vm.proiectId)
         .then(function(response) {
-          vm.activitate = response.data.activitate;
+          var membri = response.data.membriProiect;
 
-          vm.activitateCod = vm.proiect.activitati.filter(function(activitate) {
-            return activitate.activitateId === parseInt(vm.activitateId);
-          })[0].cod;
+          if (vm.proiect.tipProiect === '1') {
+            vm.proiectCuEtape = true;
+          }
 
-          vm.antetActivitate = {
-            titlu: vm.activitate.numeActivitate,
-            cod: vm.activitateCod
-          };
-
-          vm.etapa = vm.proiect.etape.filter(function(etapa) {
-            return etapa._id === vm.activitate.etapaId;
-          })[0];
-
-          proiect
-            .membriProiect(vm.proiectId)
+          activitate
+            .infoActivitate(vm.proiectId, vm.activitateId)
             .then(function(response) {
-              var membri = response.data.membriProiect;
-
+              vm.activitate = response.data.activitate;
+    
+              vm.activitateCod = vm.proiect.activitati.filter(function(activitate) {
+                return activitate.activitateId === parseInt(vm.activitateId);
+              })[0].cod;
+    
+              vm.antetActivitate = {
+                titlu: vm.activitate.numeActivitate,
+                cod: vm.activitateCod
+              };
+    
+              vm.etapa = vm.proiect.etape.filter(function(etapa) {
+                return etapa._id === vm.activitate.etapaId;
+              })[0];
+    
               vm.responsabil = membri.filter(function(membru) {
                 return vm.activitate.responsabil === membru.userId;
               })[0];
+    
+              activitate
+                .listaStatus()
+                .then(function(response) {
+                  vm.statusuri = response.data.listaStatus;
+                  vm.perioadaRealizata = '';
+                  vm.activitateFinalizata = false;
+    
+                  vm.activitateStatus = vm.statusuri.filter(function(status) {
+                    return status.statusId === vm.activitate.status;
+                  })[0];
+
+                  if (vm.activitateStatus.statusId === 4) {
+                    vm.perioadaRealizata = activitate.calculeazaZile(new Date(vm.activitate.dataFinalizare), new Date(vm.activitate.dataStart));
+                    vm.activitateFinalizata = true;
+                  }
+                }, function(response) {
+                  return null;
+                });
             }, function(response) {
               return null;
             });
-
+            
           activitate
-            .listaStatus()
+            .listaComentarii(vm.proiectId, vm.activitateId)
             .then(function(response) {
-              vm.statusuri = response.data.listaStatus;
+              vm.comentarii = response.data.comentarii;
 
-              vm.activitateStatus = vm.statusuri.filter(function(status) {
-                return status.statusId === vm.activitate.status;
-              })[0];
+              vm.comentarii.forEach(function(comentariu) {
+                var membruGasit = membri.filter(function(user) {
+                  return user.userId === comentariu.userId;
+                });
+
+                if (membruGasit.length === 1) {
+                  comentariu.numeUser = membruGasit[0].numeIntreg;
+                }
+              });
             }, function(response) {
               return null;
             });
@@ -58,39 +87,108 @@ module.exports = function paginaActivitateCtrl($routeParams, proiect, activitate
       return null;
     });
 
-  vm.dateForm = {
+  vm.statusForm = {
     statusNou: ''
   };
 
-  vm.confirmare = '';
+  vm.confirmareStatus = '';
+  vm.confirmareComentariu = '';
 
-  vm.onSubmit = function () {
-    vm.formError = '';
+  vm.onStatusSubmit = function () {
+    vm.statusFormError = '';
 
     /** validare form status. */
-    if (!vm.dateForm || !vm.dateForm.statusNou) {
-      vm.formError = "Selecteaza un status!";
+    if (!vm.statusForm || !vm.statusForm.statusNou) {
+      vm.statusFormError = "Selecteaza un status!";
       return false;
     }
     
     else {
-      vm.formError = '';
-      vm.executaSchimbaStatus(vm.proiectId, vm.activitateId, vm.dateForm);
+      vm.statusFormError = '';
+      vm.executaSchimbaStatus(vm.proiectId, vm.activitateId, vm.statusForm);
     }
   };
 
-  /* Functie care foloseste serviciul de proiect cu functia lui de editare membru. */
+  vm.comentariuForm = {
+    userComentariu: autentificare.userCurrent().userId,
+    textComentariu: ''
+  };
+
+  vm.onComentariuSubmit = function() {
+    vm.comentariuFormError = '';
+
+      /** validare form comentariu. */
+      if (!vm.comentariuForm || !vm.comentariuForm.textComentariu) {
+        vm.comentariuFormError = "Comentariul lipseste!";
+        return false;
+      }
+      
+      else {
+        vm.comentariuFormError = '';
+        vm.executaAdaugareComentariu(vm.proiectId, vm.activitateId, vm.comentariuForm);
+      }
+  };
+
+  /* Functie care foloseste serviciul de proiect cu functia lui de editare activitate. */
   vm.executaSchimbaStatus = function(proiectId, activitateId, date) {
     activitate
       .schimbaStatus(proiectId, activitateId, date)
       .then(function(response) {
-        vm.confirmare = response.data.message;
+        vm.confirmareStatus = response.data.message;
+        vm.activitate = response.data.activitate;
 
         vm.activitateStatus = vm.statusuri.filter(function(status) {
-          return status.statusId === response.data.activitate.status;
+          return status.statusId === vm.activitate.status;
         })[0];
+
+        if (vm.activitateStatus.statusId === 4) {
+          vm.perioadaRealizata = activitate.calculeazaZile(new Date(vm.activitate.dataFinalizare), new Date(vm.activitate.dataStart));
+          vm.activitateFinalizata = true;
+        }
+        
+        else {
+          vm.perioadaRealizata = '';
+        }
       }, function(response) {
-        vm.formError = response.data.message;
+        vm.statusFormError = response.data.message;
+      });
+  };
+
+  /* Functie care foloseste serviciul de proiect cu functia lui de stergere activitate. */
+  vm.executaStergeActivitate = function(proiectId, activitateId) {
+    activitate
+      .stergeActivitate(proiectId, activitateId)
+      .then(function(response) {
+        $location.path('/proiect/' + proiectId);
+      }, function(response) {
+        return null;
+      });
+  };
+
+  /* Functie care foloseste serviciul de proiect cu functia lui de adaugare comentariu. */
+  vm.executaAdaugareComentariu = function(proiectId, activitateId, date) {
+    activitate
+      .adaugaComentariu(proiectId, activitateId, date)
+      .then(function(response) {
+        vm.confirmareComentariu = response.data.message;
+        var comentariu = response.data.comentariu;
+        
+        proiect
+          .membriProiect(vm.proiectId)
+          .then(function(response) {
+            var membri = response.data.membriProiect; 
+            var autor = membri.filter(function(membru) {
+              return comentariu.userId === membru.userId;
+            })[0];
+
+            comentariu.numeUser = autor.numeIntreg;
+            
+            vm.comentarii.push(comentariu);
+          }, function(response) {
+            return null;
+          });
+      }, function(response) {
+        vm.comentariuFormError = response.data.message;
       });
   };
 };

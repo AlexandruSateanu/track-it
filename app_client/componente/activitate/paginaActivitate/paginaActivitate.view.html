@@ -8,7 +8,7 @@
         <span>Proiect: </span>
         <a href="/#proiect/{{ vm.proiectId }}">{{ vm.proiect.numeProiect }}</a>
       </div>
-      <div class="page-component">
+      <div class="page-component" ng-show="vm.proiectCuEtape">
         <span>Etapa: </span>
         <span>{{ vm.etapa.numeEtapa }}</span>
       </div>
@@ -21,7 +21,12 @@
         <div class="activitate-descriere">{{ vm.activitate.descriere }}</div>
       </div>
       <div class="page-component">
-        <a href="/#proiect/{{ vm.proiectId }}/activitate/{{ vm.activitateId }}/editeaza-activitate">Editeaza actvitatea</a>
+        <div>
+          <a href="/#proiect/{{ vm.proiectId }}/activitate/{{ vm.activitateId }}/editeaza-activitate">Editeaza actvitatea</a>
+        </div>
+        <div>
+          <a href="" ng-click="vm.executaStergeActivitate(vm.proiectId, vm.activitateId)">Sterge actvitatea</a>
+        </div>
       </div>
     </div>
     <div class="col-xs-12 col-md-6">
@@ -31,17 +36,58 @@
         <span>{{ vm.activitateStatus.numeStatus }}</span>
       </div>
       <div class="page-component">
-        <form id="schimbaStatus" name="schimbaStatus" ng-submit="vm.onSubmit()" novalidate>
-          <div role="alert" class="alert alert-danger" ng-show="vm.formError">{{ vm.formError }}</div>
+        <form id="schimbaStatus" name="schimbaStatus" ng-submit="vm.onStatusSubmit()" novalidate>
+          <div role="alert" class="alert alert-danger" ng-show="vm.statusFormError">{{ vm.statusFormError }}</div>
           <div class="form-group">
             <label for="status">Schimba Status</label>
-            <select ng-required="true" class="form-control" name="status" ng-model="vm.dateForm.statusNou">
+            <select ng-required="true" class="form-control" name="status" ng-model="vm.statusForm.statusNou">
               <option ng-repeat="status in vm.statusuri" value="{{ status.statusId }}">{{ status.numeStatus }}</option>
             </select>
           </div>
           <button type="submit" class="btn btn-primary">Schimba status</button>
         </form>
-        <div class="alert alert-success" ng-show="vm.confirmare">{{ vm.confirmare }}</div>
+        <div class="alert alert-success" ng-show="vm.confirmareStatus">{{ vm.confirmareStatus }}</div>
+      </div>
+      <div class="page-component">
+        <span>Estimare: </span>
+        <span>{{ vm.activitate.estimare }} zile</span>
+      </div>
+      <div class="page-component" ng-show="vm.activitateFinalizata">
+        <span>Perioada realizata: </span>
+        <span>{{ vm.perioadaRealizata }} zile</span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-md-8">
+      <div class="page-component">
+        <h4>Adauga un comentariu</h4>
+        <form id="adaugaComentariu" name="adaugaComentariu" ng-submit="vm.onComentariuSubmit()" novalidate>
+          <div role="alert" class="alert alert-danger" ng-show="vm.comentariuFormError">{{ vm.comentariuFormError }}</div>
+          <div class="form-group">
+            <textarea class="form-control" ng-required="true" name="comentariu" id="comentariu" placeholder="Comentariu" rows="7" ng-model="vm.comentariuForm.textComentariu"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Salveaza comentariu</button>
+        </form>
+        <div class="alert alert-success" ng-show="vm.confirmareComentariu">{{ vm.confirmareComentariu }}</div>        
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-12">
+      <div class="page-component">
+        <h4>Comentarii</h4>
+        <div ng-hide="vm.comentarii.length">Inca nu exista comentarii.</div>
+        <ul class="list-group">
+          <li class="comentariu list-group-item" ng-repeat="comentariu in vm.comentarii">
+            <div class="detalii-comentariu">
+              <span class="autor-comentariu">
+                <a href="/#user/{{ comentariu.userId }}">{{ comentariu.numeUser }}</a>
+              </span>
+              -
+              <span class="data-comentariu">{{ comentariu.createdAt | date:'dd-MM-yyyy HH:mm'}}</span>
+            </div>
+            <div class="text-comentariu">{{ comentariu.textComentariu }}</div>
+          </li>
+        </ul>
       </div>
     </div>
   </div>

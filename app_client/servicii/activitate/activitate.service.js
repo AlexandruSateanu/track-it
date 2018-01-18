@@ -44,11 +44,68 @@ module.exports = function useri($http, autentificare) {
     });
   };
 
+  /* Cerere DELETE catre API pentru a sterge o activitate. Necesita autentificare cu token. */
+  var stergeActivitate = function (proiectId, activitateId) {
+    return $http.delete('/api/proiect/' + proiectId + '/activitate/' + activitateId + '/sterge-activitate', {
+      headers: {
+        Authorization: 'Bearer ' + autentificare.getToken()
+      }
+    });
+  };
+
+  /* Cerere POST catre API pentru a adauga un comentariu. Necesita autentificare cu token. */
+  var adaugaComentariu = function (proiectId, activitateId, data) {
+    return $http.post('/api/proiect/' + proiectId + '/activitate/' + activitateId + '/adauga-comentariu', data, {
+      headers: {
+        Authorization: 'Bearer ' + autentificare.getToken()
+      }
+    });
+  };
+
+  /* Cerere GET catre API pentru a primi o lista de comentarii. Necesita autentificare cu token. */
+  var listaComentarii = function (proiectId, activitateId) {
+    return $http.get('/api/proiect/' + proiectId + '/activitate/' + activitateId + '/lista-comentarii', {
+      headers: {
+        Authorization: 'Bearer ' + autentificare.getToken()
+      }
+    });
+  };
+
+  /* Calculeaza numarul de zile dintre doua date. */
+  var calculeazaZile = function(dataFinal, dataStart) {
+    /* O zi in milisecunde. */
+    var zi = 1000 * 60 * 60 * 24;
+
+    /* Converteste datele in milisecunde. */
+    var dateFinalMs = dataFinal.getTime();
+    var dataStartMs = dataStart.getTime();
+
+    /* Calculeaza diferenta in millisecunde. */
+    var diferentaMs = dateFinalMs - dataStartMs;
+    
+    /* Converteste inapoi in zile si returneaza. */
+    return Math.round(diferentaMs / zi); 
+  };
+
+  /* Cerere GET catre API pentru a primi o lista cu toate activitatile dintr-un proiect. Necesita autentificare cu token. */
+  var listaActivitati = function (proiectId) {
+    return $http.get('/api/proiect/' + proiectId + '/lista-activitati', {
+      headers: {
+        Authorization: 'Bearer ' + autentificare.getToken()
+      }
+    });
+  };
+
   return {
     listaStatus: listaStatus,
     creare: creare,
     infoActivitate: infoActivitate,
     schimbaStatus: schimbaStatus,
-    editeazaActivitate: editeazaActivitate
+    editeazaActivitate: editeazaActivitate,
+    stergeActivitate: stergeActivitate,
+    adaugaComentariu: adaugaComentariu,
+    listaComentarii: listaComentarii,
+    calculeazaZile: calculeazaZile,
+    listaActivitati: listaActivitati
   };
 };

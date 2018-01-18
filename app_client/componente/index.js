@@ -18,7 +18,7 @@ app.controller('confirmareCtrl', ['$location', 'autentificare', require('./auten
 app.controller('panouStartCtrl', ['autentificare', 'useri', require('./panouStart/panouStart.controller.js')]);
 
 /* Proiect */
-app.controller('proiectStartCtrl', ['$scope', 'creareProiectActiva', '$routeParams', 'proiect', 'useri', require('./proiect/proiectStart/proiectStart.controller.js')]);
+app.controller('proiectStartCtrl', ['$scope', 'creareProiectActiva', '$routeParams', 'proiect', 'activitate', require('./proiect/proiectStart/proiectStart.controller.js')]);
 app.controller('creareProiectCtrl', ['proiect', '$location', '$scope', 'creareProiectActiva', require('./proiect/creareProiect/creareProiect.controller.js')]);
 app.controller('alegeEtapeCtrl', ['proiect', '$location', '$routeParams', '$rootScope', '$scope', 'creareProiectActiva', require('./proiect/alegeEtape/alegeEtape.controller.js')]);
 app.controller('alegeMembriCtrl', ['proiect', '$routeParams', 'useri', 'autentificare', '$location', '$rootScope', '$scope', 'creareProiectActiva', require('./proiect/alegeMembri/alegeMembri.controller.js')]);
@@ -29,8 +29,9 @@ app.controller('editeazaMembriCtrl', ['proiect', '$routeParams', 'useri', 'auten
 
 /* Activitate */
 app.controller('creareActivitateCtrl', ['$routeParams', 'proiect', 'activitate', 'useri', '$location', require('./activitate/creareActivitate/creareActivitate.controller.js')]);
-app.controller('paginaActivitateCtrl', ['$routeParams', 'proiect', 'activitate', require('./activitate/paginaActivitate/paginaActivitate.controller.js')]);
+app.controller('paginaActivitateCtrl', ['$routeParams', 'proiect', 'activitate', '$location', 'autentificare', require('./activitate/paginaActivitate/paginaActivitate.controller.js')]);
 app.controller('editeazaActivitateCtrl', ['$routeParams', 'proiect', 'activitate', 'useri', require('./activitate/editeazaActivitate/editeazaActivitate.controller.js')]);
+app.controller('panouActivitatiCtrl', ['activitate', 'useri', require('./activitate/panouActivitati/panouActivitati.controller.js')]);
 
 /* Sarcina */
 app.controller('creareSarcinaCtrl', ['$location', require('./sarcina/creareSarcina/creareSarcina.controller.js')]);

@@ -13,37 +13,43 @@ module.exports = function(req, res) {
 
   /* executa callback daca exista user logat si face parte din proiect.  */
   existaUserProiect(req, res, proiectId, function (req, res, user) {
-    var etapaId = req.body.etapa;
     var responsabil = parseInt(req.body.responsabil);
-
+    var etapaId = null;
+    
     /* verifica daca avem parametru cu id-ul de proiect in URL */
     if (proiectId) {
       Proiect
         .findById(proiectId)
         .exec(function(err, proiect) {
-          /* Extrage etapa de care apartine activitatea. */
-          var etapa = proiect.etape.id(etapaId);
+          if (req.body.etapa) {
+            etapaId = req.body.etapa;
+            
+            if (proiect.tipProiect === '1') {
+              /* Extrage etapa de care apartine activitatea. */
+              var etapa = proiect.etape.id(etapaId);
+  
+              /* Verifica existenta etapei. */
+              if (!etapa) {
+                sendJSONResponse(res, 404, {
+                  "message": "Etapa nu exista in proiect!"
+                });
+  
+                return;
+              }
+            }
+          }
 
           /* Verifica existenta responsabilului. */
           var membruGasit = proiect.membri.filter(membru => membru.membru === responsabil).length || (proiect.managerProiect === responsabil);
           
-          /* Verifica existenta etapei. */
-          if (!etapa) {
-            sendJSONResponse(res, 404, {
-              "message": "Etapa nu exista in proiect!"
-            });
-
-            return;
-          }
-
-          else if (!membruGasit) {
+          if (!membruGasit) {
             sendJSONResponse(res, 404, {
               "message": "Responsabilul nu exista in proiect!"
             });
 
             return;
           }
-          
+            
           else {
             /* Salveaza activitatea noua */
             Activitate.create({

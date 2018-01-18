@@ -6,11 +6,16 @@ module.exports = function creareActivitateCtrl($routeParams, proiect, activitate
   };
 
   var proiectId = $routeParams.proiectId;
+  vm.proiectCuEtape = false;
 
   proiect
     .infoProiect(proiectId)
     .then(function(response) {
       vm.proiect = response.data.proiect;
+
+      if (vm.proiect.tipProiect === '1') {
+        vm.proiectCuEtape = true;
+      }
 
       useri
         .listaUseri()
@@ -49,7 +54,7 @@ module.exports = function creareActivitateCtrl($routeParams, proiect, activitate
   vm.onSubmit = function () {
     vm.formError = '';
     /** validare form */
-    if (!vm.dateForm || !vm.dateForm.numeActivitate || !vm.dateForm.responsabil || !vm.dateForm.etapa || !vm.dateForm.estimare) {
+    if (!vm.dateForm || !vm.dateForm.numeActivitate || !vm.dateForm.responsabil || !vm.dateForm.estimare) {
       vm.formError = 'Unele campuri obligatorii nu sunt completate!';
       return false;
     }
@@ -70,7 +75,7 @@ module.exports = function creareActivitateCtrl($routeParams, proiect, activitate
     activitate
       .creare(proiectId, date)
       .then(function(response) {
-        $location.path('/proiect/' + proiectId);
+        $location.path('/proiect/' + proiectId + '/activitate/' + response.data.activitate._id);
       }, function(response) {
         vm.formError = response.data.message;
       });

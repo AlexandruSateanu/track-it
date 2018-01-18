@@ -4,8 +4,8 @@ var autoIncrement = require('mongoose-auto-increment');
 var status = require('../config/status');
 
 var comentariuSchema = new mongoose.Schema({
-  membru: {type: Number, ref: 'User', required: true},
-  text: String
+  userId: {type: Number, ref: 'User', required: true},
+  textComentariu: {type: String, required: true}
 }, {
   timestamps: true
 });

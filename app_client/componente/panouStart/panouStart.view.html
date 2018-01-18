@@ -11,15 +11,12 @@
       <div class="page-component">
         <a href="/#creare-proiect">Creare proiect nou</a>
       </div>
-      <div class="page-component">
-        <h4>Ultimele activitati pe proiecte</h4>
-        <tabel-recente recente="vm.activitatiRecente"></tabel-recente>
-      </div>
     </div>
     <div class="col-xs-12 col-md-6">
       <div class="page-component">
-        <h4>Activitatea ta recenta</h4>
-        <tabel-recente recente="vm.activitateaMea"></tabel-recente>
+        <h4>Activitatile mele recente</h4>
+        <tabel-recente recente="vm.activitatileMele"></tabel-recente>
+        <div ng-show="vm.faraActivitati">{{ vm.faraActivitati }}</div>
       </div>
     </div>
   </div>

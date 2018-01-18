@@ -26,9 +26,19 @@ module.exports = function useri($http, autentificare) {
     });
   };
 
+  /* Cerere GET catre API pentru lista activitatilor unui user. Necesita autentificare cu token. */
+  var listaActivitatiUser = function(userId) {
+    return $http.get('/api/lista-activitati-user/' + userId, {
+      headers: {
+        Authorization: 'Bearer ' + autentificare.getToken()
+      }
+    });
+  };
+
   return {
     listaUseri: listaUseri,
     listaRoluri: listaRoluri,
-    listaProiecteUser: listaProiecteUser
+    listaProiecteUser: listaProiecteUser,
+    listaActivitatiUser: listaActivitatiUser
   };
 };
