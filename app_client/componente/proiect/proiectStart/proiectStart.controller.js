@@ -18,6 +18,7 @@ module.exports = function proiectStartCtrl($scope, creareProiectActiva, $routePa
       };
 
       vm.managerProiectId = vm.proiect.managerProiect;
+      vm.faraActivitati = '';
 
       /* Membri proiect. */
       proiect
@@ -40,13 +41,17 @@ module.exports = function proiectStartCtrl($scope, creareProiectActiva, $routePa
             .then(function(response) {
               vm.activitatiRecente = response.data.listaActivitati;
 
+              if (vm.activitatiRecente.length <= 0) {
+                vm.faraActivitati = 'Momentan nu exista activitati.'
+              }
+
               vm.activitatiRecente.sort(function(a, b) {
                 return new Date(b.updatedAt) - new Date(a.updatedAt);
               });
 
               vm.activitatiRecente.splice(5);
             }, function(response) {
-              return null;
+              vm.faraActivitati = 'A intervenit o eroare cu obtinerea activitatilor.'; 
             });
         }, function(response) {
           return null;

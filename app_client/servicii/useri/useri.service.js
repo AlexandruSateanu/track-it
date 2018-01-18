@@ -38,6 +38,7 @@ module.exports = function useri($http, autentificare) {
   return {
     listaUseri: listaUseri,
     listaRoluri: listaRoluri,
-    listaProiecteUser: listaProiecteUser
+    listaProiecteUser: listaProiecteUser,
+    listaActivitatiUser: listaActivitatiUser
   };
 };

@@ -44,16 +44,17 @@ module.exports = function(req, res) {
                       numeActivitate: activitate.numeActivitate,
                       dataStart: activitate.dataStart,
                       dataFinalizare: activitate.dataFinalizare,
-                      updatedAt: activitate.updatedAt
+                      updatedAt: activitate.updatedAt,
+                      proiectId: activitate.proiectId
                     };
-  
+                    
                     listaActivitati.push(activitateDeAdaugat);
                   }
                 });
               });
-
+  
               sendJSONResponse(res, 200, {
-                "listaActivitati": listaActivitati
+                "listaActivitatiUser": listaActivitati
               });
             });
         });
