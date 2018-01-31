@@ -11,12 +11,12 @@ require('./app_api/models/db');
 require('./app_api/config/passport');
 
 var routesApi = require('./app_api/routes/index');
-var users = require('./app_server/routes/users');
+//var users = require('./app_server/routes/users');
 
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'app_server', 'views'));
+//app.set('views', path.join(__dirname, 'app_server', 'views'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
