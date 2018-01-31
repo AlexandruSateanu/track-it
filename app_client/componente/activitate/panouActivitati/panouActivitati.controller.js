@@ -8,8 +8,28 @@ module.exports = function panouActivitatiCtrl($routeParams, activitate) {
   activitate
     .listaActivitati(vm.proiectId)
     .then(function(response) {
-      vm.activitati = response.data.listaActivitati;
+      var activitati = response.data.listaActivitati;
 
+      vm.activitatiPlanificate = activitati.filter(function(activitate) {
+        return activitate.status === 0;
+      });
+
+      vm.activitatiInAsteptare = activitati.filter(function(activitate) {
+        return activitate.status === 1;
+      });
+
+      vm.activitatiInExecutie = activitati.filter(function(activitate) {
+        return activitate.status === 2;
+      });
+
+      vm.activitatiInEvaluare = activitati.filter(function(activitate) {
+        return activitate.status === 3;
+      });
+
+      vm.activitatiFinalizate = activitati.filter(function(activitate) {
+        return activitate.status === 4;
+      });
+      
       vm.antetPagina = {
         titlu: 'Panou Activitati'
       };

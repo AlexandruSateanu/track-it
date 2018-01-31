@@ -40,6 +40,7 @@ module.exports = function(req, res) {
                     numeActivitate: activitate.numeActivitate,
                     dataStart: activitate.dataStart,
                     dataFinalizare: activitate.dataFinalizare,
+                    status: activitate.status,
                     updatedAt: activitate.updatedAt,
                     proiectId: activitate.proiectId,
                     cod: activitateProiect.cod

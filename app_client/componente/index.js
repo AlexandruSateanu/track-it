@@ -32,6 +32,3 @@ app.controller('creareActivitateCtrl', ['$routeParams', 'proiect', 'activitate',
 app.controller('paginaActivitateCtrl', ['$routeParams', 'proiect', 'activitate', '$location', 'autentificare', require('./activitate/paginaActivitate/paginaActivitate.controller.js')]);
 app.controller('editeazaActivitateCtrl', ['$routeParams', 'proiect', 'activitate', 'useri', require('./activitate/editeazaActivitate/editeazaActivitate.controller.js')]);
 app.controller('panouActivitatiCtrl', ['$routeParams', 'activitate', require('./activitate/panouActivitati/panouActivitati.controller.js')]);
-
-/* Sarcina */
-app.controller('creareSarcinaCtrl', ['$location', require('./sarcina/creareSarcina/creareSarcina.controller.js')]);
