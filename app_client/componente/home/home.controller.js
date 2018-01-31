@@ -2,8 +2,8 @@ module.exports = function homeCtrl($location, autentificare) {
   var vm = this;
 
   vm.antetPagina = {
-    titlu: 'Bine ati venit la Trackit.',
-    subtitlu: 'Pur si simplu taskuri.'
+    titlu: 'Bine aţi venit la Trackit.',
+    subtitlu: 'Ajutorul vostru în managementul proiectelor.'
   }
 
   vm.credentiale = {

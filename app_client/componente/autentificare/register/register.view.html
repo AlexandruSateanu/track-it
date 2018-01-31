@@ -3,7 +3,7 @@
   <antet-pagina content="vm.antetPagina"></antet-pagina>
   <div class="row">
     <div class="col-xs-12 col-md-6">
-      <p class="lead">V-ati inregistrat deja? Atunci puteti sa va <a href="/">conectati</a>.</p>
+      <p class="lead">V-aţi înregistrat deja? Atunci puteţi să vă <a href="/">conectaţi</a>.</p>
       <form id="register" name="register" ng-submit="vm.onSubmit()" novalidate>
         <div role="alert" class="alert alert-danger" ng-show="vm.formError">{{ vm.formError }}</div>
         <div class="form-group">
@@ -22,7 +22,7 @@
           <label for="parola-confirmare">Verificare parola</label>
           <input type="password" ng-required="true" class="form-control" id="parolaConfirmare" placeholder="Reintroduceti parola" ng-model="vm.credentiale.parolaConfirmare">
         </div>
-        <button type="submit" class="btn btn-primary">Inregistrare</button>
+        <button type="submit" class="btn btn-primary">Înregistrare</button>
       </form>
       <div class="alert alert-success" ng-show="vm.confirmare">{{ vm.confirmare }}</div>
     </div>

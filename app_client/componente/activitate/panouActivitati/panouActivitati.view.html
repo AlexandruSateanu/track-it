@@ -1,0 +1,18 @@
+<navigare></navigare>
+<div class="container page-container">
+  <antet-pagina content="vm.antetPagina"></antet-pagina>
+  <div class="row">
+    <div class="col-xs-12 col-md-12">
+      <div ng-repeat="activitate in vm.activitati" class="card border-primary mb-3">
+        <div class="card-header">
+          <a href="/#proiect/{{ vm.proiectId }}/activitate/{{ activitate._id }}">{{ activitate.cod }}</a>
+        </div>
+        <div class="card-body text-primary">
+          <h4 class="card-title">{{ activitate.numeActivitate }}</h4>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  
