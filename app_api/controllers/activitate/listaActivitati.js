@@ -38,6 +38,7 @@ module.exports = function(req, res) {
                   var activitateDeAdaugat = {
                     _id: activitate._id,
                     numeActivitate: activitate.numeActivitate,
+                    responsabil: activitate.responsabil,
                     dataStart: activitate.dataStart,
                     dataFinalizare: activitate.dataFinalizare,
                     status: activitate.status,
