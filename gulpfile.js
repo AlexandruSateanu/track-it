@@ -285,8 +285,7 @@ gulp.task('default', function() {
 gulp.task('production', function() {
   runSequence(
     [
-      'build', 
-      'nodemon'
+      'build'
     ]
   );
 });
