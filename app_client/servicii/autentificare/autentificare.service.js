@@ -87,12 +87,12 @@ module.exports = function autentificare($window, $http) {
     }
     
     /* Pasam la urmatoarea metoda id-ul de proiect. */
-    return verificaAccesProiect(proiectId);
+    return verificaAccesProiect(ruta, proiectId);
   };
 
   /* Verifica daca userul are acces la proiect. */
-  var verificaAccesProiect = function(proiectId) {
-    if (!userConectat()){
+  var verificaAccesProiect = function(ruta, proiectId) {
+    if (!userConectat()) {
       return false;
     }
 
@@ -114,12 +114,24 @@ module.exports = function autentificare($window, $http) {
         });
 
         if (membruGasit.length > 0) {
-          return true;
+          if (!ruta.necesitaRol) {
+            return true;
+          }
+
+          else {
+            return verificaRol(ruta, proiectId, userId);
+          }
         }
   
         /* Cazul in care userul e manager de proiect. */
         else if (proiect.managerProiect === userId) {
-          return true;
+          if (!ruta.necesitaRol) {
+            return true;
+          }
+
+          else {
+            return verificaRol(ruta, proiectId, userId);
+          }
         }
   
         else {
@@ -135,6 +147,62 @@ module.exports = function autentificare($window, $http) {
     });
   };
 
+  var verificaRol = function(ruta, proiectId, userId) {
+    var roluriNecesare = ruta.necesitaRol;
+
+    /* Verificam daca userul cu userId are rolul necesar in proiect. */
+    var verificare = function() {
+      return $http.get('/api/lista-roluri-proiecte-user/' + userId, {
+        headers: {
+          Authorization: 'Bearer ' + getToken()
+        }
+      }).then(function(response) {
+        var listaProiecte = response.data.listaRoluriProiecteUser;
+
+        var proiectCautat = listaProiecte.filter(function(proiect) {
+          return proiect.proiect === parseInt(proiectId);
+        })[0];
+
+        if (roluriNecesare.indexOf(proiectCautat.rol) !== -1) {
+          return true;
+        }
+
+        else {
+          return false;
+        }
+      }, function(response) {
+        return false;
+      });
+    }
+
+    return verificare().then(function(rezultat) {
+      return rezultat;
+    });
+  };
+
+  var verificaPermisiuniView = function(roluri, proiectId) {
+    if (!userConectat()) {
+      return false;
+    }
+
+    var proiecteUser = userCurrent().proiecte;    
+
+    var proiectCautat = proiecteUser.filter(function(proiect) {
+      return proiect.proiect === parseInt(proiectId);
+    })[0];
+
+    var gasitPermisiuni = false;
+
+    angular.forEach(roluri, function(rol) {
+      if (proiectCautat.rol === rol) {
+        gasitPermisiuni = true;
+        return;
+      }                
+    });
+
+    return gasitPermisiuni;
+  };
+
   return {
     saveToken : saveToken,
     getToken : getToken,
@@ -147,6 +215,8 @@ module.exports = function autentificare($window, $http) {
     userCurrent : userCurrent,
     verificaPermisiuniRuta : verificaPermisiuniRuta,
     verificaAutentificareRuta : verificaAutentificareRuta,
-    verificaAccesProiect : verificaAccesProiect
+    verificaAccesProiect : verificaAccesProiect,
+    verificaRol : verificaRol,
+    verificaPermisiuniView : verificaPermisiuniView
   };
 };

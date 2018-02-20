@@ -39,6 +39,7 @@ router.get('/lista-status', auth, require('../controllers/activitate/listaStatus
 /* Useri */
 router.get('/lista-useri', auth, require('../controllers/useri/listaUseri'));
 router.get('/lista-roluri', auth, require('../controllers/useri/listaRoluri'));
+router.get('/lista-roluri-proiecte-user/:userId', auth, require('../controllers/useri/listaRoluriProiecteUser'));
 router.get('/lista-proiecte-user/:userId', auth, require('../controllers/useri/listaProiecteUser'));
 router.get('/lista-activitati-user/:userId', auth, require('../controllers/useri/listaActivitatiUser'));
 

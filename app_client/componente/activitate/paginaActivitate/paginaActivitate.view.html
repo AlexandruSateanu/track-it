@@ -20,7 +20,7 @@
         <span>Descriere: </span>
         <div class="activitate-descriere">{{ vm.activitate.descriere }}</div>
       </div>
-      <div class="page-component">
+      <div class="page-component" permisiune="[0, 1, 2]">
         <div>
           <a href="/#proiect/{{ vm.proiectId }}/activitate/{{ vm.activitateId }}/editeaza-activitate">Editeaza actvitatea</a>
         </div>
@@ -35,7 +35,7 @@
         <span>Status: </span>
         <span>{{ vm.activitateStatus.numeStatus }}</span>
       </div>
-      <div class="page-component">
+      <div class="page-component" permisiune="[0, 1, 2, 3]">
         <form id="schimbaStatus" name="schimbaStatus" ng-submit="vm.onStatusSubmit()" novalidate>
           <div role="alert" class="alert alert-danger" ng-show="vm.statusFormError">{{ vm.statusFormError }}</div>
           <div class="form-group">
@@ -60,7 +60,7 @@
   </div>
   <div class="row">
     <div class="col-xs-12 col-md-8">
-      <div class="page-component">
+      <div class="page-component" permisiune="[0, 1, 2, 3]">
         <h4>Adauga un comentariu</h4>
         <form id="adaugaComentariu" name="adaugaComentariu" ng-submit="vm.onComentariuSubmit()" novalidate>
           <div role="alert" class="alert alert-danger" ng-show="vm.comentariuFormError">{{ vm.comentariuFormError }}</div>
