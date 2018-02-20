@@ -68,14 +68,16 @@ function routeConfig($routeProvider, $locationProvider) {
       controller: 'setariProiectCtrl',
       controllerAs: 'vm',
       necesitaAccesProiect: true,
-      necesitaAuthentificare: true
+      necesitaAuthentificare: true,
+      necesitaRol: [0, 1]
     })
     .when('/proiect/:proiectId/creare-activitate', {
       templateUrl: 'componente/activitate/creareActivitate/creareActivitate.view.html',
       controller: 'creareActivitateCtrl',
       controllerAs: 'vm',
       necesitaAccesProiect: true,
-      necesitaAuthentificare: true
+      necesitaAuthentificare: true,
+      necesitaRol: [0, 1, 2]
     })
     .when('/proiect/:proiectId/activitate/:activitateId', {
       templateUrl: 'componente/activitate/paginaActivitate/paginaActivitate.view.html',
@@ -89,7 +91,8 @@ function routeConfig($routeProvider, $locationProvider) {
       controller: 'editeazaActivitateCtrl',
       controllerAs: 'vm',
       necesitaAccesProiect: true,
-      necesitaAuthentificare: true
+      necesitaAuthentificare: true,
+      necesitaRol: [0, 1, 2]
     })
     .when('/proiect/:proiectId/panou-activitati', {
       templateUrl: 'componente/activitate/panouActivitati/panouActivitati.view.html',

@@ -17,3 +17,6 @@ app.directive('proiecteleMele', require('./proiecteleMele/proiecteleMele.directi
 app.directive('tabelStatistici', require('./tabelStatistici/tabelStatistici.directive.js'));
 app.directive('tabelMembri', require('./tabelMembri/tabelMembri.directive.js'));
 app.directive('antetActivitate', require('./antetActivitate/antetActivitate.directive.js'));
+
+/* Restrictii permisiune */
+app.directive('permisiune', ['autentificare', '$routeParams', require('./permisiune/permisiune.directive.js')]);
